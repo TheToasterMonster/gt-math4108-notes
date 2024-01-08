@@ -1,0 +1,291 @@
+\chapter{Jan.~8 --- Rings and Fields}
+
+\section{Lots of Definitions}
+Recall the definitions of a ring and a field:
+\begin{definition}[Ring]
+  A \emph{ring} $R = (R, +, \cdot)$ is a non-empty set
+  $R$ together with two binary operations
+  $+$ and $\cdot$, called addition and multiplication
+  respectively, which satisfy:
+  \begin{enumerate}
+    \item[(R1)] \textit{Associative law for addition}:
+      $(a + b) + c = a + (b + c)$ for all $a, b, c \in R$.
+    \item[(R2)] \textit{Commutative law for addition}:
+      $a + b = b + a$ for all $a, b \in R$.
+    \item[(R3)] \textit{Existence of zero}: There exists $0 \in R$ such that
+      $a + 0 = a$ for all $a \in R$.
+    \item[(R4)] \textit{Existence of additive inverses}:
+      For all $a \in R$, there exists $-a \in R$ such that
+      $a + (-a) = 0$.\footnote{Note that we'll usually write $a - b$ in place of $a + (-b)$.}
+    \item[(R5)] \textit{Associative law for multiplication}:
+      $(ab)c = a(bc)$ for all $a, b, c \in R$.
+    \item[(R6)] \textit{Distributive laws}:
+      $a(b + c) = ab + ac$ and $(a + b)c = ac + bc$ for all $a, b, c \in R$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}[Commutative ring]
+In this class, we will mostly be interested in
+\emph{commutative rings}, which satisfy the following
+additional property for multiplication:
+\begin{enumerate}
+  \item[(R7)] \textit{Commutative law for multiplication}:
+    $ab = ba$ for all $a, b \in R$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Ring with unity]
+A ring \emph{with unity} satisfies the additional
+property that
+\begin{enumerate}
+  \item[(R8)] \emph{Existence of unity}: There exists
+    $1 \ne 0 \in R$ such that and
+    $a 1 = 1 a = a$ for $a \in R$.
+\end{enumerate}
+\end{definition}
+Note that a ring need not be commutative to have a unity.
+
+\begin{definition}[Domain]
+A commutative ring with unity is called a
+\emph{(integral) domain} if it has the following
+cancellation property:
+\begin{enumerate}
+  \item[(R9)] \emph{Cancellation}: For all
+    $a, b \in R$ and $c \ne 0$, $ca = cb$ implies
+    $a = b$.
+  \item[(R9')] \textit{No zero divisors}: For all
+    $a, b \in R$, $ab = 0$ implies $a = 0$ or $b = 0$.
+\end{enumerate}
+\end{definition}
+
+The conditions (R9) and (R9') are equivalent.
+
+\begin{definition}[Field]
+A commutative ring with unity is called a \emph{field}
+if it has the following additional property for
+multiplicative inverses:
+\begin{enumerate}
+  \item[(R10)] \emph{Existence of multiplicative inverses}:
+    For all $a \ne 0 \in R$, there exists
+    $a^{-1} \in R$ such that $aa^{-1} = 1$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+  Some examples of rings are $\Z / 2\Z$, which
+  also happens to be a field. The ring $\Z$ is a domain.
+  The set $M_{2 \times 2}(\R)$ is a non-commutative ring
+  with unity, and has zero divisors. The ring
+  $\Q$ is a field.\footnote{In fact, $\Q$ is somehow the smallest field containing $\Z$.} The real polynomials in a single
+  variable $\R[x]$ form a ring, which is a domain but
+  not a field. The complex numbers $\C$ and the
+  real numbers $\R$ both form a field. The
+  even integers $2\Z$ form a commutative ring without
+  unity. In general, $\Z / n\Z$ is a commutative ring
+  with unity, and is a field if and only if $n$ is prime
+  (and has zero divisors otherwise, if $n$ is composite).
+\end{example}
+
+\begin{remark}
+  If $(R, +, \cdot)$ is a ring, then $(R, +)$ is an
+  abelian group. If $(K, +, \cdot)$ is a field,
+  then $(K^*, \cdot)$ is an abelian group, where
+  $K^* = K \setminus \{0\}$.
+\end{remark}
+
+\begin{definition}[Group of units]
+  Let $R$ be a commutative ring with unity. The
+  \emph{group of units} of $R$ is
+  \[U = \{u \in R \mid \text{there exists $v \in R$ such that $uv = 1$}\}.\]
+\end{definition}
+
+\begin{exercise}
+  Show that $U$ is in fact a group under multiplication.
+\end{exercise}
+
+\begin{definition}[Associate]
+  If $a, b \in R$ such that $a = ub$ for some
+  $u \in U$, then $a$ and $b$ are called
+  \emph{associates}, denoted by $a \sim b$.
+\end{definition}
+
+\begin{exercise}
+  Show that $\sim$ is in fact an equivalence relation.
+\end{exercise}
+
+\begin{example}
+  The group of units of $\Z$ is $\{1, -1\}$. The group
+  of units of a field $K$ is $K^* = K \setminus \{0\}$.
+\end{example}
+
+\begin{exercise}
+  Let $R = \{a + b \sqrt{2} \mid a, b \in \Z\}$. Check
+  the following:
+  \begin{enumerate}
+    \item $R$ is a commutative ring with unity.
+    \item The group of units of $R$ is
+      $\{a + b \sqrt{2} \mid a, b \in \Z, |a^2 - 2b^2| = 1\}$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{definition}[Divisor]
+  Let $D$ be an integral domain, $a \in D \setminus \{0\}$,
+  $b \in D$. Then $a$ divides $b$, or $a$ is a
+  \emph{divisor} or \emph{factor} of $b$, denoted by
+  $a | b$, if there exists $z \in D$ such that $az = b$.
+  We write $a {\nmid} b$ if $a$ does not divide $b$.
+  We say that $a$ is a \emph{proper divisor} or
+  that $a$ \emph{properly divides} $b$ if $z$ is not
+  a unit.
+\end{definition}
+
+\begin{remark}
+  Equivalent, $a$ is a proper divisor of $b$ if
+  and only if $a | b$ and $b {\nmid} a$.
+\end{remark}
+
+\begin{definition}[Subring]
+  A \emph{subring} $U$ of a ring $R$ is a non-empty
+  subset of $R$ with the property that for all
+  $a, b \in R$, $a, b \in U$ implies $a + b \in U$
+  and $ab \in U$,
+  and $a \in U$ implies $-a \in U$.
+\end{definition}
+
+\begin{remark}
+  Equivalently, $U$ is a subring of $R$ if and only
+  if $a, b \in U$ implies $a - b \in U$ and $ab \in U$.
+\end{remark}
+
+\begin{remark}
+  We automatically have $0 \in U$ since we can pick
+  any $a \in U$, and then $0 = a - a \in U$.
+\end{remark}
+
+\begin{definition}[Subfield]
+  A \emph{subfield} of a field $K$ is a subset $E$
+  containing at least two elements such that
+  $a, b \in E$ implies $a - b \in E$ and $a \in E, b \in E \setminus \{0\}$ implies $ab^{-1} \in E$. If $E$ is
+  a subfield and $E \ne K$, then we say $E$ is a
+  \emph{proper} subfield.
+\end{definition}
+
+\begin{remark}
+  As before, we can replace the last condition with
+  the equivalent statement that
+  $a, b \in E$ implies $ab \in E$ and
+  $a \in E \setminus \{0\}$ implies $a^{-1} \in E$.
+\end{remark}
+
+\begin{definition}[Ideal]
+  An \emph{ideal} of $R$ is a non-empty subset $I$ of
+  $R$ with the properties that $a, b \in I$ implies
+  $a - b \in I$ and $a \in I, r \in R$ implies $ra \in I$.
+\end{definition}
+
+\begin{remark}
+  All ideals are subrings, but the converse is not
+  true in general.
+\end{remark}
+
+\begin{example}
+  The integers $\Z$ form a subring of $\R$ but not an
+  ideal.
+\end{example}
+
+\begin{remark}
+  We trivially have that $\{0\}$ and $R$ are both
+  ideals of $R$. An ideal $I$ is called \emph{proper}
+  if $\{0\} \subsetneq I \subsetneq R$.
+\end{remark}
+
+\begin{tcolorbox}
+\begin{theorem}
+  Let $A = \{a_1, \dots, a_n\}$ be a finite subset
+  of a commutative ring $R$. Then the set
+  \[Ra_1 + \dots + Ra_n = \{x_1 a_1 + \dots + x_n a_n \mid x_i \in R\}\]
+  is the smallest ideal of $R$ containing $A$.
+\end{theorem}
+\end{tcolorbox}
+
+\begin{proof}
+  See Howie. Check this is indeed an ideal
+  and is contained in any other ideal containing $A$.
+\end{proof}
+
+\begin{definition}[Ideals generated by elements of a ring]
+  The set $Ra_1 + \dots + Ra_n$ is the
+  \emph{ideal generated by} $a_1, \dots, a_n$,
+  denoted by $\langle a_1, \dots, a_n \rangle$.
+  If the ideal is generated by a single element
+  $a \in R$, then we say that $Ra = \langle a \rangle$
+  is a \emph{principal ideal}.
+\end{definition}
+
+\begin{example}
+  In $\Z$, the ideal $\langle 2 \rangle = 2\Z$ are
+  the even numbers. We have
+  $\langle 2, 3 \rangle = \Z$, but
+  $\langle 6, 8 \rangle = \langle 2 \rangle$.
+\end{example}
+
+\begin{tcolorbox}
+\begin{theorem}
+  Let $D$ be an integral domain with group of units
+  $U$ and let $a, b \in D \setminus \{0\}$. Then
+  \begin{enumerate}
+    \item $\langle a \rangle \subseteq \langle b \rangle$
+      if and only if $b | a$,
+    \item $\langle a \rangle = \langle b \rangle$
+      if and only if $a \sim b$,
+    \item $\langle a \rangle = D$ if and only if
+      $a \in U$.
+  \end{enumerate}
+\end{theorem}
+\end{tcolorbox}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\begin{definition}[Homomorphism of rings]
+  A \emph{homomorphism} from a ring $R$ to a ring $S$
+  is a mapping $\varphi : R \to S$ such that
+  $\varphi(a +_R b) = \varphi(a) +_S \varphi(b)$ and
+  $\varphi(ab) = \varphi(a)\varphi(b)$ for all
+  $a, b \in R$.
+\end{definition}
+
+\begin{example}
+  The zero mapping $\varphi(a) = 0$ is always a
+  homomorphism. The inclusion map
+  $\iota : 2\Z \to \Z$ or $\iota : \Z \to \Q$ is
+  a homomorphism.
+\end{example}
+
+\begin{tcolorbox}
+\begin{theorem}
+  Let $R, S$ be rings and $\varphi : R \to S$ a
+  homomorphism. Then
+  \begin{enumerate}
+    \item $\varphi(0_R) = 0_S$,
+    \item $\varphi(-r) = -\varphi(r)$ for all $r \in R$,
+    \item the image $\varphi(R)$ is a subring of $S$.
+  \end{enumerate}
+\end{theorem}
+\end{tcolorbox}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\begin{definition}[Monomorphism]
+  Let $\varphi : R \to S$ be a homomorphism. If
+  $\varphi$ is injective, we say that $\varphi$ is
+  a \emph{monomorphism} or an \emph{embedding}.
+\end{definition}
+
+\begin{example}
+  The inclusion map $\varphi : \Z \to \R$ given by
+  $\varphi(n) = n$ is an embedding.
+\end{example}
