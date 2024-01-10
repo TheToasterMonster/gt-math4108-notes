@@ -1,0 +1,335 @@
+\chapter{Jan.~10 --- Field of Fractions, Polynomials}
+
+\section{Isomorphisms}
+\begin{definition}[Isomorphism]
+If a homomorphism $\varphi : R \to S$ is both one-to-one
+and onto,
+then $\varphi$ is an \emph{isomorphism} and we say $R$
+and $S$ are \emph{isomorphic}, denoted
+$R \cong S$.
+\end{definition}
+
+\begin{definition}[Automorphism]
+  An isomorphism $\varphi : R \to R$ is called an
+  \emph{automorphism}.
+\end{definition}
+
+\begin{example}
+  For any ring $R$, the identity map $\varphi : R \to R$
+  with $\varphi = \text{id}$ is an automorphism.
+\end{example}
+
+\begin{exercise}
+  The complex conjugation $\varphi : \C \to \C$
+  with $\varphi(z) = \overline{z}$ is an automorphism.
+\end{exercise}
+
+\begin{definition}[Kernel]
+  Let $\varphi : R \to S$ be a homomorphism. The
+  \emph{kernel} of $\varphi$ is
+  \[
+    \ker \varphi = \phi^{-1}(0_S) \{ a \in R : \varphi(a) = 0_S \}.
+  \]
+\end{definition}
+
+\begin{exercise}
+  For any homomorphism $\varphi$, $\ker \varphi$ is
+  an ideal.
+\end{exercise}
+
+\begin{definition}[Residue class]
+  Let $I$ be an ideal of a ring $R$ and $a \in R$.
+  The set
+  \[a + I = \{a + x \mid x \in I\}\]
+  is the \emph{residue class} of $a$ modulo $I$.
+\end{definition}
+
+\begin{exercise}
+  The set $R / I$ of residue classes modulo $I$ forms
+  a ring with respect to the operations
+  \[(a + I) + (b + I) = (a + b) + I \quad \text{and} \quad (a + I)(b + I) = ab + I.\]
+\end{exercise}
+
+\begin{exercise}
+  The map $\theta_{I} : R \to R / I$ with
+  $\theta_I(a) = a + I$ is a surjective homomorphism
+  onto $R / I$ with kernel $I$. This map $\theta_I$ is
+  called the \emph{natural homomorphism} from
+  $R$ to $R / I$.
+\end{exercise}
+
+\begin{example}
+  Consider $\Z$ and $I = \langle n \rangle = n \Z$.
+  Then $\theta_I : \Z \to \Z / n \Z$ with
+  $\theta_I(a) = a + \langle n \rangle$ is the
+  natural homomorphism. There are $n$ residue classes,
+  which are
+  \[\langle n \rangle, \quad 1 + \langle n \rangle, \quad \dots, \quad (n - 1) + \langle n \rangle.\]
+\end{example}
+
+\begin{theorem}
+  Let $n \in \Z_{> 0}$. Then $\Z / n \Z$ is a field
+  if and only if $n$ is prime.
+\end{theorem}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\begin{remark}
+  If $n = 0$, then $\Z / 0 \Z \cong \Z$.
+\end{remark}
+
+\begin{theorem}
+  Let $\varphi : R \to S$ be a surjective homomorphism
+  with kernel $K$. Then there is an isomorphism
+  $\alpha : R / K \to S$ such that the following diagram
+  commutes (i.e. $\varphi = \alpha \circ \theta_K$):
+  \[
+    \begin{tikzcd}
+      R \arrow{r}{\varphi} \arrow[swap]{d}{\theta_K}
+      & S \\
+      R / K \arrow{ur}{\alpha}
+    \end{tikzcd}
+  \]
+\end{theorem}
+
+\begin{proof}
+  See Howie. But the general idea is to define
+  $\alpha : R / K \to S$ by $\alpha(a + K) = \varphi(a)$.
+  Then need to check that $\alpha$ is well-defined
+  and an isomorphism.
+\end{proof}
+
+\section{Field of Fractions}
+The motivating question is: How do we get from
+$\Z$ to $\Q$? Recall that
+\[\Q = \{a / b \mid a, b \in \Z, b \ne 0\},\]
+where $a / c = b / d$ if $ad = bc$. We add and multiply
+fractions by
+\[
+  \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \quad
+  \text{and} \quad
+  \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}.
+\]
+How do we do this more generally (construct a field out
+of an arbitrary integral domain)?
+
+\begin{definition}[Field of fractions of a domain]
+  Let $D$ be an integral domain and
+  \[P = D \times (D \setminus \{0\})
+    = \{(a, b) \mid a, b \in D, b \ne 0.\}
+  \]
+  Define an equivalence relation $\equiv$ on $P$ by
+  $(a, b) \equiv (a', b')$ if $ab' = a'b$. Then
+  the \emph{field of fractions} of $D$ is
+  \[
+    Q(D) = P / {\equiv}.
+  \]
+  We denote the equivalence class $[a, b]$ by
+  $a / b$, i.e. $a / b = c / d$ if $ad = bc$. We
+  define addition and multiplication on $Q(D)$ by
+\[
+  \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \quad
+  \text{and} \quad
+  \frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}.
+  \]
+\end{definition}
+
+\begin{exercise}
+  Do the following:
+  \begin{enumerate}
+    \item Check that $\equiv$ is an equivalence relation.
+    \item Check that these operations are well-defined.
+    \item Check that $Q(D)$ is a commutative ring with unity.
+      \begin{itemize}
+        \item The zero element is $0 / b$ for $b \ne 0$.
+        \item The unity element is $a / a$ for $a \ne 0$.
+        \item The negative of $a / b$ is $(-a) / b$
+          or equivalently $a / (-b)$.
+        \item The multiplicative inverse of $a / b$ is
+          $b / a$ for $a, b \ne 0$.
+      \end{itemize}
+    \item Complete the previous exercise and check that
+      $Q(D)$ is a field.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  The map $\phi : D \to Q(D)$ defined by
+  $\phi(a) = a / 1$ is a monomorphism. In particular,
+  the field of fractions
+  $Q(D)$ contains $D$ as a subring and $Q(D)$ is
+  the smallest field containing $D$, in the sense that
+  if $K$ is a field with the property that there exists
+  a monomorphism $\theta : D \to K$, then there exists
+  a monomorphism $\psi : Q(D) \to K$ such that the
+  following diagram commutes:
+  \[
+    \begin{tikzcd}
+      D \arrow{r}{\theta} \arrow[swap]{d}{\varphi}
+      & K \\
+      Q(D) \arrow{ur}{\psi}
+    \end{tikzcd}
+  \]
+\end{exercise}
+
+\section{The Characteristic of a Field}
+Note that for $a \in R$, we might write $a + a$ as
+$2a$ and $a + a + \dots + a$ ($n$ times) as $na$.
+Furthermore, $0a = 0_R$ and $(-n)a = n(-a)$ for
+$n \in \Z_{> 0}$. Thus $na$ has meaning for all
+$n \in \Z$.\footnote{This is saying that any abelian group is naturally a \emph{module} over the integers $\Z$.}
+
+\begin{exercise}
+  For $a, b \in R$ and $m, n \in \Z$, we have
+  $(ma)(nb) = (mn)(ab)$.
+\end{exercise}
+
+\begin{definition}[Characteristic of a ring]
+For an arbitrary ring $R$, there are two possibilities:
+\begin{enumerate}
+  \item $m 1_R$ for $m \in \Z$ are all distinct. In
+    this case, we say that $R$ has \emph{characteristic}
+    $0$.
+  \item There exists $m, n \in \N$ such that
+    $m 1_R = (m + n) 1_R$. In this case, we say that
+    $R$ has \emph{characteristic} $n$, where $n$ is
+    the least positive $n$ for which this property
+    holds.
+\end{enumerate}
+We denote the characteristic of $R$ by $\Char R$.
+If $\Char R = n$, then $na = 0_R$ for all $a \in R$
+since $na = (n 1_R) a = 0a = 0$.
+\end{definition}
+
+\begin{example}
+  We have $\Char \Z / n\Z = n$.
+\end{example}
+
+\begin{theorem}
+  The characteristic of a field is either $0$ or a prime.
+\end{theorem}
+
+\begin{proof}
+  Let $K$ be a field and suppose $\Char K = n \ne 0$
+  and $n$ is not prime. Then we can write $n = rs$ where
+  $1 < r, s < n$. The minimal property of $n$
+  implies that $r 1_K \ne 0$ and $s 1_K \ne 0$. But then
+  \[
+    r 1_K \cdot s 1_K = rs 1_K = n 1_K = 0,
+  \]
+  which is impossible since $K$ is a field and thus
+  has no zero divisors.
+\end{proof}
+
+\begin{remark}
+  Note the following:
+  \begin{enumerate}
+    \item If $K$ is a field with $\Char K = 0$, then
+      $K$ has a subring isomorphic to $\Z$, i.e.
+      elements of the form $n 1_K$ for $n \in \Z$,
+      and $K$ has a subfield isomorphic to $\Q$,
+      i.e.
+      \[P(K) = \{m 1_K / n 1_K \mid m, n \in \Z, n \ne 0\}.\]
+      This is the \emph{prime subfield} of $K$,
+      and any subfield of $K$ must contain $P(K)$.
+    \item If $K$ is a field with $\Char K = p$, then
+      the prime subfield of $K$ is
+      \[P(K) = \{1_K, 2 \cdot 1_K, \dots, (p - 1) \cdot 1_K\},\]
+      which is isomorphic to $\Z / p \Z$.
+  \end{enumerate}
+\end{remark}
+
+\begin{remark}
+  In other words, every field of characteristic $0$
+  is an \emph{extension} of $\Q$ (contains $\Q$ as a subfield),
+  and every field of characteristic $p$ is an
+  \emph{extension} of $\Z / p \Z$ (contains $\Z / p\Z$
+  as a subfield).
+\end{remark}
+
+\begin{remark}
+  If $\Char K = 0$, then writing $a / n 1_K$ as
+  $a / n$ is fine. But if $\Char K = p$, then
+  $a / n$ does not make sense when $p | n$
+  (since $p \cdot 1_K = 0$).
+\end{remark}
+
+\begin{theorem}
+  If $K$ is a field with $\Char K = p$, then
+  for all $x, y \in K$, $(x + y)^p = x^p + y^p$.
+\end{theorem}
+
+\begin{proof}
+  See Howie. Uses the binomial theorem.
+\end{proof}
+
+\section{Polynomials}
+Let $R$ be a ring, then we have the polynomial ring
+over $R$
+\[
+  R[X] = \{a_0 + a_1 X + \dots + a_n X^n \mid a_i \in R, n \in \N\}.
+\]
+If $f \in R[X]$, then it has \emph{degree} $n$ if the
+last nonzero element in the sequence
+$\{a_0, a_1, \dots\}$ is $a_n$, denoted
+$\partial f = n$. By convention, the zero polynomial has
+degree $-\infty$. The coefficient $a_n$ is called the
+\emph{leading coefficient}, and if $a_n = 1$, then
+$f$ is \emph{monic}. Addition and multiplication work
+as expected:
+\[
+  (a_0 + a_1 X + \dots + a_m X^m) + (b_0 + b_1 X + \dots + b_n X^n)
+  = (a_0 + b_0) + (a_1 + b_1) X + \dots
+\]
+and
+\[
+  (a_0 + a_1 X + \dots + a_m X^m)(b_0 + b_1 X + \dots + b_n X^n)
+  = c_0 + c_1 X + \dots
+\]
+where
+\[
+  c_k = \sum_{i + j = k}^k a_i b_{j}.
+\]
+The ground ring $R$ sits inside of the polynomial ring
+$R[X]$. Take the monomorphism $\theta : R \to R[X]$
+by $\theta(a) = a$, i.e. an element $a$ maps to the
+constant polynomial $a$.
+
+\begin{theorem}
+  Let $D$ be an integral domain. Then
+  \begin{enumerate}
+    \item $D[X]$ is an integral domain.
+    \item If $p, q \in D[X]$, then
+      $\partial (p + q) \le \max(\partial p, \partial q)$.
+    \item If $p, q \in D[X]$, then
+      $\partial (p q) = \partial p + \partial q$.
+    \item The group of units of $D[X]$ coincides
+      with the group of units of $D$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Statements (2) and (3) are left as exercises.
+
+  (1) We need to show that $D[X]$ has no zero divisors.
+  For this, suppose that $p, q$ are nonzero polynomials
+  with leading coefficients $a_m$ and $b_n$ respectively.
+  Then the leading coefficient of $pq$ is $a_m b_n$,
+  which is nonzero since $D$ is an integral domain and
+  thus has no zero divisors. So $pq$ is nonzero.
+
+  (4) Let $p, q \in D[X]$ and suppose $pq = 1$.
+  Since $\partial (pq) = \partial (1) = 0$, we must
+  have $\partial p = \partial q = 0$. Thus $p, q \in D$
+  and $pq = 1$ if and only if $p$ and $q$ are in
+  the group of units of $D$.
+\end{proof}
+
+Since $D[X]$ is a domain, we can consider polynomials
+in the variable $Y$ with coefficients in $D[X]$:
+\[D[X, Y] = (D[X])[Y].\]
+We can repeat this to get polynomials in $n$
+variables: $D[X_1, X_2, \dots, X_n]$, which is
+an integral domain.
