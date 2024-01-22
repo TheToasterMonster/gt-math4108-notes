@@ -1,0 +1,305 @@
+\chapter{Jan.~22 --- Field Extensions}
+\section{More on Irreducibility}
+The following excerpt is from Howie:
+\begin{quote}
+  Another device for determining irreducibility over $\Z$ (and consequently over $\Q$) is to map the polynomial onto $\Z_p[X]$ for some suitably chosen prime $p$. Let $g = a_0 +a_1X + \dots +a_nX_n \in \Z[X]$, and let $p$ be a prime not dividing $a_n$. For each $i$ in $\{0, 1, \dots, n\}$, let $\overline{a}_i$ denote the residue class $a_i + \langle p \rangle$ in the field $\Z_p = \Z / \langle p \rangle$, and write the polynomial $\overline{a}_0 + \overline{a}_1X + \dots + \overline{a}_n X_n$ as $\overline{g}$. Our choice of $p$ ensures that $\partial \overline{g} = n$. Suppose that $g = uv$, with $\partial u, \partial v < \partial f$ and $\partial u + \partial v = \partial g$. Then $\overline{g} = \overline{u}\,\overline{v}$. If we can show that $\overline{g}$ is irreducible in $\Z_p[X]$, then we have a contradiction, and we deduce that $g$ is irreducible. The advantage of transferring the problem from $\Z[X]$ to $\Z_p[X]$ is that $\Z_p$ is finite, and the verification of irreducibility is a matter of checking a finite number of cases.
+\end{quote}
+
+\begin{example}
+  Show that
+  \[g = 7X^4 + 10X^3 - 2X^2 + 4X - 5\]
+  is irreducible over $\Q$.
+\end{example}
+
+\begin{proof}
+  Let $p = 3$ and
+  \[\overline{g} = X^4 + X^3 + X^2 + 1\]
+  This has no linear factors since
+  \[\overline{g}(0) = 1, \quad \overline{g}(1) = 2, \quad \overline{g}(-1) = 1.\]
+  So suppose
+  \[
+    \overline{g} = X^4 + X^3 + X^2 + X + 1
+    = (X^2 + aX + b)(X^2 + cX + d)
+  \]
+  in $\Z_3[x]$. Then for some
+  $a, b, c, d \in \Z_3 = \{-1, 0, 1\}$, we have
+  \[
+    \begin{cases}
+      X^3 & a + c = 1 \\
+      X^2 & b + ac + d = 1 \\
+      X & ad + bc = 1 \\
+      1 & bd = 1
+    \end{cases}
+  \]
+  The first case is if $b = d = 1$, but this
+  implies $ac = -1$, so $a = \pm 1$ and $c = \mp 1$.
+  But $a + c = 1$, so this cannot happen. The
+  second case is if $b = d = -1$. This implies
+  that $ac = 0$ and $a + c = 1$. So if $a = 0$,
+  then $c = 1$, so $1 = ad + bc = b$, which is
+  a contradiction with $b = -1$. If $c = 0$,
+  then $1 = ad + bc = d$, which is a contradiction
+  with $d = -1$. Thus $\overline{g}$ is irreducible
+  in $\Z_3[x]$, so $g$ is irreducible in $\Z[x]$,
+  and by Gauss's lemma, $g$ is irreducible in $\Q[x]$.
+\end{proof}
+
+\begin{remark}
+  If we had tried $p = 2$, then we have
+  $\overline{g} = x^4 + 1 \in \Z_2[x]$, which is
+  not in fact irreducible since
+  \[\overline{g} = x^4 + 1 = (x + 1)^4 \in \Z_2[x].\]
+\end{remark}
+
+\section{Field Extensions}
+\begin{definition}
+  Let $K, L$ be fields and $\varphi : K \to L$ an
+  injective homomorphism. Then $L$ is a
+  \emph{field extension} of $K$, denoted $L : K$.
+\end{definition}
+
+\begin{example}
+  We have $\C : \R$ is a field extension.
+\end{example}
+
+\begin{definition}
+Recall that $V$ is a \emph{$K$-vector space} if
+\begin{enumerate}
+  \item $V$ is an abelian group under $+$,
+  \item For $a, b \in K$ and $x, y \in V$, we have
+    \[\text{(i). } a(x + y) = ax + ay, \quad \text{(ii). }(a + b)x = ax + bx, \quad \text{(iii). } (ab)x = a(bx), \quad \text{(iv). } 1x = 1.\]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+  If $L : K$ is a field extension, then $L$ is a
+  a vector space over $K$.
+\end{remark}
+
+\begin{definition}
+  A \emph{basis} for a vector space is a linearly
+  independent spanning set.
+\end{definition}
+
+\begin{example}
+  The complex numbers $\C$ is a $\R$-vector space
+  with basis $\{1, i\}$. Bases are not unique,
+  since $\{1 + i, 1 - i\}$ is another basis for $\C$.
+\end{example}
+
+\begin{example}
+  If there is a vector space that we know to be a field,
+  then it is automatically a field extension of its
+  ground field.
+\end{example}
+
+\begin{definition}
+  The \emph{dimension} of $L$
+  is the cardinality of a bsis for $L : K$.\footnote{Note that this is well-defined since any two bases of $L$ have the same length.}
+  The dimension is also called the \emph{degree} of
+  $L : K$, denoted $[L : K]$. We say that $L$ is a
+  \emph{finite extension} if $[L : K]$ is finite, and
+  an \emph{infinite extension} otherwise.
+\end{definition}
+
+\begin{example}
+  We have $[\C : \R] = 2$, which is finite. On the
+  other hand, $\R : \Q$ is an infinite extension.
+\end{example}
+
+\begin{theorem}
+  Let $L : K$ be a field extension. Then
+  $L = K$ if and only if $[L : K] = 1$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$ If $L = K$, then $\{1\}$ is a basis
+  for $L : K$, and thus $[L : K] = 1$.
+
+  $(\Leftarrow)$ If $[L : K] = 1$, then $\{x\}$ is a
+  basis for $L : K$ for some $x \in L$. Then there exists
+  some $a \in K$ such that $1 = ax$, so
+  $x = a^{-1} \in K$. For every $y \in L$, there exists
+  $b \in K$ such that $y = bx$. But then
+  \[
+    y = bx = b(a^{-1}) \in K,
+  \]
+  so $y \in K$ as well by closure. Thus $L = K$
+  as desired.
+\end{proof}
+
+\begin{remark}
+Let $L : K$ and $M : L$ by field extensions with
+\begin{center}
+  \begin{tikzcd}
+    K \arrow[r, "\alpha"] & L \arrow[r, "\beta"] & M
+  \end{tikzcd}
+\end{center}
+Then $M : K$ is also a field extension.
+\end{remark}
+
+\begin{theorem}
+  For field extensions $L : K$ and $M : L$, we have
+  $[M : L][L : K] = [M : K]$.
+\end{theorem}
+
+\begin{proof}
+  Suppose $\{a_1, a_2, \dots a_r\}$ is a linearly
+  independent subset of $M$ over $L$ and
+  $\{b_1, b_2, \dots, b_s\}$ is a linearly
+  independent subset of $L$ over $K$.
+  Now we claim that
+  \[
+    \{a_i b_j \mid 1 \le i \le r, 1 \le j \le s\}
+  \]
+  is a linearly independent subset of $M$ over $K$.
+  To see this, suppose
+  \[
+    \sum_{i = 1}^r \sum_{j = 1}^s \lambda_{ij} a_i b_i = 0
+  \]
+  for some $\lambda_{ij} \in K$. We can rewrite this as
+  \[
+    \sum_{i = 1}^r \left(\sum_{j = 1}^s \lambda_{ij} b_j\right) a_i = 0.
+  \]
+  Since the $a_i$ are linearly independent over $L$,
+  it follows that
+  \[
+    \sum_{j = 1}^s \lambda_{ij} b_j = 0
+  \]
+  for each $i = 1, \dots, r$. Since the $b_j$ are
+  linearly independent over $K$, it follows that
+  $\lambda_{ij} = 0$ for each $i, j$, which proves
+  the claim. Returning to the main proof,
+  if $[M : L]$ or $[L : K]$ is infinite,
+  then $r$ or $s$ can be made arbitrarily large,
+  so
+  \[
+    \{a_i b_j \mid 1 \le i \le r, 1 \le j \le s\}
+  \]
+  can also be made arbitrarily large, and hence
+  $[M : K]$ is infinite. Now suppose
+  $[M : L] = r < \infty$ and $[L : K] = s < \infty$. Let
+  $\{a_1, a_2, \dots, a_r\}$ be a basis for $M : L$ and
+  $\{b_1, b_2, \dots, b_s\}$ be a basis for $L : K$.
+  We will show that
+  \[
+    \{a_i b_j \mid 1 \le i \le r, 1 \le j \le s\}
+  \]
+  is a basis for $M : K$. Since we already showed that
+  $\{a_i b_j\}$ is linearly independent, it only remains
+  to show that they span $M$ over $K$. For each $z \in M$,
+  there exist $\lambda_1, \dots, \lambda_r \in L$ such
+  that
+  \[z = \sum_{i = 1}^r \lambda_i a_i.\]
+  Then for each $\lambda_i \in L$, there exist
+  $\mu_{i 1}, \dots, \mu_{i s} \in K$ such that
+  \[
+    \lambda_i = \sum_{j = 1}^s \mu_{i j} b_j.
+  \]
+  Combining this yields
+  \[
+    z = \sum_{i = 1}^r \sum_{j = 1}^s \mu_{i j} a_i b_j
+  \]
+  as desired, which finishes the proof.
+\end{proof}
+
+\begin{example}
+  Consider $\Q(\sqrt{2}) = \Q[\sqrt{2}] = \{a + b\sqrt{2} \mid a, b \in \Q\}$.
+\end{example}
+
+\begin{exercise}
+  Show that $\Q[\sqrt{2}]$ is a field.
+  (Hint: $1 / (a + b\sqrt{2}) = (a - b\sqrt{2}) / (a^2 - 2b^2)$.)
+\end{exercise}
+
+\begin{definition}
+  Let $K$ be a subfield of $L$ and $S$ a subset of
+  $L$. The \emph{subfield of $L$ generated over $K$ by $S$},
+  denoted $K(S)$, is the intersection of all subfields
+  of $L$ containing $K \cup S$. If
+  $S = \{\alpha_1, \dots, \alpha_n\}$ is finite,
+  we write $K(\alpha_1, \dots, \alpha_n)$.
+\end{definition}
+
+\begin{theorem}
+  Let $E$ be the elements in $L$ that can be expressed
+  as quotients of finite $K$-linear combinations of
+  finite products of elements in $S$. Then $K(S) = E$.
+\end{theorem}
+
+\begin{proof}
+  To see that $K(S) \subseteq E$, simply check that $E$
+  is a subfield of $L$ containing $K \cup S$.
+
+  For $E \subseteq K(S)$, note that any subfield of $L$
+  containing $K$ and $S$ must contain all finite products
+  of elements in $S$, all linear combinations of
+  such products, and all quotients of such linear
+  combinations. This is precisely what is means
+  to have $E \subseteq K(S)$.
+\end{proof}
+
+\begin{definition}
+  A \emph{simple extension} of $K$ is $K(\alpha)$,
+  i.e. $S$ has a single element $\alpha \notin K$.
+\end{definition}
+
+\begin{example}
+  The previous example $\Q(\sqrt{2})$ is a simple
+  extension.
+\end{example}
+
+\begin{theorem}
+  Let $L$ be a field, $K$ a subfield, and $\alpha \in L$.
+  Then either
+  \begin{enumerate}
+    \item $K(\alpha)$ is isomorphic to $K(X)$, the
+      field of rational forms with coefficients in $K$,
+    \item or there exists a unique monic polynomial
+      $m \in K[X]$ with the property that for all
+      $f \in K[X]$,
+      \begin{enumerate}
+        \item $f(\alpha) = 0$ if and only if $m | f$,
+        \item the field $K(\alpha)$ coincides with
+          $K[\alpha]$, the ring of all polynomials
+          in $\alpha$ with coefficients in $K$,
+        \item and $[K[\alpha] : K] = \partial m$.
+      \end{enumerate}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Suppose there does not exist nonzero $f \in K[X]$ such
+  that $f(\alpha) = 0$. Then there exists a map
+  $\varphi : K(X) \to K(\alpha)$ with
+  $f / g \mapsto f(\alpha) / g(\alpha)$, which is
+  defined since $g(\alpha) = 0$ only if $g$ is the
+  zero polynomial. Note that $\varphi$ is a
+  surjective homomorphism,\footnote{Also check that $\varphi$ is well-defined.} which one can check as
+  an exercise. Now we show that $\varphi$ is also
+  injective. To see this, suppose
+  \[
+    \varphi(f / g) = \varphi(p / q),
+  \]
+  which happens if and only if
+  \[
+    f(\alpha) q(\alpha) - p(\alpha) g(\alpha).
+  \]
+  in $L$. This happens if and only if $fq - pg = 0$
+  in $K[X]$, which happens if and only if $f / g = p / q$
+  in $K(X)$. This completes the first case of the theorem.
+  (Second case of the theorem to be done next class.)
+\end{proof}
+
+\begin{example}
+  Continuing the same example, note that
+  \[
+    \Q[\sqrt{2}] = \{a + b\sqrt{2} \mid a, b \in \Q\}
+    = \{a_0 + a_1 \sqrt{2} + a_2 \sqrt{2}^2 + a_3 \sqrt{2}^3 + \dots + a_n \sqrt{2}^n \mid a_i \in \Q\},
+  \]
+  which falls in the second case of the previous theorem.
+\end{example}
+
+\begin{remark}
+  We also have $\Q[\sqrt{2}] = \Q[X] / \langle X^2 - 2 \rangle$.
+\end{remark}
