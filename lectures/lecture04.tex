@@ -288,7 +288,81 @@ Then $M : K$ is also a field extension.
   in $L$. This happens if and only if $fq - pg = 0$
   in $K[X]$, which happens if and only if $f / g = p / q$
   in $K(X)$. This completes the first case of the theorem.
-  (Second case of the theorem to be done next class.)
+
+  Now suppose there exists nonzero $g \in K[X]$ such
+  that $g(\alpha) = 0$. Furthermore, suppose $g$ is a
+  polynomial of least degree with this property. Let
+  $a$ be the leading coefficient of $g$, and let
+  $m = g / a$, so that $m$ is monic and $m(\alpha) = 0$
+  still. The reverse implication in (2a) is clear. For
+  the forwards implication in (2a), note that by division
+  with remainder for polynomials over a field, we can
+  write
+  \[
+    f = qm + r,
+  \]
+  where $\partial r < \partial m$. By the minimality
+  of $\partial m$, we must have $r = 0$, so $m | f$.
+  For the uniqueness of $m$, suppose there exists $m'$
+  with the same properties. Then
+  $m(\alpha) = m'(\alpha) = 0$, so
+  $m | m'$ and $m' | m$, which implies that $m = m'$
+  since $m$ and $m'$ are monic. For the irreducibility
+  of $m$, suppose for the sake of contradiction that
+  $m = pq$ with $\partial p, \partial q < \partial m$.
+  Then $m(\alpha) = p(\alpha) q(\alpha) = 0$, so
+  either $p(\alpha) = 0$ or $q(\alpha) = 0$, which
+  contradicts the minimality of $\partial m$.
+
+  Now we show (2b), which says that
+  $K(\alpha) = K[\alpha]$. For this, consider
+  $p(\alpha) / q(\alpha) \in K(\alpha)$ for
+  $q(\alpha) \ne 0$. Then $m {\nmid} q$, and since
+  $m$ is irreducible we have $\gcd(m, q) = 1$. Now
+  by Theorem 2.15 of Howie (about gcd's in the
+  Euclidean domain $K[X]$), there exist polynomials
+  $a, b$ such that $aq + bm = 1$. Setting
+  $X = \alpha$ yields $a(\alpha) q(\alpha) = 1$, so
+  \[
+    \frac{p(\alpha)}{q(\alpha)} = p(\alpha) a(\alpha) \in K[\alpha].
+  \]
+  Thus $K(\alpha) \subseteq K[\alpha]$. Since we already
+  know that $K[\alpha] \subseteq K(\alpha)$, we conclude
+  that $K(\alpha) = K[\alpha]$.
+
+  Finally we show (2c), which claims that
+  $[K[\alpha] : K] = \partial m$. For this, suppose
+  $\partial m = n$ and let
+  \[
+    p(\alpha) \in K[\alpha] = K(\alpha).
+  \]
+  Then $p = qm + r$ where $\partial r < \partial m = n$.
+  We have $p(\alpha) = r(\alpha)$, so if
+  \[
+    r = c_0 + c_1 X + \dots + c_{n - 1} X^{n - 1}
+  \]
+  for $c_i \in K$, then
+  \[
+    p(\alpha) = c_0 + c_1 \alpha + \dots + c_{n - 1} \alpha^{n - 1}.
+  \]
+  So $\{1, \alpha, \dots, \alpha^{n - 1}\}$ is a spanning
+  set for $K[\alpha]$. To see that
+  $\{1, \alpha, \dots, \alpha^{n - 1}\}$ is also
+  linearly independent, suppose there exists $a_i \in K$
+  such that
+  \[
+    a_0 + a_1 \alpha + \dots + a_{n - 1} \alpha^{n - 1} = 0.
+  \]
+  Then $a_0 = \dots = a_{n - 1} = 0$ since otherwise
+  we would have a polynomial
+  \[
+    p = a_0 + a_1 X + \dots + a_{n - 1} X^{n - 1}
+  \]
+  with $\partial p \le n - 1$ and $p(\alpha) = 0$,
+  which is a contradiction with the minimality of
+  $\partial m = n$. Thus
+  $\{1, \alpha, \dots, \alpha^{n - 1}\}$ is a basis, and
+  so $[K[\alpha] : K] = n = \partial m$.
 \end{proof}
 
 \begin{example}
