@@ -1,0 +1,270 @@
+\chapter{Jan.~31 --- Splitting Fields}
+
+\section{Review of Notation}
+Recall that
+\begin{align*}
+  \Q[X] &= \{
+    a_0 + a_1 X + \dotsb + a_n X^n : a_i \in \Q
+  \} \\
+    \Q(X) &= \{
+      f / g : f, g \in \Q[X], g \ne 0
+    \} / \sim,
+\end{align*}
+where $\sim$ is the usual relation on fractions, e.g.
+$2f / 2g = f / g$. Next, recall that
+\[
+  \Q[\sqrt{2}] = \{a_0 + a_1 \sqrt{2} + \dots + a_n \sqrt{2}^n : a_i \in \Q\}
+  = \{a + b \sqrt{2} : a, b \in \Q\}
+\]
+since $\sqrt{2}^2 = 2$. Also
+$\Q(\sqrt{2})$ is the smallest subfield of $\R$
+containing $\Q \cup \{\sqrt{2}\}$. In this case,
+$\Q(\sqrt{2}) = \Q[\sqrt{2}]$ since
+\[
+  \frac{1}{a + b\sqrt{2}} = \frac{a - b\sqrt{2}}{a^2 - 2b^2}.
+\]
+Next, we have
+\begin{align*}
+  \Q[X] / \langle X^2 - 2 \rangle
+  &= \{
+    a_0 + a_1 X + \dots + a_n X^n + \langle X^2 - 2 \rangle : a_i \in \Q
+  \} \\
+  &= \{
+    a + bX + \langle X^2 - 2 \rangle : a, b \in \Q
+  \}
+\end{align*}
+since $X^2 + \langle X^2 - 2 \rangle = 2 + \langle X^2 - 2\rangle$.
+In fact, $\Q[X] / \langle X^2 - 2 \rangle \cong \Q[\sqrt{2}]$.\footnote{Here the isomorphism $\Q[X] / \langle X^2 - 2 \rangle \to \Q[\sqrt{2}]$ is given by $a + bX  +\langle X^2 - 2 \rangle \mapsto a + b\sqrt{2}$.}
+
+\section{Splitting Fields}
+The motivating question here is: When can we factor
+a polynomial into linear factors?
+
+\begin{definition}
+  A polynomial \emph{splits completely} over $K$
+  if it can be factored into linear factors over $K$.
+\end{definition}
+
+\begin{example}
+  The polynomial $X^2 + 2$ splits completely over
+  $\Q[i\sqrt{2}]$ since $X^2 + 2 = (X - i\sqrt{2})(X + i\sqrt{2})$.
+\end{example}
+
+\begin{example}
+  The polynomial $X^3 - 2$ is irreducible
+  over $\Q$ by Eisenstein's criterion. However,
+  it factors as
+  \[
+    X^3 - 2 = (X - \alpha) (X^2 + \alpha X + \alpha^2)
+  \]
+  in $\Q[\alpha]$, where $\alpha = \sqrt[3]{2}$.
+  Also $X^2 + \alpha X + \alpha^2$ is irreducible
+  over $\Q[\alpha]$, since its discriminant shows that
+  it is irreducible even over $\R$. But in $\C$, we
+  can factor it as
+  \[
+    X^3 - 2 = (X - \alpha)(X - \alpha e^{2\pi i / 3})(X - \alpha e^{4\pi i / 3}).
+  \]
+  A smaller field that $X^3 - 2$ splits completely over
+  is $\Q[\sqrt[3]{2}, i \sqrt{3}]$.
+\end{example}
+
+\begin{definition}
+  Let $K$ be a field and $f \in K[X]$. An extension
+  $L$ of $K$ is a \emph{splitting field} for $f$ over $K$
+  if
+  \begin{enumerate}
+    \item $f$ splits completely over $L$,
+    \item and $f$ does not split completely over any
+      subfield $E$ with $K < E < L$.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  From the last two examples, $\Q[i\sqrt{2}]$ is a
+  splitting field over $\Q$ for $X^2 + 2$, and $\Q[\sqrt[3]{2}, i\sqrt{3}]$
+  is a splitting field for $X^3 - 2$ over $\Q$.
+\end{example}
+
+\begin{theorem}
+  Let $K$ be a field and $f \in K[X]$ with
+  $\partial f = n$. Then there exists a splitting field
+  $L$ for $f$ over $K$ and $[L : K] \le n!$.
+\end{theorem}
+
+\begin{proof}
+The proof is essentially the process we perform in the
+following example. At each step, construct an extension
+in which we can split off a linear factor from $f$.
+For more details, see Howie.
+\end{proof}
+
+\begin{example}
+  Let us find a splitting field for
+  \[f = X^5 + X^4 - X^3 - 3X^2 - 3X + 3\]
+  over $\Q$. Note that $\partial f = n$.
+  Stare hard enough and we can see that
+  \[
+    f = (X^3 - 3)(X^2 + X - 1),
+  \]
+  where the first factor is irreducible by Eisenstein's criterion and
+  the second factor is irreducible by checking the
+  discriminant. Now add a root, say $\alpha = \sqrt[3]{3}$,
+  and let $E_1 = \Q(\alpha)$. Then
+  \[
+    f = (X - \alpha) (X^2 + \alpha X + \alpha^2)(X^2 + X - 1).
+  \]
+  Note that $[E_1 : K] \le n = \partial f$.
+  Now let $E_2 = E_1(\alpha e^{2\pi i / 3})$, so that
+  \[
+    f = (X - \alpha) (X - \alpha e^{2\pi i / 3})
+    (X - \alpha e^{-2\pi i / 3})(X^2 + X - 1).
+  \]
+  Note that $[E_2 : \Q] \le n(n - 1)$. Next
+  $E_3 = E_2(\alpha e^{- 2\pi i / 3})$ with
+  \[
+    f = (X - \alpha) (X - \alpha e^{2\pi i / 3})
+    (X - \alpha e^{-2\pi i / 3})(X^2 + X - 1).
+  \]
+  Note that $[E_3 : K] \le n(n - 1)(n - 2)$. Now let
+  \[
+    \gamma = \frac{-1 + \sqrt{5}}{2}, \quad \delta = \frac{-1 - \sqrt{5}}{2}.
+  \]
+  Let $E_4 = E_3(\gamma)$,
+  \[
+    f = (X - \alpha) (X - \alpha e^{2\pi i / 3})
+    (X - \alpha e^{-2\pi i / 3})(X - \gamma)(X - \delta).
+  \]
+  Finally $E_5 = E_4(\delta)$ is the splitting field
+  for $f$ over $\Q$. Note that we did much better than
+  $n!$ here, since
+  \[
+    [E_1 : \Q] = 3, \quad [E_2 : E_1] = 2, \quad
+    [E_3 : E_2] = 1, \quad [E_4 : E_3] = 2, \quad
+    [E_5 : E_4] = 1,
+  \]
+  so $[E_5 : \Q] = 12 \le 120$.
+\end{example}
+
+\begin{remark}
+  Splitting fields are unique (up to isomorphism).
+\end{remark}
+
+\begin{theorem}
+  Let $L$ and $L'$ be splitting fields of $f$ over $K$.
+  Then there exists an isomorphism
+  $\varphi : L \to L'$ fixing $K$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+  Induct on the number of roots of $f$ that are not
+  in $K$. The induction step uses Theorem \ref{thm:isomorphism-fix}
+  from last
+  class giving an isomorphism $K[\alpha] \to K[\alpha']$
+  for $\alpha, \alpha'$ roots of an irreducible
+  polynomial.
+\end{proof}
+
+\begin{example}
+  Let us find the splitting field of $f = X^4 - 2$ over
+  $\Q$ and its degree. Note that $X^4 - 2$ is
+  irreducible over $\Q$ by Eisenstein's criterion.
+  Note that
+  \[
+    X^4 - 2 = (X - \alpha)(X + \alpha)(X - i \alpha)(X + i\alpha)
+  \]
+  where $\alpha = \sqrt[4]{2}$. So the
+  splitting field is $\Q(\sqrt[4]{2}, i)$. For the
+  degree, note that $[\Q(\sqrt[4]{2}) : \Q] = 4$ since
+  the minimal polynomial of $\sqrt[4]{2}$ is $X^4 - 2$.
+  A basis for this extension is $\{1, \sqrt[4]{2}, \sqrt[4]{2}^2, \sqrt[4]{2}^3\}$.
+  Since $i \notin \Q(\sqrt[4]{2})$, we have
+  $[\Q(\sqrt[4]{2}, i) : \Q(\sqrt[4]{2})] = 2$ since
+  the minimal polynomial of $i$ over $\Q(\sqrt[4]{2})$
+  is $X^2 + 1$. Thus we see that the degree of the
+  splitting field
+  is $[\Q(\sqrt[4]{2}, i) : \Q] = 8$.
+\end{example}
+
+\begin{example}
+  Let us look at monic quadratic polynomials
+  over $\Z_3 = \{-1, 0, 1\}$.\footnote{Note that as opposite to $\Q$, this field has finite characteristic.}
+  These are
+  \[
+  \begin{array}{ccccc}
+    X^2 & & X^2 + 1 & & X^2 - 1 \\
+    X^2 + X & & X^2 + X + 1 & & X^2 + X - 1 \\
+    X^2 - X & & X^2 - X + 1 & & X^2 - X - 1.
+  \end{array}
+  \]
+  We have $0$ is a root of the polynomials in the
+  first column, $1$ is a root of $X^2 - 1$ and
+  $X^2 + X + 1$, and $-1$ is a root of $X^2 - X + 1$.
+  So the irreducible polynomials over $\Z_3$ are
+  \[
+    X^2 + 1, \quad X^2 + X - 1, \quad X^2 - X - 1.
+  \]
+  Let $L = \Z_3[X] / \langle X^2 + 1 \rangle$. Observe
+  that $\alpha = X + \langle X^2 + 1 \rangle$ satisfies
+  \[
+    \alpha^2 = X^2 + \langle X^2 + 1 \rangle
+    = -1 + \langle X^2 + 1 \rangle.
+  \]
+  Hence $L$ is a splitting field for $X^2 + 1$ since
+  $(X - \alpha)(X + \alpha) = X^2 + 1$.
+  Similarly,
+  $\Z_3[X] / \langle X^2 + X - 1 \rangle$ is a
+  splitting field for $X^2 + X - 1$ and
+  $\Z_3[X] / \langle X^2 - X - 1 \rangle$ is a
+  splitting field for $X^2 - X - 1$. Note that each of
+  these fields have $9 = 3^2$ elements since they are
+  degree $2$ extensions of $\Z_3$.
+\end{example}
+
+\begin{remark}
+  In $L$, we had $\alpha \in L$ such that
+  $\alpha^2 = - 1$ and addition is performed modulo $3$.
+  Now observe
+  \[
+    (\alpha + 1)^2 + (\alpha + 1) - 1
+    = (\alpha^2 - \alpha + 1) + (\alpha + 1) - 1
+    = \alpha^2 - \alpha + \alpha + 1 + 1 - 1
+    = 0
+  \]
+  since $\alpha^2 = -1$. So $\alpha + 1$ is a root of
+  $X^2 + X - 1$ in $L$. By a similar computation, we
+  see that $- \alpha + 1$ is a root of $X^2 + X - 1$,
+  so $L$ is also a splitting field for $X^2 + X - 1$.
+  Additionally, $\alpha - 1$ and $-\alpha - 1$ are
+  roots of $X^2 - X - 1$, so $L$ is also a splitting
+  field for $X^2 - X - 1$. So by uniqueness of splitting
+  fields,
+  \[
+    \Z_3[X] / \langle X^2 + 1 \rangle
+    \cong \Z_3[X] / \langle X^2 + X - 1 \rangle
+    \cong \Z_3[X] / \langle X^2 - X - 1 \rangle.
+  \]
+\end{remark}
+
+\begin{exercise}
+  Find explicit isomorphisms between these
+  fields.
+\end{exercise}
+
+\section{Finite Fields}
+\begin{definition}
+Let $f = a_0 + a_1 X + \dots + a_n X^n \in K[X]$. Then
+the \emph{formal derivative} of $f$ is
+\[
+  Df = a_1 + 2a_2 X + \dots + n a_n X^{n-1}.
+\]
+\end{definition}
+
+\begin{exercise}
+  The usual formulas for derivatives
+  \[
+    D(kf) = k Df, \quad D(f + g) = Df + Dg, \quad
+    D(fg) = (Df)g + f(Dg)
+  \]
+  all still hold for $f, g \in K[X]$ and $k \in K$.
+\end{exercise}
