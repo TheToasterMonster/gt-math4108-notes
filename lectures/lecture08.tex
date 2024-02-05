@@ -1,0 +1,322 @@
+\chapter{Feb.~5 --- Finite Fields}
+
+\section{Last Time}
+
+\begin{example}
+  The splitting field of $X^4 - 2$ over $\Q$ is
+  $\Q(i, \sqrt[4]{2]})$ since
+  \[
+    X^4 - 2 = (X - \sqrt[4]{2})(X + \sqrt[4]{2})(X - i\sqrt[4]{2})(X + i\sqrt[4]{2}).
+  \]
+\end{example}
+
+\begin{example}
+  The splitting field of $Y^2 + 1$ over $\Z_3$ is
+  $\Z_3[X] / \langle X^2 + 1 \rangle$. If
+  $\alpha = X + \langle X^2 + 1 \rangle$, then
+  \[
+    Y^2 + 1 = (Y - \alpha)(Y + \alpha).
+  \]
+  Also the degree of this extension is
+  $[Z_3[X] / \langle X^2 + 1 \rangle : \Z_3] = 2$, and
+  a basis for the extension is $\{1, X\}$.
+\end{example}
+
+\section{Finite Fields}
+\begin{lemma}
+  \label{lem:distinct-roots}
+  Let $f \in K[X]$, $K$ a field, and $L$ be a splitting
+  field for $f$ over $K$. Then the roots of $f$ are
+  distinct if and only if $f$ and $Df$ have no
+  nonconstant common factor.
+\end{lemma}
+
+\begin{proof}
+  $(\Leftarrow)$ We show the contrapositive. Suppose
+  $f$ has a repeated root $\alpha$ in $L$. Then
+  \[
+    f = (X - \alpha)^r g
+  \]
+  for some $r \ge 2$. Then
+  \[
+    Df = (X - \alpha)^r Dg + r(X - \alpha)^{r - 1} g,
+  \]
+  so $Df$ and $f$ both have $X - \alpha$ as a factor.
+
+  $(\Rightarrow)$ Suppose the roots of $f$ are
+  all distinct. Then for each root $\alpha$ of $f$
+  in $L$, we have
+  \[
+    f = (X - \alpha)g,
+  \]
+  where $g(\alpha) \ne 0$. Then
+  \[
+    Df = (X - \alpha)Dg + g,
+  \]
+  so that
+  \[
+    (Df)(\alpha) = g(\alpha) \ne 0,
+  \]
+  i.e. $X - \alpha {\nmid} Df$. This holds for factor
+  of $f$ in $L[X]$, so $f$ and $Df$ have no common
+  proper factors.
+\end{proof}
+
+\begin{theorem}
+  Finite fields exist and are unique up to isomorphism.
+  In particular,
+  \begin{enumerate}
+      \item Let $K$ be a finite field. Then $|K| = p^n$ for
+    some prime $p$ and integer $n \ge 1$. Every element
+    of $K$ is a root of $X^{p^n} - X$ and $K$ is a
+    splitting field of $X^{p^n} - X$ over $\Z_p$.
+    \item Let $p$ be a prime and $n \in \Z$, $n \ge 1$.
+      Then there exists a unique field of
+      order $p^n$ up to isomorphism.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) Let $\Char K = p$. Then $K$ is a finite extension
+  of $\Z_p$. Let $n = [K : \Z_p]$. If
+  $\{\delta_1, \dots, \delta_n\}$ is a basis for $K$
+  over $\Z_p$, then every element in $K$ can be
+  uniquely written as
+  \[
+    a_1 \delta_1 + \dots + a_n \delta_n
+  \]
+  for some $a_i \in \Z_p$. There are $p^n$ such elements,
+  so $|K| = p^n$. Then $|K^*| = p^n - 1$.\footnote{Recall that $K^*$ is the set of nonzero elements of $K$, which forms a group under multiplication. We also call $K^*$ the group of units of $K$.}
+  For
+  any $\alpha \in K^*$, the order of $\alpha$ divides
+  $p^n - 1$. So $\alpha^{p^n - 1} = 1$, and hence
+  $\alpha^{p^n} - \alpha = 0$. We also have
+  $0^{p^n} - 0 = 0$ so every element in $K$ is a
+  root of $X^{p^n} - X$. Hence $X^{p^n} - X$ splits
+  completely over $K$. Since $X - \alpha$ is a factor
+  of $X^{p^n} - X$ for each of the $p^n$ elements of $K$,
+  $X^{p^n} - X$ does not split over any proper
+  subfield of $K$. Thus we conclude that $K$ is a
+  splitting field of $X^{p^n} - X$ over $\Z_p$.
+
+  (2) Given a prime $p$ and an integer $n \ge 1$, let
+  $L$ be the splitting field of $X^{p^n} - X$ over
+  $\Z_p$. Note that
+  \[
+    Df = p^n X^{p^n - 1} - 1 = -1
+  \]
+  since $\Char \Z_p = p$. Then $Df$ and $f$ have no
+  nonconstant common factors, so by Lemma
+  \ref{lem:distinct-roots}, we see that $X^{p^n} - X$ has
+  $p^n$ distinct roots in $L$. Let $K$ be the set of
+  $p^n$ distinct roots, and we claim that $K$ is a
+  subfield of $L$. To check this, let $a, b \in K$.
+  Then by an extension of Theorem \ref{thm:freshman-exponentiation},
+  \[
+    (a - b)^{p^n} = a^{p^n} - b^{p^n} = a - b
+  \]
+  in $\Z_p$, $a - b \in K$. Also
+  \[
+    (ab^{-1})^{p^n} = a^{p^n} (b^{p^n})^{-1} = ab^{-1},
+  \]
+  so $ab^{-1} \in K$. Hence $K$ is a field of order
+  $p^n$. In fact, $K = L$ since $K$ contains all the
+  roots of $X^{p^n} - X$ and no proper subfield does.
+  By uniqueness of splitting fields, $K$ is unique up
+  to isomorphism.
+\end{proof}
+
+\begin{definition}
+  We call the field of order $p^n$ the \emph{Galois field}
+  of order $p^n$, denoted $\text{GF}(p^n)$.
+\end{definition}
+
+\begin{example}
+  We have
+  $\GF(3^2) = \Z_3[X] / \langle X^2 + 1 \rangle \cong \Z_3[X] / \langle X^2 + X - 1 \rangle \cong \Z_3[X] / \langle X^2 - X - 1 \rangle$.
+\end{example}
+
+\begin{remark}
+  Recall that for a finite group $G$ and $a \in G$, the
+  \emph{order} of $a$ is
+  \[
+    \ord(a) = \min\{k \in \N : a^k = 1\}.
+  \]
+  The \emph{exponent} of $G$ is
+  \[
+    \exp(G) = \min\{k \in \N : a^k = 1 \text{ for all } a \in G\}.
+  \]
+  Also recall that $\ord(a)$ divides $|G|$ for all $a \in G$,
+  and thus $\exp(G)$ divides $|G|$.
+\end{remark}
+
+\begin{exercise}
+  Show that $\exp(G) = \lcm\{\ord(a) : a \in G\}$.
+\end{exercise}
+
+\begin{example}
+  For $S_3 = \{\id, (12), (23), (13), (123), (132)\}$,
+  the order of the transpositions is $2$ and the order
+  of $3$-cycles is $3$. So we see that $\exp(S_3) = 6$.
+\end{example}
+
+\begin{prop}
+  If $G$ is a finite abelian group, then there exists
+  $a \in G$ such that $\ord(a) = \exp(G)$.
+\end{prop}
+
+\begin{proof}
+  Suppose that
+  \[
+    \exp(G) = p_1^{\alpha_1} p_2^{\alpha_2} \dots p_k^{\alpha_k},
+  \]
+  where the $p_i$ are distinct primes and $\alpha_i \ge 1$
+  for all $i$. Since
+  \[
+    \exp(G) = \lcm\{\ord(a) : a \in G\},
+  \]
+  there exists $h_1 \in G$ such that
+  $p_1^{\alpha_1} | \ord(h_1)$. So
+  $\ord(h_1) = p_1^{\alpha_1} q_1$ where
+  $q_1 | p_2^{\alpha_2} \dots p_k^{\alpha_k}$.
+  Let $g_1 = h_1^{q_1}$. For each
+  $m \ge 1$, we have $g_1^m = h_1^{m q_1}$, and
+  \[
+    h_1^{mq_1} = 1 \iff p_1^{\alpha_1} q_1 | mq_1
+    \iff p_1^{\alpha_1} | m.
+  \]
+  Hence $\ord(g_1) = p_1^{\alpha_1}$. Similarly
+  for $i = 2, \dots, k$, we can find elements $g_i$
+  of order $p_i^{\alpha_i}$.  Let
+  \[
+    a = g_1 g_2 \dots g_k
+  \]
+  and $n = \ord(a)$. Now check as an exercise
+  that $\ord(a) = \exp(G)$. This relies on
+  \[
+    a^n = g_1^n g_2^n \dots g_k^n = 1,
+  \]
+  which uses the assumption that $G$ is abelian.
+\end{proof}
+
+\begin{remark}
+  The previous example shows that the abelian condition
+  in this theorem is necessary.
+\end{remark}
+
+\begin{corollary}
+  \label{cor:finite-abelian-cyclic}
+  If $G$ is a finite abelian group with $\exp(G) = |G|$,
+  then $G$ is cyclic.
+\end{corollary}
+
+\begin{theorem}
+  The group of units
+  $\GF(p^n)^*$
+  of a Galois field is cyclic.
+\end{theorem}
+
+\begin{proof}
+  Let $e = \exp(\GF(p^n)^*)$. Then $a^e = 1$ for
+  all $a \in \GF(p^n)^*$, so every element
+  $a \in \GF(p^n)^*$ is a root of $X^e - 1$. Since
+  $X^e - 1$ has at most $e$ roots, we see that
+  $|\GF(p^n)^*| \le e$. But $e \le |\GF(p^n)^*|$ since
+  $\exp(\GF(p^n)^*)$ divides $|\GF(p^n)^*|$. Hence
+  $|\GF(p^n)^*| = e$, so by Corollary \ref{cor:finite-abelian-cyclic},
+  $\GF(p^n)^*$ is cyclic.
+\end{proof}
+
+\section{Automorphisms of Fields}
+
+\begin{example}
+  The complex conjugation $f : \C \to \C$ given by
+  $f(a + bi) = a - bi$ is an automorphism of $\C$.
+  Observe that $f(c) = c$ if and only if $c \in \R$.
+\end{example}
+
+\begin{theorem}
+  Let $K$ be a field. The set $\Aut K$ of automorphisms
+  of $K$ forms a group under composition.
+\end{theorem}
+
+\begin{proof}
+  First observe that composition is associative. The
+  identity element in $\Aut K$ is the identity map
+  $\id_K$. For inverses, let $\alpha \in \Aut K$. Since
+  $\alpha$ is a bijection, there exists an inverse map
+  $\alpha^{-1} : K \to K$, where $\alpha^{-1}(x)$
+  is the unique element $s$ such that $\alpha(s) = x$. Now
+  we check that $\alpha^{-1}$ is also a homomorphism.
+  For this, let $x, y \in K$ and suppose that
+  $\alpha^{-1}(x) = s$ and $\alpha^{-1}(y) = t$. Then
+  $\alpha(s) = x$ and $\alpha(t) = y$, so
+  \[
+    \alpha(s + t) = \alpha(s) + \alpha(t) = x + y
+  \]
+  since $\alpha$ is a homomorphism. Then we see that
+  \[
+    \alpha^{-1}(x + y) = s + t = \alpha^{-1}(x) + \alpha^{-1}(y).
+  \]
+  Similarly, $\alpha(st) = xy$, so
+  \[
+    \alpha^{-1}(xy) = st = \alpha^{-1}(x) \alpha^{-1}(y). \]
+  Hence $\alpha^{-1} \in \Aut K$ and
+  $\alpha \circ \alpha^{-1} = \alpha^{-1} \circ \alpha = \id_K$,
+  so $\Aut K$ is indeed a group.
+\end{proof}
+
+\begin{definition}
+  We call $\Aut K$ the \emph{group of automorphisms}
+  of $K$.
+\end{definition}
+
+\begin{definition}
+  Let $L$ be a field extension of $K$. A
+  \emph{$K$-automorphism} is an automorphism
+  $\alpha : L \to L$
+  such that $\alpha(x) = x$ for all $x \in K$. The
+  \emph{Galois group} of $L$ over $K$, denoted
+  $\Gal(L : K)$, is the set of $K$-automorphisms of $L$.
+  The \emph{Galois group} $\Gal(f)$ of a polynomial
+  $f \in K[X]$ is $\Gal(L : K)$ where $L$ is a splitting
+  field of $f$ over $K$.
+\end{definition}
+
+\begin{theorem}
+  The Galois group $\Gal(L : K)$ is a subgroup of
+  $\Aut L$.
+\end{theorem}
+
+\begin{proof}
+  Clearly $\id_L \in \Gal(L : K)$ since it fixes all
+  elements of $L$. Now let $\alpha, \beta \in \Gal(L : K)$.
+  Then we have $\alpha(x) = x$ and $\beta(x) = x$ for
+  all $x \in K$. Then $\beta^{-1}(x) = x$, which gives
+  \[
+    \alpha \beta^{-1}(x) = \alpha(x) = x,
+  \]
+  so $\alpha \beta^{-1} \in \Gal(L : K)$. Thus
+  $\Gal(L : K)$ is a subgroup of $\Aut L$.
+\end{proof}
+
+\begin{remark}
+  The big idea here is that there is a correspondence
+  between subfields $E$ with $K \subseteq E \subseteq L$
+  and subgroups $H$ of $\Gal(L : K)$.
+\end{remark}
+
+\begin{remark}
+  From a past homework, we identified the subfields
+  of $\Q(\sqrt{3}, \sqrt{5})$ as:
+  \[
+  \begin{tikzcd}
+    & \Q(\sqrt{3}, \sqrt{5}) \\
+    \Q(\sqrt{3}) \urar & \Q(\sqrt{5}) \uar & \Q(\sqrt{15}) \ular \\
+    & \Q \ular \uar \urar
+  \end{tikzcd}
+  \]
+  Compare the subgroups of $\Gal(\Q(\sqrt{3}, \sqrt{5}) : \Q)$
+  to subfields of $\Q(\sqrt{3}, \sqrt{5})$ containing
+  $\Q$.
+\end{remark}
