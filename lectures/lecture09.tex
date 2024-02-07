@@ -1,0 +1,334 @@
+\chapter{Feb.~7 --- The Galois Correspondence}
+
+\section{Automorphisms of Fields}
+
+\begin{example}
+  The complex conjugation $\beta : \C \to \C$ given
+  by $\beta(a + bi) = a - bi$ is a nontrivial element
+  of the Galois group of $\C : \R$. In fact,
+  $\Gal(\C : \R) = \{\id, \beta\}$. Note that
+  $\beta$ fixes $\R$, $\id$ fixes $\C$, and
+  \[
+  \begin{tikzcd}
+    \C \\
+    \R \uar
+  \end{tikzcd}
+  \]
+\end{example}
+
+\section{The Galois Correspondence}
+
+\begin{definition}
+  Define
+  \begin{align*}
+    \Gamma(E) &= \{
+      \alpha \in \Aut L : \alpha(z) = z \text{ for all } z \in E
+    \}, \\
+    \Phi(H) &= \{
+    x \in L : \alpha(x) = x \text{ for all } \alpha \in H
+    \},
+  \end{align*}
+  where $E$ is a subfield of $L$ and $H$ is a subgroup
+  of $\Gal(L : K)$. This is called the
+  \emph{Galois correspondence}.
+\end{definition}
+
+\begin{example}
+  In the previous example of $\C : \R$, we have
+  $\Gamma(\C) = \{\id\}$ and $\Gamma(\R) = \{\id, \beta\}$.
+  We also have $\Phi(\{\id, \beta\}) = \R$ and
+  $\Phi(\{\id\}) = \C$.
+\end{example}
+
+\begin{remark}
+  The goal is to determine: When are $\Gamma$ and
+  $\Phi$ inverses of one another?
+\end{remark}
+
+\begin{theorem}
+  We have the following:
+  \begin{enumerate}
+    \item For every subfield $E$ of $L$ containing $K$,
+      $\Gamma(E)$ is a subgroup of $\Gal(L : K)$.
+    \item Conversely, for every subgroup $H$
+      of $\Gal(L : K)$, $\Phi(H)$ is a subfield of $L$
+      containing $K$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\begin{theorem}
+  Let $z \in L \setminus K$. If $z$ is a root of
+  $f \in K[X]$ and $\alpha \in \Gal(L : K)$, then
+  $\alpha(z)$ is also a root of $f$.
+\end{theorem}
+
+\begin{proof}
+  Let $f = a_0 + a_1X + \cdots + a_nX^n$, where
+  $a_i \in K$. Then since $\alpha$ fixes each
+  $a_i \in K$, we have
+  \begin{align*}
+    f(\alpha(z))
+    = a_0 + a_1\alpha(z) + \cdots + a_n(\alpha(z))^n
+    &= \alpha(a_0) + \alpha(a_1)\alpha(z) + \cdots + \alpha(a_n)(\alpha(z))^n \\
+    &= \alpha(a_0 + a_1z + \cdots + a_nz^n)
+    = \alpha(0) = 0,
+  \end{align*}
+  which completes the proof.
+\end{proof}
+
+\begin{example}
+  Recall this example from homework:
+  \[
+  \begin{tikzcd}
+    & L = \Q(\sqrt{3}, \sqrt{5}) \\
+    \Q(\sqrt{3}) \urar & \Q(\sqrt{5}) \uar & \Q(\sqrt{15}) \ular \\
+    & K = \Q \ular \uar \urar
+  \end{tikzcd}
+  \]
+  A basis for $L$ over $K$ is $\{1, \sqrt{3}, \sqrt{5}, \sqrt{15}\}$.
+  Since $\sqrt{3}$ is a root of $X^2 - 3$,
+  by the previous theorem, any element in $\Gal(L : K)$
+  must send $\sqrt{3} \mapsto \pm \sqrt{3}$. Similarly,
+  any element must send
+  $\sqrt{5} \mapsto \pm \sqrt{5}$. So
+  the $\Q$-isomorphisms of $\Q(\sqrt{3}, \sqrt{5})$
+  are
+  \begin{align*}
+    \alpha(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    &= a - b\sqrt{3} + c\sqrt{5} - d\sqrt{15}, \\
+    \beta(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    &= a + b\sqrt{3} - c\sqrt{5} - d\sqrt{15}, \\
+    \gamma(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    &= a - b\sqrt{3} - c\sqrt{5} + d\sqrt{15}, \\
+    \id(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    &= a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15}.
+  \end{align*}
+  We can write the multiplication table for this
+  group as:
+  \begin{center}
+    \begin{tabular}{c|cccc}
+      $\times$ & $\id$ & $\alpha$ & $\beta$ & $\gamma$ \\
+      \hline
+      $\id$ & $\id$ & $\alpha$ & $\beta$ & $\gamma$ \\
+      $\alpha$ & $\alpha$ & $\id$ & $\gamma$ & $\beta$ \\
+      $\beta$ & $\beta$ & $\gamma$ & $\id$ & $\alpha$ \\
+      $\gamma$ & $\gamma$ & $\beta$ & $\alpha$ & $\id$
+    \end{tabular}
+  \end{center}
+  The proper subgroups are
+  $H_1 = \{\id, \alpha\}$, $H_2 = \{\id, \beta\}$, and
+  $H_3 = \{\id, \gamma\}$. Also
+  $\{id\}$ and $G = \{\id, \alpha, \beta, \gamma\}$
+  are subgroups. Then
+  \begin{gather*}
+    \Phi(H_1) = \Q(\sqrt{5}), \quad
+    \Phi(H_2) = \Q(\sqrt{3}), \quad
+    \Phi(H_3) = \Q(\sqrt{15}), \\
+    \Phi(\{\id\}) = \Q(\sqrt{3}, \sqrt{5}), \quad
+    \Phi(G) = \Q.
+  \end{gather*}
+  Under $\Phi$, this gives the diagram:
+  \[
+  \begin{tikzcd}
+    & G \\
+    H_1 \urar & H_2 \uar & H_3 \ular \\
+    & \{\id\} \ular \uar \urar
+  \end{tikzcd} \quad
+  \longrightarrow \quad
+  \begin{tikzcd}
+    & \Phi(G) = \Q \drar \dar \dlar \\
+    \Q(\sqrt{3}) \drar & \Q(\sqrt{5}) \dar & \Q(\sqrt{15}) \dlar \\
+    & \Phi(\{\id\}) = \Q(\sqrt{3}, \sqrt{5})
+  \end{tikzcd}
+  \]
+  Also note that
+  $\Gamma(\Q(\sqrt{3})) = \{\id, \alpha\}$ since
+  \[
+    \alpha(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    = a - b\sqrt{3} + c\sqrt{5} - d\sqrt{15}.
+  \]
+\end{example}
+
+\begin{exercise}
+  Show that $\Gamma$ is the inverse of $\Phi$ in the
+  previous example.
+\end{exercise}
+
+\begin{theorem}
+  Let $L : K$ be a field extension. Then
+  \begin{enumerate}
+    \item If $E_1, E_2$ are two subfields of $L$
+      containing $K$, then
+      $E_1 \subseteq E_2$ implies
+      $\Gamma(E_1) \supseteq \Gamma(E_2)$.
+    \item If $H_1, H_2$ are subgroups of $\Gal(L : K)$,
+      then $H_1 \subseteq H_2$ implies
+      $\Phi(H_1) \supseteq \Phi(H_2)$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) Suppose $E_1 \subseteq E_2$ and $\alpha \in \Gamma(E_2)$.
+  Then $\alpha$ fixes every element in $E_2$, so since
+  $E_1 \subseteq E_2$, $\alpha$ also fixes every element
+  in $E_1$. Hence $\alpha \in \Gamma(E_1)$ by
+  definition.
+
+  (2) Suppose $H_1 \subseteq H_2$ and let $z \in \Phi(H_2)$.
+  Then $\alpha(z) = z$ for every $\alpha \in H_2$, and
+  since $H_1 \subseteq H_2$, $\alpha(z) = z$ for every
+  $\alpha \in H_1$ as well. Hence $z \in \Phi(H_1)$ by
+  definition.
+\end{proof}
+
+\begin{remark}
+  Note that $\Gamma$ and $\Phi$ are not always
+  inverses of one another.
+\end{remark}
+
+\begin{example}
+  Consider the extension $\Q(\sqrt[3]{2}) : \Q$.
+  If $\alpha \in \Gal(\Q(\sqrt[3]{2}) : \Q)$, then
+  \[
+    \alpha(\sqrt[3]{2})^3 = \alpha(2) = 2.
+  \]
+  Since there is only one cube root of $2$ in this
+  field, we must have $\alpha(\sqrt[3]{2}) = \sqrt[3]{2}$.
+  So $\Gal(\Q(\sqrt[3]{2}) : \Q) = \{\id\}$. So
+  $\Gamma$ cannot be the inverse of $\Phi$ here since
+  there are two subfields, namely $\Q(\sqrt[3]{2})$
+  and $\Q$. In particular,
+  \[
+    \Gamma(\Q(\sqrt[3]{2})) = \Gamma(\Q) = \{\id\}
+    \quad \text{and} \quad
+    \Phi(\{\id\}) = \Q(\sqrt[3]{2}).
+  \]
+\end{example}
+
+\begin{theorem}
+  For any subfield $E$ of $L$ and subgroup $H$ of $\Gal(L : K)$, we have
+  \begin{enumerate}
+    \item $E \subseteq \Phi(\Gamma(E))$
+    \item and $H \subseteq \Gamma(\Phi(H))$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) Let $z \in E$. Then $\Gamma(E)$ is the set of
+  all automorphisms fixing every element of $E$, and so
+  $z$ is fixed by every element of $\Gamma(E)$.
+  Hence $z \in \Phi(\Gamma(E))$.
+
+  (2) Let $\alpha \in H$. Then $\Phi(H)$ is the set
+  of elements of $L$ fixed by every element of $H$, and
+  so $\alpha$ fixes every element of $\Phi(H)$.
+  Hence $\alpha \in \Gamma(\Phi(H))$.
+\end{proof}
+
+\begin{remark}
+  Now the goal will be to find sufficient conditions
+  for $\Gamma$ and $\Phi$ to be inverses of one another.
+\end{remark}
+
+\section{Normal Extensions}
+
+\begin{definition}
+  A field extension $L : K$ is \emph{normal} if every
+  irreducible polynomial in $K[X]$ having at least
+  one root in $L$ splits completely over $L$.
+\end{definition}
+
+\begin{example}
+  An nonexample is $\Q(\sqrt[3]{2}) : \Q$. This is not
+  a normal extension since $X^3 - 2$ is irreducible
+  and has a root in $\Q(\sqrt[3]{2})$, but does not
+  split completely over $\Q(\sqrt[3]{2})$.
+\end{example}
+
+\begin{remark}
+  Is $\Q(\sqrt{2}) : \Q$ normal?
+\end{remark}
+
+\begin{theorem}
+  A finite extension $L : K$ is normal if and only if
+  it is a splitting field for some polynomial in $K[X]$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$ Let $L$ be a finite normal extension
+  and $\{z_1, \dots, z_n\}$ be a basis for $L : K$.
+  let $m_i$ be the minimum polynomial for $z_i$, and
+  let
+  \[
+    m = m_1 m_2 \dots m_n.
+  \]
+  Each $m_i$ has at least one root $z_i$ in $L$, hence
+  $m$ splits completely over $L$ since $L$ is normal.
+  Since $L$ is generated by $z_1, \dots, z_n$, it is
+  not possible for $m$ to split over a proper subfield
+  of $L$, hence $L$ is a splitting field for $m$ over $K$.
+
+  $(\Leftarrow)$ See Howie. Relies on the isomorphism
+  $K(\alpha) \to K(\beta)$ for $\alpha, \beta$ roots
+  of an irreducible polynomial $f$. We also need
+  properties of degrees of field extensions.
+\end{proof}
+
+\begin{corollary}
+  Let $L$ be a normal extension of $K$ and $E$ a
+  subfield of $L$ containing $K$. Then every injective
+  $K$-homomorphism $\varphi : E \to L$ can be extended to
+  a $K$-automorphism $\varphi^*$ of $L$.
+\[
+  \begin{tikzcd}
+    E \dar[hook, swap, "i"] \rar{\varphi} & L \\
+    L \urar[dashed, "\varphi^*"'] &
+  \end{tikzcd}
+\]
+\end{corollary}
+
+\begin{proof}
+  By the theorem, there exists $f \in K[X]$ such that
+  $L$ is a splitting field for $f$ over $K$. But
+  $L$ is also a splitting field for $f$ over $E$ and
+  $\varphi(E)$. From here, a slight generalization of the
+  proof of uniqueness of splitting fields gives
+  the desired $K$-automorphism of $L$ extending $\varphi$.
+\end{proof}
+
+\begin{example}
+  Let $L = \Q(\sqrt{3}, \sqrt{5})$, $K = \Q$, and
+  $E = \Q(\sqrt{3})$. Define $\varphi : E \to L$
+  by
+  \[
+    \varphi(a + b\sqrt{3}) = a - b\sqrt{3},
+  \]
+  which is an injective $K$-homomorphism. We have the
+  following diagram:
+  \[
+  \begin{tikzcd}
+    \Q(\sqrt{3}) \dar[hook, swap, "i"] \rar{\varphi} & \Q(\sqrt{3}, \sqrt{5}) \\
+    \Q(\sqrt{3}, \sqrt{5}) \urar[dashed, "\varphi^*"'] &
+  \end{tikzcd}
+  \]
+  Then we can define
+  \[
+    \varphi^*(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    = a - b\sqrt{3} + c\sqrt{5} - d\sqrt{15}
+  \]
+  as an extension of $\varphi$. Note that we could have
+  also defined
+  \[
+    \varphi^*(a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15})
+    = a - b\sqrt{3} - c\sqrt{5} + d\sqrt{15}.
+  \]
+\end{example}
+
+\begin{remark}
+  From the previous example we see that
+  $\varphi^*$ is not unique.
+\end{remark}
