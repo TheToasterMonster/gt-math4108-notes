@@ -122,7 +122,7 @@
   The proper subgroups are
   $H_1 = \{\id, \alpha\}$, $H_2 = \{\id, \beta\}$, and
   $H_3 = \{\id, \gamma\}$. Also
-  $\{id\}$ and $G = \{\id, \alpha, \beta, \gamma\}$
+  $\{\id\}$ and $G = \{\id, \alpha, \beta, \gamma\}$
   are subgroups. Then
   \begin{gather*}
     \Phi(H_1) = \Q(\sqrt{5}), \quad
@@ -135,7 +135,7 @@
   \[
   \begin{tikzcd}
     & G \\
-    H_1 \urar & H_2 \uar & H_3 \ular \\
+    H_2 \urar & H_1 \uar & H_3 \ular \\
     & \{\id\} \ular \uar \urar
   \end{tikzcd} \quad
   \longrightarrow \quad
@@ -254,6 +254,7 @@
 \end{remark}
 
 \begin{theorem}
+  \label{thm:normal-splitting}
   A finite extension $L : K$ is normal if and only if
   it is a splitting field for some polynomial in $K[X]$.
 \end{theorem}
@@ -261,7 +262,7 @@
 \begin{proof}
   $(\Rightarrow)$ Let $L$ be a finite normal extension
   and $\{z_1, \dots, z_n\}$ be a basis for $L : K$.
-  let $m_i$ be the minimum polynomial for $z_i$, and
+  let $m_i$ be the minimal polynomial for $z_i$, and
   let
   \[
     m = m_1 m_2 \dots m_n.
@@ -279,6 +280,7 @@
 \end{proof}
 
 \begin{corollary}
+  \label{thm:extend-automorphism}
   Let $L$ be a normal extension of $K$ and $E$ a
   subfield of $L$ containing $K$. Then every injective
   $K$-homomorphism $\varphi : E \to L$ can be extended to
