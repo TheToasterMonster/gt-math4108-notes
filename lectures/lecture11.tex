@@ -1,0 +1,157 @@
+\chapter{Feb.~21 --- Galois Extensions}
+
+\section{Example of an Inseparable Extension}
+
+\begin{example}
+  The field $K = \Z_p(X)$ is not perfect. Consider
+  the polynomial
+  \[
+    f = Y^p - X \in \Z_p(X)[Y],
+  \]
+  which is irreducible. Now let $L$ be a splitting
+  field of $f$ over $K$ and $\alpha$ a root of $f$,
+  i.e. $\alpha^p - X = 0$. Then
+  \[
+    (Y - \alpha)^p = Y^p - \alpha^p = Y^p - X
+  \]
+  by freshman exponentiation. In particular,
+  $\alpha$ is a repeated root of $f$ in $L$.
+\end{example}
+
+\section{Galois Extensions}
+
+\begin{definition}
+  A \emph{Galois extension} of $K$ is a finite extension
+  that is both normal and separable.
+\end{definition}
+
+\begin{remark}
+  The main goal here is: For a Galois extension,
+  $\Gamma$ and $\Phi$ are inverses of one another.
+\end{remark}
+
+\begin{theorem}
+  Let $L : K$ be a separable extension of degree
+  $n$. Then there are exactly $n$ distinct
+  $K$-monomorphisms of $L$ into a normal closure $N$
+  of $L$ over $K$.
+\end{theorem}
+
+\begin{proof}
+  Use strong induction on the degree of $L : K$.
+  See Howie for details.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:galois-size}
+  If $L : K$ is Galois, then
+  $|\Gal(L : K)| = [L : K]$.
+\end{corollary}
+
+\begin{proof}
+  If $L : K$ is Galois, then $L : K$ is normal
+  and separable. So the previous theorem applies,
+  where $L$ is its own normal closure. So we get exactly
+  $[L : K]$ distinct $K$-monomorphisms of $L$ into $L$,
+  which are precisely the $K$-automorphisms of $L$ and
+  thus the elements of the Galois group.
+\end{proof}
+
+\begin{example}
+  The extension $\Q(\sqrt[3]{2}, i\sqrt{3}) : \Q$ is
+  Galois with $[\Q(\sqrt[3]{2}, i\sqrt{3}) : \Q] = 6$.
+  We could have
+  \[
+    \sqrt[3]{2} \mapsto \sqrt[3]{2} \text{ or } e^{2\pi i / 3} \sqrt[3]{2} \text{ or } e^{-2\pi i / 3} \sqrt[3]{2}
+    \quad \text{and} \quad
+    i\sqrt{3} \mapsto i\sqrt{3} \text{ or } {-i\sqrt{3}}.
+  \]
+  Combinining these options gives us $6$ distinct
+  maps, so these must in fact all be
+  $\Q$-automorphisms of $\Q(\sqrt[3]{2}, i\sqrt{3})$,
+  since we know the Galois group has size $6$.
+  In fact, $\Gal(\Q(\sqrt[3]{2}, i\sqrt{3}) : \Q) \cong S_3 \cong D_3$.
+\end{example}
+
+\begin{remark}
+  The proper nontrivial subfields of
+  $\Q(\sqrt[3]{2}, i\sqrt{3})$ are
+  $\Q(\sqrt[3]{2})$, $\Q(e^{2\pi i / 3}\sqrt[3]{2})$,
+  $\Q(e^{-2\pi i / 3}\sqrt[3]{2})$, and
+  $\Q(i\sqrt{3})$. Maybe draw a pretty diagram with this
+  showing the Galois correspondence.
+\end{remark}
+
+\begin{exercise}
+  Show that $\Z / 6\Z \cong \Z / 2\Z \times \Z / 3\Z$.
+\end{exercise}
+
+\begin{exercise}
+  Show that $\Z / 4\Z \ncong \Z / 2\Z \times \Z / 2\Z$.
+\end{exercise}
+
+\begin{theorem}
+  Let $L : K$ be a finite extension.
+  Then $\Phi(\Gal(L : K)) = K$ if and only if
+  $L : K$ is normal and separable.
+\end{theorem}
+
+\begin{proof}
+  $(\Leftarrow)$ Let $[L : K] = n$. By Corollary
+  \ref{cor:galois-size}, we have $|\Gal(L : K)| = n$.
+  Let $K' = \Phi(\Gal(L : K))$. By definition,
+  $K \subseteq K'$. By Theorem 7.12 of Howie, we find that
+  \[
+    [L : K'] = |\Gal(L : K)|.
+  \]
+  Hence $[L : K'] = [L : K]$ and thus we cocnlude
+  that $K = K'$.
+
+  $(\Rightarrow)$ See Howie.
+\end{proof}
+
+\begin{exercise}
+  Show that if $K \subseteq K'$ and
+  $[L : K'] = [L : K]$, then $K = K'$.
+\end{exercise}
+
+\begin{theorem}
+  Let $L : K$ be Galois and $E$ a subfield of $L$
+  containing $K$. If $\delta \in \Gal(L : K)$, then
+  \[\Gamma(\delta(E)) = \delta \Gamma(E) \delta^{-1}.\]
+\end{theorem}
+
+\begin{proof}
+  Next class, see Howie for now.
+\end{proof}
+
+\begin{example}
+  Consider $\Q(\sqrt[3]{2}, i\sqrt{3}) : \Q$.
+  Define the elements of $\Gal(\Q(\sqrt[3]{2}, i\sqrt{3}) : \Q)$ by
+  \begin{gather*}
+    \mu_1 : \sqrt[3]{2} \mapsto \sqrt[3]{2},\, i\sqrt{3} \mapsto -i\sqrt{3}, \quad
+    \mu_2 : \sqrt[3]{2} \mapsto e^{2\pi i / 3} \sqrt[3]{2},\, i\sqrt{3} \mapsto -i\sqrt{3}, \\
+    \mu_3 : \sqrt[3]{2} \mapsto e^{-2\pi i / 3}\sqrt[3]{2},\, i\sqrt{3} \mapsto -i\sqrt{3}, \\
+    \rho_1 : \sqrt[3]{2} \mapsto e^{2\pi i / 3}\sqrt[3]{2},\, i\sqrt{3} \mapsto i\sqrt{3}, \quad
+    \rho_2 : \sqrt[3]{2} \mapsto e^{-2\pi i / 3}\sqrt[3]{2},\, i\sqrt{3} \mapsto i\sqrt{3}.
+  \end{gather*}
+  Let $\delta = \mu_3$ and $E = \Q(\sqrt[3]{2})$.
+  Then $\delta(E) = \Q(e^{-2\pi i / 3}\sqrt[3]{2})$ since
+  $\mu_3(\sqrt[3]{2}) = e^{-2\pi i / 3}\sqrt[3]{2}$. Now
+  \begin{align*}
+    \mu_2(e^{-2\pi i / 3} \sqrt[3]{2})
+    &= \mu_2(e^{-2\pi i / 3}) \mu_2(\sqrt[3]{2})
+    = \mu_2(-\frac{1}{2} - i\frac{\sqrt{3}}{2}) \mu_2(\sqrt[3]{2}) \\
+    &= (-\frac{1}{2} + i\frac{\sqrt{3}}{{2}})(e^{2\pi i / 3} \sqrt[3]{2})
+    = e^{2\pi i / 3} e^{2\pi i / 3} \sqrt[3]{2}
+    = e^{-2\pi i / 3} \sqrt[3]{2},
+  \end{align*}
+  so $\Gamma(\delta(E)) = \{\id, \mu_2\}$. Also
+  $\Gamma(E) = \{\id, \mu_1\}$, and we find that
+  \[
+    \delta \Gamma(E) \delta^{-1}
+    = \{\delta \id \delta^{-1}, \delta \mu_1 \delta^{-1}\}
+    = \{\id, \mu_3 \mu_1 \mu_3^{-1}\} = \{\id, \mu_2\},
+  \]
+  so indeed we have $\Gamma(\delta(E)) = \delta \Gamma(E) \delta^{-1}$ in this case.
+\end{example}

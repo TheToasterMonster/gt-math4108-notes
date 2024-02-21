@@ -211,7 +211,38 @@ a finite extension to make it normal?
 \end{theorem}
 
 \begin{proof}
-  See Howie.
+  (1) It suffices to show that if $\Char K = 0$, then
+  any irreducible polynomial $f$ is separable. Let
+  \[
+    f = a_0 + a_1 X + \dots + a_n X^n
+  \]
+  for $n \ge 1$ and suppose $f$ is not separable. Then
+  $f$ and $Df$ have a non-constant common factor $d$.
+  Since $f$ is irreducible, $d$ must be a constant
+  multiple of $f$, and thus $d$ cannot divide $Df$
+  unless
+  \[
+    Df = a_1 + 2a_2 X + \dots + na_n X^{n-1}
+  \]
+  is the zero polynomial, by comparing degrees. Then
+  \[
+    a_1 = 2a_2 = \dots = na_n = 0.
+  \]
+  Since $\Char K = 0$, this implies
+  \[a_1 = a_2 = \dots = a_n = 0,\]
+  and so $f = a_0$,
+  a constant polynomial.\footnote{Recall that an irreducible polynomial is by definition a non-unit.}
+  Contradiction. Hence $f$ is separable.
+
+  (2) The same argument as above implies the only possible
+  inseparable irreducible polynomials are of the form\footnote{We can still conclude $ka_k = 0$ implies $a_k = 0$ when $k$ is not a multiple of $p$.}
+  \[
+    f(X) = b_0 + b_1 X^p + b_2 X^{2p} \dots + b_{m} X^{mp}.
+  \]
+  Now Theorem 7.24 of Howie implies that if $K$ is finite,
+  such a polynomial is reducible. Hence every irreducible
+  polynomial is separable, so $K$ is perfect. See Howie
+  for details.
 \end{proof}
 
 \begin{remark}
