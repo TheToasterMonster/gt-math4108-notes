@@ -1,0 +1,205 @@
+\chapter{Feb.~26 --- The Fundamental Theorem}
+
+\section{Normal Subgroups}
+
+Recall the following:
+
+\begin{definition}
+  A subgroup $H$ of $G$ is \emph{normal} if
+  \[
+    gHg^{-1} = H
+  \]
+  for all $g \in G$ (equivalently, $gH = Hg$ for all
+  $g \in G$).
+\end{definition}
+
+\begin{remark}
+  If $G$ is abelian, then every subgroup of $G$ is normal.
+\end{remark}
+
+\begin{exercise}
+  If $[G : H] = 2$, then $H$ is normal.
+\end{exercise}
+
+\begin{remark}
+  Normality is a necessary and sufficient condition for
+  $G / H$ to be a well-defined group (with operation
+  induced by the operation on $G$).
+\end{remark}
+
+\begin{theorem}
+  Let $\varphi : G \to G'$ be a surjective homomorphism
+  with kernel $H$. Then there exists a unique isomorphism
+  $\alpha : G / H \to G'$ such that the following diagram
+  commutes:
+  \[
+    \begin{tikzcd}
+      G \arrow{r}{\varphi} \arrow[swap]{d}{\pi}
+      & G' \\
+      G / H \arrow{ur}{\alpha}
+    \end{tikzcd}
+  \]
+  Here $\pi : G \to G / H$ is the canonical projection
+  $g \mapsto gH$.
+\end{theorem}
+
+\section{Fundamental Theorem of Galois Theory}
+\begin{theorem}[Fundamental theorem of Galois theory]
+  Let $L : K$ be a separable, normal extension of
+  finite degree $n$. Then
+  \begin{enumerate}
+    \item For all subfields $E$ of $L$ containing
+      $K$ and for all subgroups $H$ of $\Gal(L : K)$,
+      \begin{enumerate}
+        \item $\Phi(\Gamma(E)) = E$ and
+          $|\Gamma(E)| = [L : E]$,
+        \item $\Gamma(\Phi(H)) = H$ and
+          $|{\Gal(L : K)}| / |\Gamma(E)| = [E : K]$.
+      \end{enumerate}
+    \item A subfield $E$ is a normal extension of $K$
+      if and only if $\Gamma(E)$ is a normal subgroup
+      of $\Gal(L : K)$. If $E : K$ is normal, then
+      \[
+        \Gal(E : K) \cong \Gal(L : K) / \Gamma(E).
+      \]
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) By a homework exercise, $L : K$ being normal implies
+  that $L : E$ is normal. Also, by Howie's
+  Theorem 7.26, $L : K$ being finite and separable
+  implies that $L : E$ is separable. Hence $L : E$ is
+  Galois, so $|\Gamma(E)| = [L : E]$. Then
+  \[
+    [E : K] = \frac{[L : K]}{[L : E]}
+    = \frac{|{\Gal(L : K)}|}{|\Gamma(E)|}.
+  \]
+  Now $\Gamma(E) = \Gal(L : E)$, so $L : E$ being
+  Galois and Howie's Theorem 7.30 imply that
+  $\Phi(\Gamma(E)) = E$. Now let $H$ be a subgroup of
+  $\Gal(L : K)$. We showed that
+  $H \subseteq \Gamma(\Phi(H))$. Also $\Phi\Gamma\Phi = \Phi$,
+  so
+  \[
+    |H| = [L : \Phi(H)] = [L : \Phi\Gamma\Phi(H)]
+    = |\Gamma\Phi(H)|
+  \]
+  by Howie's Theorem 7.12. Now finiteness and
+  $H \subseteq \Gamma(\Phi(H))$ imply that
+  $H = \Gamma(\Phi(H))$.
+
+  (2) $(\Rightarrow)$ Suppose $E : K$ is normal and
+  let $\delta \in \Gal(L : K)$. Let
+  $\delta' = \delta|_E$, the restriction of $\delta$ to
+  $E$. Hence $\delta'$ is a monomorphism $E \to L$
+  and thus a $K$-automorphism of $E$, by Howie's
+  Theorem 7.21. Hence
+  \[
+    \delta(E) = \delta'(E) = E,
+  \]
+  and so by Theorem \ref{thm:conjugate},
+  \[
+    \Gamma(E) = \Gamma(\delta(E)) = \delta \Gamma(E) \delta^{-1},
+  \]
+  i.e. $\Gamma(E)$ is a normal subgroup of
+  $\Gal(L : K)$.
+
+  $(\Leftarrow)$ Suppose $\Gamma(E)$ is a normal
+  subgroup of $\Gal(L : K)$. Let $\delta_1$ be
+  a $K$-monomorphism from $E$ to $L$. This
+  extends (by Howie's Corollary 7.14) to a
+  $K$-automorphism $\delta$ of $L$. Since
+  $\Gamma(E)$ is normal, $\delta \Gamma(E) \delta^{-1} = \Gamma(E)$.
+  Hence by Theorem \ref{thm:conjugate}, we get
+  $\Gamma(\delta(E)) = \Gamma(E)$. Since $\Gamma$ is
+  injective,
+  \[
+    \delta_1(E) = \delta(E) = E,
+  \]
+  so $\delta$ is a $K$-automorphism of $E$. By Howie's
+  Theorem 7.21, this implies $E : K$ is normal.
+
+  Now suppose $E : K$ is normal, and we want to show
+  that
+  \[\Gal(E : K) \cong \Gal(L : K) / \Gamma(E).\]
+  Let $\delta \in \Gal(L : K)$ and $\delta' = \delta|_E$.
+  By Howie's Theorem 7.21, having $E : K$ be normal
+  implies that $\delta'(E) = E$.
+  Thus we can define
+  $\theta : \Gal(L : K) \to \Gal(E : K)$ by
+  $\delta \mapsto \delta'$, i.e. restricting
+  $\delta$ to $E$. Clearly $\theta$ is surjective
+  onto $\Gal(E : K)$. Also, we see that
+  \[
+    \ker \theta = \{\delta \in \Gal(L : K) \mid \delta|_E = \id_E\} = \Gamma(E).
+  \]
+  Hence by the first isomorphism theorem,
+  $\Gal(E : K) \cong \Gal(L : K) / {\ker \theta} = \Gal(L : K) / \Gamma(E)$.
+\end{proof}
+
+\begin{exercise}
+  Show that $\Phi \Gamma \Phi = \Phi$.
+\end{exercise}
+
+\begin{exercise}
+  Check that $\theta$ is a homomorphism.
+\end{exercise}
+
+\begin{example}
+  Let $L = \Q(\sqrt[4]{2}, i)$ with $[L : \Q] = 8$.
+  Any $\Q$-automorphism in $\Gal(L : \Q)$ must map
+  \[
+    i \mapsto \pm i, \quad \sqrt[4]{2} \mapsto \pm \sqrt[4]{2}, \pm i\sqrt[4]{2}.
+  \]
+  So there are only $8$ possible automorphisms, and thus
+  each of these must in fact be automorphisms since
+  $|{\Gal(L : \Q)}| = [L : \Q] = 8$. We can enumerate these
+  automorphisms via
+  \begin{gather*}
+    \id, \quad \alpha : \sqrt[4]{2} \mapsto i\sqrt[4]{2}, i \mapsto i, \quad
+    \beta : \sqrt[4]{2} \mapsto -\sqrt[4]{2}, i \mapsto i,
+    \quad \gamma : \sqrt[4]{2} \mapsto -i\sqrt[4]{2}, i \mapsto i, \\
+    \lambda : \sqrt[4]{2} \mapsto \sqrt[4]{2}, i \mapsto -i, \quad
+    \mu : \sqrt[4]{2} \mapsto i\sqrt[4]{2}, i \mapsto -i, \quad
+    \nu : \sqrt[4]{2} \mapsto -\sqrt[4]{2}, i \mapsto -i,  \\
+    \rho : \sqrt[4]{2} \mapsto -i\sqrt[4]{2}, i \mapsto -i.
+  \end{gather*}
+  Note that $\Gal(L : \Q)$ is not abelian, as
+  \[
+    \lambda\alpha(\sqrt[4]{2}) = \lambda(i\sqrt[4]{2})
+    = -i\sqrt[4]{2}, \quad \lambda \alpha(i) = \lambda(i)
+    = i,
+  \]
+  so $\lambda \alpha = \rho$. We can show as an exercise
+  that $\alpha \lambda = \mu \ne \rho$, so
+  $\lambda \alpha \ne \alpha \lambda$. The subgroups of
+  $\Gal(L : \Q)$ are
+  \begin{gather*}
+    G = \Gal(L : \Q), \quad \{\id\}, \quad
+    \{\id, \beta\}, \quad \{\id, \mu\}, \quad
+    \{\id, \nu\}, \quad \{\id, \rho\}, \\
+    \{\id, \alpha, \beta, \gamma\}, \quad
+    \quad \{\id, \beta, \lambda, \nu\},
+    \quad \{\id, \beta, \mu, \rho\}.
+  \end{gather*}
+  Now we could draw a nice subgroup lattice for this
+  (identical to $D_4$, the dihedral group of order $8$).
+  The normal subgroups of $\Gal(L : \Q)$ are
+  \[
+    G, \quad \{\id, \beta, \lambda, \nu\},
+    \quad \{\id, \alpha, \beta, \gamma\}, \quad
+    \{\id, \beta, \mu, \rho\}, \quad \{\id, \beta\},
+    \quad \{\id\}.
+  \]
+  Let $H_1 = \{\id, \alpha, \beta, \gamma\}$. Then
+  $\Phi(H_1) = \Q(i)$. Also
+  $\Phi(\{\id, \lambda\}) = \Q(\sqrt[4]{2})$ and
+  $\Phi(\{\id, \nu\}) = \Q(i\sqrt[4]{2})$. We can also
+  see that $\Phi(\{\id, \mu\}) = \Q((1 + i)\sqrt[4]{2})$
+  and $\Phi(\{\id, \rho\}) = \Q((1 - i)\sqrt[4]{2})$.
+\end{example}
+
+\begin{exercise}
+  Write out the multiplication table for $\Gal(L : \Q)$.
+\end{exercise}

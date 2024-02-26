@@ -116,13 +116,37 @@
 \end{exercise}
 
 \begin{theorem}
+  \label{thm:conjugate}
   Let $L : K$ be Galois and $E$ a subfield of $L$
   containing $K$. If $\delta \in \Gal(L : K)$, then
   \[\Gamma(\delta(E)) = \delta \Gamma(E) \delta^{-1}.\]
 \end{theorem}
 
 \begin{proof}
-  Next class, see Howie for now.
+  We begin by showing $\delta \Gamma(E) \delta^{-1} \subseteq \Gamma(\delta(E))$.
+  For this, let $\theta \in \Gamma(E)$ and
+  $z' \in \delta(E)$. Then there exists a unique
+  $z \in E$ such that $\delta(z) = z'$, since $\delta$
+  is an automorphism. Then
+  \[
+    \delta \theta \delta^{-1}(z')
+    = \delta \theta (z) = \delta(z) = z'
+  \]
+  since $\delta(z) = z'$ and $\theta \in \Gamma(E)$.
+  So we see that
+  $\delta \theta \delta^{-1} \in \Gamma(\delta(E))$.
+
+  Now for $\Gamma(\delta(E)) \subseteq \delta \Gamma(E) \delta^{-1}$,
+  we will show that $\delta^{-1} \Gamma(\delta(E)) \delta \subseteq \Gamma(E)$.
+  Let $\theta' \in \Gamma(\delta(E))$ and $z \in E$.
+  Then $\delta(z) \in \delta(E)$ and so
+  $\theta'(\delta(z)) = \delta(z)$. Thus
+  \[
+    (\delta^{-1} \theta' \delta)(z) =
+    (\delta^{-1} \circ \delta)(z) = z,
+  \]
+  so we get $\delta^{-1} \theta' \delta \in \Gamma(E)$,
+  as desired.
 \end{proof}
 
 \begin{example}
