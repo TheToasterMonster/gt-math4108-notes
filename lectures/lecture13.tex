@@ -1,0 +1,78 @@
+\chapter{Feb.~28 --- Join of Subgroups and Subfields}
+
+\section{Join of Subgroups}
+
+Let $H_1, H_2$ be subgroups of $G$.
+
+\begin{exercise}
+  Show that $H_1 \cap H_2$ is a subgroup of $G$.
+\end{exercise}
+
+\begin{remark}
+  In general, $H_1 \cup H_2$ is \emph{not} a subgroup
+  of $G$.
+\end{remark}
+
+\begin{definition}
+  The \emph{join} of $H_1$ and $H_2$, denoted
+  $H_1 \lor H_2$,
+  is the smallest subgroup of $G$ containing
+  $H_1 \cup H_2$, i.e. $H_1 \lor H_2$ consists
+  of all products of the form
+  \[
+    a_1 b_1 \dots a_n b_n,
+  \]
+  where $a_i \in H_1$ and $b_i \in H_2$ for all $n$.
+\end{definition}
+
+\begin{remark}
+  Recall that if $E_1$ and $E_2$ are subfields of
+  $L$, then $E_1 \cap E_2$ is also a subfield of $L$,
+  as is the join
+  \[E_1 \lor E_2 = E_1(E_2) = E_2(E_1).\]
+\end{remark}
+
+\begin{example}
+  In Example \ref{ex:big-galois-correspondence},
+  we have $\{\id, \beta\} \lor \{\id, \lambda\} = \{\id, \beta, \lambda, \nu\}$.
+  Now notice that
+  \[
+    \Phi(\{\id, \beta\}) = \Q(i, \sqrt{2}), \quad
+    \Phi(\{\id, \lambda\}) = \Q(\sqrt[4]{2}), \quad
+    \Phi(\{\id, \beta, \lambda, \nu\}) = \Q(\sqrt{2}).
+  \]
+  Notice that
+  $\Q(i, \sqrt{2}) \cap \Q(\sqrt[4]{2}) = \Q(\sqrt{2})$.
+\end{example}
+
+\begin{theorem}
+  Let $L : K$ be Galois and $E_1, E_2$ subfields
+  of $L$ containing $K$. If
+  \[
+    \Gamma(E_1) = H_1, \quad \Gamma(E_2) = H_2,
+  \]
+  then $\Gamma(E_1 \cap E_2) = H_1 \lor H_2$ and
+  $\Gamma(E_1 \lor E_2) = H_1 \cap H_2$.
+\end{theorem}
+
+\begin{proof}
+  Certainly $E_1 \cap E_2 \subseteq E_1$, so
+  $H_1 = \Gamma(E_1) \subseteq \Gamma(E_1 \cap E_2)$,
+  since the Galois correspondence is order
+  reversing. Similarly,
+  $H_2 = \Gamma(E_2) \subseteq \Gamma(E_1 \cap E_2)$,
+  so $H_1 \lor H_2 \subseteq \Gamma(E_1 \cap E_2)$.
+  Now $H_1 \subseteq H_1 \lor H_2$, so we get
+  $E_1 = \Phi(H_1) \supseteq \Phi(H_1 \lor H_2)$.
+  Similarly, $E_2 = \Phi(H_2) \supseteq \Phi(H_1 \lor H_2)$,
+  so $\Phi(H_1 \lor H_2) \subseteq E_1 \cap E_2$.
+  Since $L : K$ is Galois, we get
+  \[
+    H_1 \lor H_2 \supseteq \Gamma(E_1 \cap E_2)
+  \]
+  by applying $\Gamma$ to both sides. So
+  $\Gamma(E_1 \cap E_2) = H_1 \lor H_2$.
+
+  The proof for $\Gamma(E_1 \lor E_2) = H_1 \cap H_2$
+  is similar, see Howie for details.
+\end{proof}

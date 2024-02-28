@@ -156,7 +156,49 @@ a finite extension to make it normal?
 \end{theorem}
 
 \begin{proof}
-  See Howie.
+  $(\Rightarrow)$ Suppose $E : K$ is normal and
+  let $\varphi : E \to L$ be a $K$-monomorphism. Now we
+  would like to show that $\varphi(E) \subseteq E$. So let
+  let $z \in E$ and suppose
+  \[
+    m = a_0 + a_1 X + \dots + a_n X^n
+  \]
+  is the minimal polynomial of $z$ over $K$. Then
+  \[
+    a_0 + a_1z + \dots + a_nz^n = 0,
+  \]
+  so that
+  \[
+    a_0 + a_1\varphi(z) + \dots + a_n\varphi(z)^n = 0
+  \]
+  since $\varphi$ is a homomorphism fixing $K$ pointwise.
+  Hence $\varphi(z)$ is also a root of $m$ in $L$.
+  Since $E : K$ is normal, the irreducible polynomial
+  $m$ splits completely over $E$. Hence
+  $\varphi(z) \in E$, so that $\varphi(E) \subseteq E$.
+  Then\footnote{We need to make this argument since $E$ may be infinite, so injectivity does not imply bijectivity.}
+  \[
+    [\varphi(E) : K] = [\varphi(E) : \varphi(K)]
+    = [E : K] = [E : \varphi(E)][\varphi(E) : K],
+  \]
+  so $[E : \varphi(E)] = 1$. Hence $\varphi(E) = E$,
+  so $\varphi$ is a $K$-automorphism of $E$.
+
+  $(\Leftarrow)$ Suppose every $K$-monomorphism
+  $E \to L$ is a $K$-automorphism of $E$. Let $f$
+  be an irreducible polynomial in $K[X]$ having a root
+  $z \in E$. We need to show that $f$ splits completely
+  over $E$. Since $L$ is normal, $f$ splits completely
+  over $L$. Let $z'$ be another root of $f$ in $L$.
+  Then there exists a $K$-automorphism
+  $K(z) \to K(z')$ which sends $z \mapsto z'$,
+  which by Corollary \ref{thm:extend-automorphism}
+  extends to a $K$-automorphism $\psi$ of $L$. Let
+  $\psi^* = \psi|_E$, i.e. the restriction of $\psi$
+  to $E$. By hypothesis, $\psi^*$ is a $K$-automorphism
+  of $E$, so
+  \[z' = \psi(z) = \psi^*(z) \in E.\]
+  That is, $E$ is normal.
 \end{proof}
 
 \begin{example}
