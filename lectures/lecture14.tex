@@ -1,0 +1,350 @@
+\chapter{Mar.~4 --- Solvable Groups}
+
+\section{Solvable Groups}
+\begin{definition}
+  A finite group $G$ is \emph{solvable} if, for some
+  $m \ge 0$, it has a finite series
+  \[
+    \{\id\} = G_0 \subseteq G_1 \subseteq \dots \subseteq G_m = G
+  \]
+  of subgroups such that for $i = 0, \dots, m - 1$,
+  \begin{enumerate}
+    \item $G_i \triangleleft G_{i + 1}$,
+    \item and $G_{i + 1} / G_i$ is cyclic.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  We require $G_i \triangleleft G_{i + 1}$, but
+  $G_i$ need not be normal in $G$.
+\end{remark}
+
+\begin{example}
+  Let $G = \Gal(\Q(i, \sqrt[4]{2}), \Q)$ from Example
+  \ref{ex:big-galois-correspondence}. We have
+  \[
+    \{\id\} \subseteq \{\id, \lambda\} \subseteq \{\id, \beta, \lambda, \nu\} \subseteq G,
+  \]
+  where $G_i \triangleleft G_{i + 1}$ and
+  $|G_{i + 1} / G_i| = 2$, so it is cyclic. Observe
+  that $\{\id, \lambda\}$ is not normal in G, since
+  \[
+    \alpha \{\id, \lambda\} = \{\alpha, \mu\}
+    \ne \{\alpha, \rho\} = \{\id, \lambda\} \alpha.
+  \]
+\end{example}
+
+\begin{theorem}
+  Every finite abelian group $G$ is solvable.
+\end{theorem}
+
+\begin{proof}
+  Recall from the structure theorem for finitely generated
+  abelian groups that every finite abelian group is
+  a direct sum of cyclic groups. Then
+  \[
+    G = U_1 \oplus U_2 \oplus \dots \oplus U_k
+  \]
+  where each $U_i$ is cyclic. Let
+  \[
+    G_i = U_1 \oplus \dots \oplus U_i.
+  \]
+  Observe that $G_i \triangleleft G_{i + 1}$ since
+  $G$ is abelian, and $G_{i + 1} / G_i \cong U_{i + 1}$,
+  which is cyclic. So $G$ is solvable.
+\end{proof}
+
+\begin{remark}
+  Recall that $S_n$ is the symmetric group on $n$
+  elements.
+\end{remark}
+
+\begin{theorem}
+  Every permutation can be expressed as a product of
+  transpositions (i.e. 2-cycles).
+\end{theorem}
+
+\begin{definition}
+  A permutation $\sigma$ is \emph{even} (respectively \emph{odd})
+  if $\sigma$ can be expressed as a product of an
+  \emph{even} (respectively \emph{odd}) number of transpositions.
+  This is well defined. The set
+  \[
+    A_n = \text{subgroup of even permutations}
+  \]
+  is called the \emph{alternating group}.
+\end{definition}
+
+\begin{example}
+  We have $S_3 = \{\id, (12), (23), (13), (123), (132)\}$.
+  We can write
+  \[
+    \{\id\} \subseteq \{\id, (123), (132)\} \subseteq S_n.
+  \]
+  Call these $G_i$ for $i = 0, 1, 2$.
+  Then $G_i \triangleleft G_{i + 1}$, and
+  $G_2 / G_1 \cong \Z_2$ and $G_1 / G_0 = G_1 \cong \Z_3$.
+  So $S_3$ is solvable.
+\end{example}
+
+\begin{example}
+  The symmetric group $S_4$ is solvable. We can write
+  \[
+    \{\id\} \subseteq \{\id, (12)(34)\}
+    \subseteq \{\id, (12)(34), (13)(24), (14)(23)\}
+    \subseteq A_4 \subseteq S_4.
+  \]
+  Call the first three subgroups $G_i$ for $i = 0, 1, 2$.
+  Then $G_i \triangleleft G_{i + 1}$, and we have
+  \[
+    S_4 / A_4 \cong \Z_2, \quad A_4 / G_2 \cong \Z_3,
+    \quad G_2 / G_1 \cong \Z_2, \quad G_1 / G_0 \cong \Z_2.
+  \]
+\end{example}
+
+\begin{exercise}
+  Show that
+  $G_2 = \{\id, (12)(34), (13)(24), (14)(23)\} \triangleleft A_4$.
+\end{exercise}
+
+\begin{definition}
+  A group is \emph{simple} if it has no proper normal
+  subgroups.
+\end{definition}
+
+\begin{remark}
+  A non-abelian simple group is not solvable.
+\end{remark}
+
+\begin{theorem}
+  For $n \ge 5$, the alternating group $A_n$ is simple.
+\end{theorem}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\begin{theorem}
+  We have the following:
+  \begin{enumerate}
+    \item If $G$ is solvable, then every subgroup
+      of $G$ is solvable.
+    \item If $G$ is solvable and $N \triangleleft G$,
+      then $G / N$ is solvable.
+    \item Let $N \triangleleft G$. Then
+      $G$ is solvable if and only if
+      $N$ and $G / N$ are solvable.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) Since $G$ is solvable, there exists
+  \[
+    \{\id\} = G_0 \subseteq G_1 \subseteq \dots \subseteq G_m = G
+  \]
+  where $G_i \triangleleft G_{i + 1}$ and
+  $G_{i + 1} / G_i$ is cyclic. Now let $H$ be a subgroup
+  of $G$. Let $K_i = G_i \cap H$. Now check as an exercise
+  that
+  \[
+    \{\id\} = K_0 \subseteq K_1 \subseteq \dots \subseteq K_m = H
+  \]
+  is the desired series of subgroups. In particular,
+  check that
+  $K_i \triangleleft K_{i + 1}$ and $K_{i + 1} / K_i$
+  is cyclic (show that it is a subgroup of the cyclic
+  group $G_{i + 1} / G_i$).
+
+  (2) Take
+  \[
+    N / N = NG_0 / N \subseteq NG_1 / N \subseteq \dots NG_m / N = G / N
+  \]
+  as the desired series of subgroups. Here
+  \[
+    NG = \{ng \mid n \in N, g \in G\}.
+  \]
+  Check as an exercise that this construction works.
+  For the cyclic part,
+  verify that $(NG_{i + 1} / N) / (NG_i / N)$ is a
+  quotient of the cyclic group $G_{i + 1} / G_i$.
+  One of the isomorphism theorems may help here.
+
+  (3) $(\Rightarrow)$ this follows from (1) and (2).
+
+  $(\Leftarrow)$ Suppose $N$ and $G / N$ are solvable.
+  Then there exists a series
+  \[
+    \{\id\} \subseteq N_0 \subseteq N_1 \subseteq \dots \subseteq N_p = N
+  \]
+  such that $N_i \triangleleft N_{i + 1}$ and
+  $N_{i + 1} / N_i$ is cyclic, and a series
+  \[
+    \{\id\} = N / N = G_0 / N \subseteq G_1 / N
+    \subseteq \dots \subseteq G_n / N = G / N
+  \]
+  such that $G_i / N \triangleleft G_{i + 1} / N$ and
+  $(G_{i + 1} / N) / (G_i / N) \cong G_{i + 1} / G_i$
+  by one of the isomorphism theorems, so it is cyclic as
+  well. Now check as an exercise that
+  \[
+    \{\id\} = N_0 \subseteq N_1 \subseteq \dots \subseteq N_p = N
+    = G_0 \subseteq G_1 \subseteq \dots \subseteq G_n = G
+  \]
+  is the desired series (i.e. check the normal and
+  cyclic conditions).
+\end{proof}
+
+\begin{corollary}
+  For $n \ge 5$, $S_n$ is not solvable.
+\end{corollary}
+
+\begin{proof}
+  For $n \ge 5$, $A_n$ is simple, hence it is not
+  solvable. Now if $S_n$ were solvable, all of its
+  subgroups would be solvable, which leads to
+  a contradiction since $A_n \subseteq S_n$.
+\end{proof}
+
+\section{Solvable Polynomials}
+
+\begin{definition}
+  A field extension $L : K$ is a \emph{radical extension}
+  if there exists a sequence
+  \[
+    K = L_0 \subseteq L_1 \subseteq \dots \subseteq L_m = L
+  \]
+  such that $L_{j + 1} = L_j(\alpha_j)$, where
+  $\alpha_j$ is a root of a polynomial in $L_j[X]$ of
+  the form $X^{n_j} - c_j$.
+\end{definition}
+
+\begin{example}
+  For $L_0 = \Q$, we can take
+  \begin{align*}
+    L_0 &= \Q, \\
+    L_1 &= L_0(\alpha_0), \quad \quad \alpha_0^2 = 2, \\
+    L_2 &= L_1(\alpha_1), \quad \quad \alpha_1^5 = 3 + \sqrt{2} \in L_1, \\
+    L_3 &= L_2(\alpha_2), \quad \quad \alpha_2^2 = 2 + \sqrt[5]{3 + \sqrt{2}} \in L_2.
+  \end{align*}
+  This is a radical extension of $\Q$.
+\end{example}
+
+\begin{definition}
+  A polynomial $f \in K[X]$ is \emph{solvable by radicals}
+  if there is a splitting field for $f$ contained in a
+  radical extension of $K$.
+\end{definition}
+
+\begin{example}
+  Any quadratic $f = X^2 + bX + c \in \Q[X]$ is
+  solvable by radicals, since its roots are
+  \[
+    \frac{-b \pm \sqrt{b^2 - 4c}}{2}.
+  \]
+\end{example}
+
+\begin{remark}
+  In the 16th and 17th centuries, mathematicians
+  proved that cubics
+  \[
+    X^3 + a_2 X^2 + a_1 X + a_0
+  \]
+  and quartics
+  \[
+    X^4 + a_3 X^3 + a_2 X^2 + a_1 X + a_0
+  \]
+  are solvable by radicals. For cubics, the idea
+  is to \emph{depress} the cubic, i.e. make a substitution
+  to remove the quadratic term. Then we get
+  \[
+    Y^3 + 3aY + b = 0.
+  \]
+  By a lengthy algebra argument, the roots are
+  \[
+    q + r, \quad q\omega + r\omega^2, \quad q\omega^2 + r\omega,
+  \]
+  where
+  \[
+    q = \left(\frac{1}{2} (-b + \sqrt{b^2 + 4a^3})\right)^{1 / 3}
+  \]
+  and we have similar expressions for $r$ and $\omega$.
+  A similar but longer algebraic manipulations can be
+  made for quartics. In particular, the expressions for
+  the roots of cubics and quartics only involve radicals.
+\end{remark}
+
+\begin{theorem}
+  Let $L : K$ be a radical extension and $N$ the
+  normal closure of $L$ over $K$. Then $N$ is also
+  a radical extension of $K$.
+\end{theorem}
+
+\begin{proof}
+  By Corollary \ref{cor:normal-closure}, we have
+  \[
+    N = L_1 \lor \dots \lor L_k,
+  \]
+  where each $L_i \cong L$, hence they are all radical.
+  Now it suffices to show that the join of two radical
+  extensions is radical. For this, let
+  \[
+    L_1 = K(\alpha_1, \dots, \alpha_m), \quad
+    L_2 = K(\beta_1, \dots, \beta_n),
+  \]
+  where $\alpha_i^{k_i} \in K(\alpha_1, \dots, \alpha_{i - 1})$
+  and $\beta_j^{l_j} \in K(\beta_1, \dots, \beta_{j - 1})$.
+  Then
+  \[
+    L_1 \lor L_2 = K(\alpha_1, \dots, \alpha_m, \beta_1, \dots, \beta_n),
+  \]
+  where $\alpha_i^{k_i} \in K(\alpha_1, \dots, \alpha_{i - 1})$ and
+  $\beta_j^{l_j} \in K(\alpha_1, \dots, \alpha_m, \beta_1, \dots, \beta_{j - 1})$,
+  so $L_1 \lor L_2$ is radical.
+\end{proof}
+
+\begin{remark}
+  Radical extensions involve polynomials of the form
+  $X^m - c$. Let us look more closely at $X^m - 1$.
+  We focus on fields $K$ of characteristic $0$, so
+  that the splitting field $L$ of $X^m - 1$ over $K$
+  is normal and separable.
+\end{remark}
+
+\begin{lemma}
+  The set $R$ of roots of $X^m - 1$ is a cyclic group
+  under multiplication.
+\end{lemma}
+
+\begin{proof}
+  Check as an exercise that $R$ is indeed a subgroup of $L$.
+  To see that it is cyclic, recall that
+  \[
+    \exp(R) = \text{smallest positive integer $e$ such that $a^e = 1$ for all $a \in R$}.
+  \]
+  Clearly we have $\exp(R) \le |R|$. Now observe that
+  $x^e - 1$ has at
+  most $e$ roots, so $|R| \le e$. Hence
+  $e = |R| = m$, so $(R, \cdot)$ is cyclic.
+\end{proof}
+
+\begin{definition}
+  A \emph{primitive $m$th root of unity} $\omega$ is a
+  generator for $(R, \cdot)$.
+\end{definition}
+
+\begin{remark}
+  We have
+  \[
+    R = \{1, \omega, \omega^2, \dots, \omega^{m - 1}\},
+  \]
+  and $\omega^i$ is a primitive $m$th root of unity if
+  $\gcd(m, i) = 1$.
+\end{remark}
+
+\begin{definition}
+  Let $P_m = \{\text{primitive $m$th roots of unity}\}$.
+  The \emph{cyclotomic polynomial} $\Phi_m$ is
+  \[
+    \Phi_m = \prod_{\varepsilon \in P_m} (X - \varepsilon).
+  \]
+\end{definition}
