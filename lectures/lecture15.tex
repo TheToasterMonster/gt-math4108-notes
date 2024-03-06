@@ -1,0 +1,358 @@
+\chapter{Mar.~6 --- Cyclotomic Polynomials}
+
+\section{Cyclotomic Polynomials}
+
+\begin{example}
+  For $X^p - 1$ with $p$ prime, all roots except
+  $1$ are primitive:
+  \[
+    X^p - 1 = (X - 1)(X^{p - 1} + X^{p - 2} + \dots + 1).
+  \]
+  So we get $\Phi_p = X^{p - 1} + X^{p - 2} + \dots + 1$.
+\end{example}
+
+\begin{example}
+  Consider $f = X^{12} - 1$, where $L \subseteq \C$ is
+  the splitting field of $f$ over $\Q$. We have
+  \[
+    P_{12} = \{\omega, \omega^5, \omega^7, \omega^{11}\},
+  \]
+  the powers of $\omega = e^{2\pi i / 12}$ relatively
+  prime to $12$. This gives
+  \begin{align*}
+    \Phi_{12}
+    &= (X - \omega)(X - \omega^{11})(X - \omega^5)(X - \omega^7)
+    = (X^2 - (\omega + \omega^{11})X + 1)(X^2 - (\omega^5 + \omega^7)X + 1) \\
+    &= (X^2 - \sqrt{3}X + 1)(X^2 + \sqrt{3}X + 1)
+    = X^4 - X^2 + 1,
+  \end{align*}
+  since $\omega^{11} = \overline{\omega}$ with
+  $\re(\omega) = \sqrt{3} / 2$ (a similar analysis works
+  for $\omega^5$ and $\omega^7$).
+  We have $P_6 = \{\omega^2, \omega^{10}\}$, so
+  \[
+    (X - \omega^2)(X - \omega^{10}) = X^2 - (\omega^2 + \omega^{10})X + 1
+    = X^2 - X + 1
+  \]
+  Next $P_3 = \{\omega^3, \omega^9\} = \{\pm i\}$, so
+  \[
+    \Phi_4 = (X - i)(X + i) = X^2 + 1.
+  \]
+  Now $P_3 = \{\omega^4, \omega^8\}$, so
+  \[
+    \Phi_2 = (X - \omega^4)(X - \omega^8) = X^2 + X + 1.
+  \]
+  Finally $P_2 = \{\omega^6\}$, so
+  $\Phi_2 = X + 1$, and $P_1 = \{1\} = \{\omega^{12}\}$,
+  so $\Phi_1 = X - 1$.
+\end{example}
+
+\begin{remark}
+  Observe that
+  \[
+    X^{12} - 1 = \prod_{d | 12} \Phi_d
+    = (X - 1)(X + 1)(X^2 + X + 1)(X^2 + 1)(X^2 - X + 1)(X^4 - X^2 + 1).
+  \]
+  This works in general, i.e.
+  \[
+    X^m - 1 = \prod_{d | m} \Phi_d.
+  \]
+  Note that we need $1 | m$ and $m | m$ here.
+\end{remark}
+
+\begin{remark}
+  The question here is: Does $\Phi_d$ always have
+  coefficients in $K$?
+\end{remark}
+
+\begin{lemma}
+  \label{lem:coefficient-divides}
+  Let $K, L$ be fields and $K \subseteq L$. If
+  $f, g \in L[X]$ such that $f, fg \in K[X]$, then
+  $g \in K[X]$.
+\end{lemma}
+
+\begin{proof}
+  Let
+  \[
+    f = a_0 + a_1 X + \dots + a_m X^m
+  \]
+  for $a_i \in K$, $a_m \ne 0$, and
+  \[
+    g = b_0 + b_1 X + \dots + b_n X^n
+  \]
+  for $b_i \in L$, $b_n \ne 0$. Then
+  \[
+    fg = c_0 + c_1 X + \dots + c_{m + n} X^{m + n}
+  \]
+  for $c_i \in K$, so $b_n = c_{m + n} / a_m \in K$.
+  Now suppose inductively that $b_j \in K$ for all
+  $j > r$. Then
+  \[
+    c_{m + r} = a_m b_r + a_{m - 1} b_{r + 1} + \dots + a_{m - n + r} b_{n}
+  \]
+  where $a_i = 0$ if $i < 0$. Then we get that
+  \[
+    b_r = \frac{c_{m + r} - a_{m - 1} b_{r + 1} - \dots - a_{m - n + r} b_{n}}{a_m}.
+  \]
+  Since each $a_i \in K$, $c_{m + r} \in K$, and
+  $b_j \in K$ for $j > r$, we get that $b_r \in K$.
+  So in fact $b_j \in K$ for all $j$ by induction, and
+  thus $g \in K[X]$.
+\end{proof}
+
+\begin{theorem}
+  Let $\Char K = 0$ (so the prime subfield
+  $K_0 \cong \Q$). Suppose $K$ contains the $m$th roots of
+  unity, where $m \ge 2$. Then for every divisor $d$
+  of $m$, $\Phi_d \in K_0[X]$.
+\end{theorem}
+
+\begin{proof}
+  Note that $\Phi_1 = X - 1 \in K_0[X]$. Let $d | m$,
+  $d \ne 1$, and suppose inductively that
+  $\Phi_r \in K_0[X]$ for all proper divisors $r$ of
+  $d$. Now
+  \[
+    X^d - 1 = \left(\prod_{r | d, r \ne d} \Phi_r\right) \Phi_d,
+  \]
+  so Lemma \ref{lem:coefficient-divides} gives
+  $\Phi_d \in K_0[X]$.
+\end{proof}
+
+\begin{remark}
+  In fact, $\Phi_m \in \Z_[X]$.
+\end{remark}
+
+\begin{theorem}
+  The cyclotomic polynomials $\Phi_m$ are irreducible
+  over $\Q$.
+\end{theorem}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\section{The Galois Groups of Cyclotomic Polynomials}
+\begin{remark}
+  When we talk about the \emph{Galois group of a
+  polynomial},
+  we mean the Galois group of the splitting field of
+  that polynomial.
+\end{remark}
+
+\begin{theorem}
+  \label{thm:multiplicative-group}
+  Let $L$ be a splitting field over $\Q$
+  of $X^m - 1$. Then
+  $\Gal(L : \Q) \cong \Z_m^*$.
+\end{theorem}
+
+\begin{proof}
+  Let $\omega$ be a primitive $m$th root of unity and
+  $\sigma \in \Gal(L : \Q)$. Since
+  $L = \Q(\omega)$, $\sigma(\omega)$ must be another
+  primitive $m$th root of unity, so
+  $\sigma \in \Gal(L : \Q)$ if and only if
+  $\sigma(\omega) = \omega^{k_\sigma}$
+  where $\gcd(k_\sigma, m) = 1$. Then
+  $\sigma \mapsto k_\sigma$ is an isomorphism
+  $\Gal(L : \Q) \to \Z_m^*$, so $\Gal(L : \Q) \cong \Z_m^*$.
+\end{proof}
+
+\begin{exercise}
+  Show that the map $\sigma \mapsto k_\sigma$ is an
+  isomorphism $\Gal(L : \Q) \to \Z_m^*$.
+\end{exercise}
+
+\begin{corollary}
+  If $L$ is a splitting field of $X^p - 1$ over $\Q$
+  with $p$ prime, then $\Gal(L : \Q)$ is cyclic.
+\end{corollary}
+
+\begin{proof}
+  By Theorem \ref{thm:multiplicative-group},
+  $\Gal(L : \Q) \cong \Z_p^*$, which we have previously
+  shown is cyclic.
+\end{proof}
+
+\begin{example}
+  Consider the splitting field $\Q(\omega)$ of $X^8 - 1$
+  over $\Q$, where $\omega = e^{2\pi i / 8} = e^{\pi i / 4}$.
+  Then
+  \[
+    \Gal(\Q(\omega) : \Q)
+    = \{\omega \mapsto \omega, \omega \mapsto \omega^3, \omega \mapsto \omega^5, \omega \mapsto \omega^7\}
+    \cong \Z_8^*.
+  \]
+  In particular, $\Gal(\Q(\omega) : \Q)$ is not cyclic
+  since every element has order $2$.
+\end{example}
+
+\begin{example}
+  Consider the splitting field $\Q(\omega)$ of $X^5 - 1$
+  over $\Q$, where $\omega = e^{2\pi i / 5}$. Then
+  \[
+    \Gal(\Q(\omega) : \Q)
+    = \{\omega \mapsto \omega, \omega \mapsto \omega^2, \omega \mapsto \omega^3, \omega \mapsto \omega^4\}
+    \cong \Z_5^*.
+  \]
+\end{example}
+
+\begin{theorem}
+  Let $f = X^m - a \in K[X]$, where $\Char K = 0$.
+  Let $L$ be a splitting for $f$ over $K$. Then
+  \begin{enumerate}
+    \item $L$ contains a primitive $m$th root of unity $\omega$,
+    \item $\Gal(L : K(\omega))$ is cyclic, with
+      order dividing $m$,
+    \item and $|{\Gal(L : K)}| = m$ if and only if
+      $f$ is irreducible over $K(\omega)$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  If $\alpha$ is a root of $f$, then over $L$ we have
+  \[
+    f = (X - \alpha)(X - \omega \alpha)(X - \omega^2 \alpha) \dots (X - \omega^{m - 1} \alpha)
+  \]
+  where $\omega$ is a primitive $m$th root of unity.
+  Since $\alpha, \omega \alpha \in L$, this proves (1).
+  Thus $L = K(\omega, \alpha)$, and an element
+  $\sigma \in \Gal(L : K(\omega))$ is determined by
+  $\sigma(\alpha)$, which must be another root of $f$.
+  Hence $\sigma(\alpha) = \omega^{k_\sigma} \alpha$ for some
+  $k_\sigma \in \{0, 1, \dots, m - 1\}$.
+  Now for $\sigma, \tau \in \Gal(L : K(\omega))$,
+  \[
+    \sigma \circ \tau (\alpha)
+    = \sigma(\omega^{k_\tau} \alpha)
+    = \omega^{k_\tau} \sigma(\alpha)
+    = \omega^{k_\tau} \omega^{k_\sigma} \alpha
+    = \omega^{k_\sigma + k_\tau} \alpha,
+  \]
+  so $\sigma \mapsto k_\sigma$ is a homomorphism
+  $\Gal(L : K(\omega)) \to \Z_m$. This homomorphism is
+  injective since
+  \[k_\sigma \equiv 0 \pmod{m}\]
+  if and only if $m | k_\sigma$,
+  if and only if $\sigma(\alpha = \alpha)$. Hence
+  $\Gal(L : K(\omega))$ is isomorphic to a subgroup of
+  the cyclic group $\Z_m$, so $\Gal(L : K(\omega))$
+  is cyclic (subgroups of cyclic groups are cyclic).
+  This proves (2).
+
+  (3) $(\Leftarrow)$ Suppose $f$ is irreducible
+  over $K(\omega)$. Then by the Galois correspondence
+  \[
+    |{\Gal(L : K(\omega))}|
+    = [L : K(\omega)]
+    = \partial f = m,
+  \]
+  where the second equality follows from the
+  characterization of simple algebraic extensions.
+  So we get $\Gal(L : K(\omega)) \cong \Z_m$, since we
+  already showed that $\Gal(L : K(\omega))$ is
+  isomorphic to a subgroup of $\Z_m$.
+
+  (3) $\Rightarrow)$ We show the contrapositive. Suppose
+  $f$ is not irreducible over $K(\omega)$, so
+  $f$ has a monic proper factor $g$ with $\partial g < m$.
+  Let $\beta$ be a root of $g$. Then
+  \[
+    X^m - a = (X - \beta)(X - \omega \beta) \dots (X - \omega^{m - 1} \beta),
+  \]
+  so $L = K(\omega, \beta)$ is a splitting field for
+  $f$ over $K(\omega)$. Hence
+  \[
+    |{\Gal(L : K(\omega))}|
+    = [L : K(\omega)]
+    = \partial g
+    < m,
+  \]
+  so the Galois group is a proper subgroup of $\Z_m$.
+\end{proof}
+
+\begin{theorem}[Abel's theorem]
+  Let $\Char K = 0$, $p$ prime, and $a \in K$.
+  If $X^p - a$ is reducible over $K$, then it has a
+  linear factor $X - c$ in $K[X]$.
+\end{theorem}
+
+\begin{proof}
+  Suppose $f = X^p - a$ is reducible over $K$. Let
+  $g \in K[X]$ be a monic irreducible factor of $f$ of
+  egree $d$. If $d = 1$, then we are done, so suppose
+  $1 < d < p$. Let $L$ be a splitting field of $f$
+  over $K$, and $\beta$ a root of $f$ in $L$. Then in
+  $L[X]$,
+  \[
+    g = (X - \omega^{n_1} \beta) (X - \omega^{n_2} \beta) \dots (X - \omega^{n_d} \beta)
+  \]
+  where $\omega$ is a primitive $p$th root of unity and
+  $0 \le n_1 < n_2 < \dots < n_d < p$. Suppose
+  \[
+    g = X^d - b_{d - 1} X^{d - 1} + \dots + (-1)^d b_0.
+  \]
+  Then we have
+  \[
+    b_0 = \omega^{n_1 + n_2 + \dots + n_d} \beta^d
+    = \omega^n \beta^d
+  \]
+  where $n = n_1 + n_2 + \dots + n_d$. So
+  \[
+    b_0^p = \omega^{pn} \beta^{pd} = (\beta^p)^d = a^d
+  \]
+  since $\omega^p = 1$ and $\beta$ is a $p$th root of $a$. We have
+  $\gcd(d, p) = 1$ since $p$ is prime, so there exist
+  $s, t \in \Z$ such that
+  $sd + tp = 1$.
+  Then since $a^d = b_0^p$, we get that
+  \[
+    a = a^{sd + tp} = a^{sd} a^{tp} = b_0^{sp} a^{tp}
+    = (b_0^s a^t)^p.
+  \]
+  Now $X - b_0^s a^t$ is the desired linear factor of $f$
+  in $K[X]$.
+\end{proof}
+
+\begin{example}
+  Let $L$ be the splitting field of $X^5 - 8$ over
+  $\Q$. We have $L = \Q(\sqrt[5]{7}, \omega)$, where
+  $\omega = e^{2\pi i / 5}$. Note that the minimum
+  polynomial of $\omega$ is
+  $X^4 + X^3 + X^2 + X + 1$.
+  What is $\Gal(L : \Q)$? First we show that
+  $X^5 - 7$ is irreducible over $\Q(\omega)$. To do this,
+  suppose not. Then by Abel's theorem, $X^5 - 7$ has a
+  linear factor $X - c$ in $\Q(\omega)[X]$, i.e.
+  $c = \sqrt[5]{7} \in \Q(\omega)$ and
+  $[\Q(c) : \Q] = 5$. But if $c \in \Q(\omega)$, then
+  \[
+    [\Q(c) : \Q] \le [\Q(\omega) : \Q] = 4,
+  \]
+  a contradiction. Now notice that the roots of $X^5 - 7$ in $\C$ are
+  \[
+    \alpha, \omega \alpha, \omega^2 \alpha, \omega^3 \alpha, \omega^4 \alpha,
+  \]
+  where $\alpha = \sqrt[5]{7}$. Since
+  $|{\Gal(L : \Q)}| = 20$, define the maps
+  \[
+    \sigma_{p, q} : \alpha \mapsto \omega^p \alpha, \quad \omega \mapsto \omega^q
+  \]
+  for $0 \le p \le 4$ and $1 \le q \le 4$. Then we can
+  write
+  \[
+    \Gal(L : \Q) = \{\sigma_{p, q} \mid 0 \le p \le 4, 1 \le q \le 4\},
+  \]
+  where the identity element is $\id = \sigma_{0, 1}$.
+\end{example}
+
+\begin{exercise}
+  Check that
+  \[\sigma_{p, q} \sigma_{r, s} = \sigma_{rq + p, qs}\]
+  in the above example,
+  where the subscripts are taken modulo $5$ (i.e.
+  compute $\sigma_{p, q} \sigma_{r, s}(\alpha)$
+  and $\sigma_{p, q} \sigma_{r, s}(\omega)$).
+\end{exercise}
