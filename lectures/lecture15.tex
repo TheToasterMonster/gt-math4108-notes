@@ -200,13 +200,14 @@
 \end{example}
 
 \begin{theorem}
+  \label{thm:galois-group-of-xm-a}
   Let $f = X^m - a \in K[X]$, where $\Char K = 0$.
   Let $L$ be a splitting for $f$ over $K$. Then
   \begin{enumerate}
     \item $L$ contains a primitive $m$th root of unity $\omega$,
     \item $\Gal(L : K(\omega))$ is cyclic, with
       order dividing $m$,
-    \item and $|{\Gal(L : K)}| = m$ if and only if
+    \item and $|{\Gal(L : K(\omega))}| = m$ if and only if
       $f$ is irreducible over $K(\omega)$.
   \end{enumerate}
 \end{theorem}
@@ -317,7 +318,8 @@
 \end{proof}
 
 \begin{example}
-  Let $L$ be the splitting field of $X^5 - 8$ over
+  \label{ex:splitting-field-of-x5-7-over-q}
+  Let $L$ be the splitting field of $X^5 - 7$ over
   $\Q$. We have $L = \Q(\sqrt[5]{7}, \omega)$, where
   $\omega = e^{2\pi i / 5}$. Note that the minimum
   polynomial of $\omega$ is

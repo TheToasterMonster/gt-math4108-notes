@@ -1,0 +1,300 @@
+\chapter{Mar.~11 --- Solvable Polynomials}
+
+\section{More on Cyclotomic Polynomials}
+\begin{exercise}
+  From Example \ref{ex:splitting-field-of-x5-7-over-q},
+  check that
+  \[
+    (\sigma_{1, 1})^n = \sigma_{n, 1}, \quad
+    (\sigma_{0, 2})^n = \sigma_{0, 2^n}, \quad
+    \sigma_{2, 1} \sigma_{0, 2} = \sigma_{2, 2} = \sigma_{0, 2} \sigma_{1, 1}.
+  \]
+  Let $a = \sigma_{1, 1}$ and $b = \sigma_{0, 2}$. Use
+  the above to show that
+  \[
+    \Gal(L : \Q) = \langle a, b \mid a^5 = 1,\, b^4 = 1,\, a^2 b = ba \rangle
+  \]
+  is a presentation for $\Gal(L : \Q)$
+  in terms of generators and relations.
+\end{exercise}
+
+\begin{theorem}
+  \label{thm:char-zero-cyclic-converse}
+  Let $\Char K = 0$ and suppose $X^m - 1$ splits
+  completely over $K$. Let $L : K$ be a cyclic extension
+  with $[L : K] = m$. Then there exists $a \in K$ such
+  that
+  \begin{enumerate}
+    \item $X^m - a$ is irreducible over $K$,
+    \item $L$ is a splitting field for $X^m - a$ over $K$,
+    \item and $L = K(\alpha)$ where $\alpha$ is a root of
+      $X^m - a$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  See Howie.
+\end{proof}
+
+\begin{remark}
+  This is a partial converse to Theorem
+  \ref{thm:galois-group-of-xm-a}.
+\end{remark}
+
+\section{Solvable Polynomials}
+
+\begin{remark}
+  For $f \in K[X]$, we define
+  $\Gal(f) = \Gal(L : K)$ where $L$ is a splitting
+  field for $f$ over $K$.
+\end{remark}
+
+\begin{theorem}
+  Let $\Char K = 0$ and $f \in K[X]$. If
+  $\Gal(f)$ is solvable, then $f$ is solvable
+  by radicals.
+\end{theorem}
+
+\begin{proof}
+  Let $L$ be a splitting field of $f$ over $K$, where
+  $\Gal(L : K)$ is solvable by hypothesis, and let
+  $m = |{\Gal(L : K)}|$. If $K$ does not contain an
+  $m$th root of unity, adjoin one, i.e. let $E$ be the
+  splitting field of $X^m - 1$ over $K$. Let $M$ be
+  the splitting field of $f$ over $E$. This gives the
+  subfield lattice:
+  \[
+    \begin{tikzcd}[column sep=1em, row sep=1.5em]
+      & M \\
+      E & & L \\
+        & E \cap L \\
+        & K
+      \arrow[from=2-1, to=1-2]
+      \arrow[from=2-3, to=1-2]
+      \arrow[from=3-2, to=2-1]
+      \arrow[from=3-2, to=2-3]
+      \arrow[from=4-2, to=3-2]
+    \end{tikzcd}
+  \]
+  By Theorem 7.36 of Howie, we get
+  $G = \Gal(M : E) \cong \Gal(L : E \cap L)$. Now
+  $\Gal(L : E \cap L) \subseteq \Gal(L : K)$, i.e. $G$
+  is isomorphic to a subgroup of a solvable group, hence
+  it is also solvable. So
+  \[
+    \{1\} = G_0 \triangleleft G_1 \triangleleft \cdots \triangleleft G_{r - 1} \triangleleft G_r = G,
+  \]
+  with $G_{i + 1} / G_i$ cyclic. By the fundamental
+  theorem of Galois theory, we get
+  \[
+    M_0 = M \supseteq M_1 \supseteq \cdots \subseteq M_{r - 1} \supseteq M_r = E \supseteq K,
+  \]
+  where $M_i : M_{i + 1}$ is normal. We have
+  $\Gal(M : M_i) = G_i$, so
+  \[
+    \Gal(M_i : M_{i + 1}) \cong \Gal(M : M_i) / \Gamma(M_i)
+    \cong G_{i + 1} / G_i,
+  \]
+  which yields that $M_i : M_{i + 1}$ is cyclic.
+  Let $d_i = [M_i : M_{i + 1}]$. Then
+  $d_1 \big| [M : E] = \Gal(M : E)$. Now since
+  $\Gal(M : E) \cong \Gal(L : E \cap L)$, we have that
+  \[
+    |{\Gal(L : E \cap L)}| \big| |{\Gal(L : K)}| = m,
+  \]
+  so $d_1 | m$. Since $M_{i + 1}$ contains $E$, it
+  contains every $m$th root of unity, so $E$ also contains
+  all $d_i$th roots of unity. By Theorem
+  \ref{thm:galois-group-of-xm-a}, there exists
+  $\beta_i \in M_i$ such that $M_i = M_{i + 1}(\beta_i)$,
+  where $\beta_i$ is a root of $X^{d_i} - c_{i + 1}$ with
+  $c_{i + 1} \in M_{i + 1}$. Hence we get that
+  $f$ is solvable by radicals.
+\end{proof}
+
+\begin{theorem}
+  Let $\Char K = 0$ and $K \subseteq L \subseteq M$ where
+  $M$ is a radical extension. Then $\Gal(L : K)$ is
+  solvable.
+\end{theorem}
+
+\begin{proof}
+  By hypothesis, there exists a sequence
+  \[
+    M_r = M \supseteq M_{r - 1} \supseteq \cdots \supseteq M_1 \supseteq M_0 = K,
+  \]
+  where $M_{i + 1} = M_i(\alpha_i)$ with $\alpha_i$
+  a root of $X^{n_i} - a_i \in M_i[X]$.
+  The main idea from here is that if $L : K$ and
+  $M : K$ are normal, then
+  \[
+    \Gal(L : K) \cong \Gal(M : K) / \Gal(M : L),
+  \]
+  so it is sufficient to show that $\Gal(M : K)$ is
+  solvable. Now use Theorem 8.18 and Corollary 8.14 from
+  Howie to show that $\Gal(M : K)$ is solvable (uses
+  induction). See Howie for details.
+\end{proof}
+
+\begin{theorem}
+  A polynomial $f \in K[X]$ with $\Char K = 0$ is
+  solvable by radicals if and only if $\Gal(f)$ is
+  solvable.
+\end{theorem}
+
+\begin{proof}
+  This is summarizing the previous two theorems.
+\end{proof}
+
+\section{Insolvability of the Quintic}
+
+\begin{theorem}
+  Let $f \in \Q[X]$ be a monic irreducible polynomial
+  with $\partial f = p$, $p$ prime. Suppose $f$ has
+  exactly two roots in $\C \setminus \R$. Then
+  $\Gal(f) = S_p$.
+\end{theorem}
+
+\begin{proof}
+  Let $L \subseteq \C$ be a splitting field for $f$. Now
+  $G = \Gal(L : \Q)$ is a subgroup of $S_p$ since
+  $G$ is a group of permutations on the $p$ roots of $f$
+  in $L$. Consider $\Q(\alpha)$, where $\alpha$ has
+  minimum polynomial $f$. Then $[\Q(\alpha) : \Q] = p$, so
+  we get that
+  \[
+    |G| = |{\Gal(L : \Q)}| = [L : \Q] = [L : \Q(\alpha)] [\Q(\alpha) : \Q]
+    = [L : \Q(\alpha) \cdot p.
+  \]
+  By the Sylow theorems, $G$ has an element of order $p$.\footnote{Cauchy's theorem directly gives this, but also $|S_p| = p!$, so the $p$-Sylow subgroup can only have order $p$.}
+  Now $G$ is a subgroup of $S_p$, and the only elements
+  in $S_p$ of order $p$ are $p$-cycles, so
+  $G$ contains a $p$-cycle. Also complex roots of
+  $f$ come in conjugate pairs, so $G$ contains a
+  transposition $\tau$ that swaps conjugate roots (there
+  are only two complex roots of $f$ in $\C \setminus \R$).
+  Then $G$ is a subgroup of $S_p$ that contains a
+  $p$-cycle and a transposition, so by Homework 8,
+  $G = S_p$.
+\end{proof}
+
+\begin{example}
+  Consider the polynomial $f = X^5 - 8X + 2$, which
+  is irreducible over $\Q$ by Eisenstein's criterion.
+  Now we have:
+  \[
+    \begin{tabular}
+      {c|ccccc}
+      $X$ & $-2$ & $-1$ & $0$ & $1$ & $2$ \\
+      \hline
+      $f(X)$ & $-14$ & $9$ & $2$ & $-5$ & $18$
+    \end{tabular}
+  \]
+  So by the intermediate value theorem, $f$ has
+  at least $3$ real roots. Then $f'(X) = 5X^4 - 8$, and
+  $f'(X) \le 0$ if and only if
+  \[
+    -\sqrt[4]{\frac{8}{5}} \le X \le \sqrt[4]{\frac{8}{5}}
+    \approx 1.12.
+  \]
+  Rolle's theorem tells us that there exists at least
+  one zero of $f'(X)$ between zeroes of $f(X)$.\footnote{The above conditions guarantee that $f'(X)$ has only two zeroes, so $f(X)$ can have at most three.} Thus
+  $f$ has exactly $3$ real roots. Then by the previous
+  theorem, $\Gal(f) = S_5$, so $f$ is not solvable
+  by radicals since $S_5$ is not solvable. So there
+  exists a quintic polynomial which is not solvable
+  by radicals.
+\end{example}
+
+\section{Finitely-Generated Extensions}
+
+\begin{definition}
+  A subseteq $\{\alpha_1, \alpha_2, \dots, \alpha_n\} \subseteq L$
+  is \emph{algebraically independent} over $K$ if
+  for all polynomials $f(X_1, X_2, \dots, X_n)$ with
+  coefficients in $K$, we have
+  \[
+    f(\alpha_1, \alpha_2, \dots, \alpha_n) = 0
+    \iff f = 0..
+  \]
+\end{definition}
+
+\begin{example}
+  Notably, this is a stronger condition than linear
+  independence. A non-example is
+  $\{1, \sqrt{2}, \sqrt{3}, \sqrt{6}\}$, which is linearly
+  independent over $\Q$ but not algebraically independent,
+  since
+  \[
+    \sqrt{2} \cdot \sqrt{3} - \sqrt{6} = 0.
+  \]
+  This means we can take $f(X_1, X_2, X_3, X_4) = X_2 \cdot X_3 - X_4$ to
+  get $f(1, \sqrt{2}, \sqrt{3}, \sqrt{6}) = \sqrt{2} \cdot \sqrt{3} - \sqrt{6} = 0$.
+\end{example}
+
+\begin{exercise}
+  Show that $\{\alpha_1, \dots, \alpha_n\}$  is algebraically
+  independent over $K$ if and only if
+  $\alpha_1$ is transcendental over $K$ and for each
+  $2 \le d \le n$, $\alpha_d$ is transcendental over
+  $K(\alpha_1, \dots, \alpha_{d - 1})$. Also show that
+  this is if and only if
+  \[
+    K(\alpha_1, \alpha_2, \dots, \alpha_n) \cong K(X_1, X_2, \dots, X_n).
+  \]
+\end{exercise}
+
+\begin{definition}
+  An extension $L$ of $K$ is \emph{finitely generated}
+  if $L = K(\alpha_1, \alpha_2, \dots, \alpha_n)$ for
+  some natural number $n$.
+\end{definition}
+
+\begin{example}
+  Finite extensions are finitely generated.
+\end{example}
+
+\begin{example}
+  The extension $K(X)$ is finitely generated but not
+  a finite extension.
+\end{example}
+
+\begin{theorem}
+  Let $L = K(\alpha_1, \dots, \alpha_n)$ be a finitely
+  generated extension of $K$. Then there exists a field
+  $E$ with $K \subseteq E \subseteq L$ such that for
+  some $m$ with $0 \le m \le n$,
+  \begin{enumerate}
+    \item $E = K(\beta_1, \beta_2, \dots, \beta_m)$,
+      where $\{\beta_1, \beta_2, \dots, \beta_m\}$ are
+      algebraically independent,
+    \item and $[L : E]$ is finite.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  If all the $\alpha_i$ are algebraic over $K$, then
+  $[L : K]$ is finite and we can take $E = K$ with
+  $m = 0$. Otherwise, there exists $\alpha_i$ that is
+  transcendental over $K$. Let $\beta_1 = \alpha_i$.
+  If $[L : K(\beta_1)]$ is not finite, then there exists
+  $\alpha_j$ that is transcendental over $K(\beta_1)$.
+  Let $\beta_2 = \alpha_j$, and so on. Repeat this
+  process, which terminates in at most $n$ steps, so
+  \[
+    E = K(\beta_1, \beta_2, \dots, \beta_m)
+  \]
+  with $m \le n$. By construction, $\{\beta_1, \dots, \beta_m\}$
+  are algebraically independent over $K$ and
+  $[L : E]$ is finite.
+\end{proof}
+
+\begin{remark}
+  We can think of this theorem as saying that $E$ is
+  the ``transcendental part'' of the extension.
+\end{remark}
+
+\begin{remark}
+  The elements $\beta_i$ are not unique, but the number
+  $m$ is determined uniquely by $L$ and $K$.
+\end{remark}
