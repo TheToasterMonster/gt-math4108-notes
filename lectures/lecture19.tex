@@ -1,0 +1,309 @@
+\chapter{Mar.~27 --- Multilinear Functions}
+
+\section{The Homomorphism Theorem}
+\begin{theorem}[Homomorphism theorem]
+  Let $\varphi : M \to \overline{M}$ be a surjective
+  $R$-module homomorphism with kernel $N$. Then
+  $\varphi$ descends to an homomorphism on the
+  quotient $M / N$, i.e. there exists
+  $\widetilde{\varphi} : M / N \to \overline{M}$
+  such that the following diagram commutes (i.e.
+  $\varphi = \widetilde{\varphi} \circ \pi$):
+  \[
+    \begin{tikzcd}
+      M \ar[r, "\varphi"] \ar[d, "\pi", swap] & \overline{M} \\
+      M / N \ar[ur, "\widetilde{\varphi}"'] &
+    \end{tikzcd}
+  \]
+  In particular, $\widetilde{\varphi}$ is an
+  $R$-module isomorphism.
+\end{theorem}
+
+\begin{proof}
+  Define $\widetilde{\varphi} : M / N \to \overline{M}$
+  by $\widetilde{\varphi}(m + N) = \varphi(m)$ for
+  any $m \in M$. To see that $\widetilde{\varphi}$
+  is well-defined, suppose $m + N = m' + N$. Then
+  $m' = m + n$ for some $n \in N$, so
+  \[
+    \widetilde{\varphi}(m' + N) = \varphi(m')
+    = \varphi(m + n) = \varphi(m) + \varphi(n)
+    = \varphi(m) = \widetilde{\varphi}(m + N)
+  \]
+  since $n \in N = \ker \varphi$. So $\widetilde{\varphi}$
+  is well-defined. Now by the usual first isomorphism
+  theorem for groups, $\widetilde{\varphi}$ is a
+  group homomorphism. To see that
+  $\widetilde{\varphi}$ also respects $R$-actions,
+  observe that
+  \[
+    \widetilde{\varphi}(r(m + N))
+    = \widetilde{\varphi}(rm + N)
+    = \varphi(rm)
+    = r\varphi(m)
+    = r\widetilde{\varphi}(m + N)
+  \]
+  So $\widetilde{\varphi}$ is an $R$-module homomorphism.
+  We also get that $\widetilde{\varphi}$ is bijective for
+  free by the first isomorphism theorem for groups.
+  Thus $\widetilde{\varphi}$ is an $R$-module isomorphism.
+\end{proof}
+
+\begin{example}
+  Let $M$ be an $R$-module and let $x \in M$.
+  Consider the cyclic submodule
+  \[
+    R_x = \{rx \mid r \in R\}.
+  \]
+  Then $\varphi : R \to R_x$ defined by
+  $r \mapsto rx$ is an $R$-module homomorphism (and is
+  surjective). The
+  kernel $\ker \varphi$ is called the \emph{annihilator}
+  of $x$, denoted $\ann(x)$. Then by the homomorphism
+  theorem, $R / {\ann(x)} \cong R_x$.
+\end{example}
+
+\begin{example}
+  Let $R = \Z$ and $M = \Z / n \Z$. Let $x = 1$.
+  Then $\ann(x) = n\Z = \ker \varphi$ where
+  $\varphi : \Z \to R_x$ is defined by
+  $r \mapsto rx$. Then by the
+  homomorphism theorem,
+  $\Z / n\Z \cong R /{\ann(x)} \cong R_x = M \cong \Z / n\Z$.
+\end{example}
+
+\section{Multilinear Functions}
+\begin{definition}
+  Let $M_1, \dots, M_n, N$ be $R$-modules. We say that
+  a function
+  $\varphi : M_1 \times \dots \times M_n \to N$ is
+  \emph{$R$-multilinear} (or just \emph{multilinear})
+  if for each $j$ and fixed $x_i \in M_i$ for $i \ne j$,
+  the map $M_j \to N$ given by
+  \[
+    x \mapsto \varphi(x_1, \dots, x_{j-1}, x, x_{j+1}, \dots, x_n)
+  \]
+  is an $R$-module homomorphism.
+\end{definition}
+
+\begin{exercise}
+  If $\varphi : M_1 \times M_2 \to N$ is multilinear, then
+  \begin{enumerate}
+    \item $\varphi(m_1 + m_1', m_2) = \varphi(m_1, m_2) + \varphi(m_1', m_2)$,
+    \item $\varphi(m_1, m_2 + m_2') = \varphi(m_1, m_2) + \varphi(m_1, m_2')$,
+    \item $\varphi(rm_1, m_2) = r\varphi(m_1, m_2)$,
+    \item and $\varphi(m_1, rm_2) = r\varphi(m_1, m_2)$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{remark}
+  We will focus on the case where all the $M_i$'s
+  are the same, i.e. $\varphi : M^n \to N$.
+\end{remark}
+
+\begin{remark}
+  Recall that a permutation $\sigma \in S_n$ is
+  \emph{even} (respectively \emph{odd}) if it can be
+  expressed as a product of an even (respectively odd)
+  number of transpositions. We say that the \emph{sign}
+  of $\sigma$ is
+  \[
+    \varepsilon(\sigma) = \begin{cases}
+      1 & \text{if $\sigma$ is even} \\
+      -1 & \text{if $\sigma$ is odd}.
+    \end{cases}
+  \]
+  Note that the sign $\varepsilon : S_n \to \{\pm 1\}$
+  is in fact a group homomorphism.
+\end{remark}
+
+\begin{example}
+  The permutation
+  $(123) = (12)(23)$ is even and the permutation
+  $(12)$ is odd.
+\end{example}
+
+\begin{definition}
+  We say that an $R$-multilinear function
+  $\varphi : M^n \to N$
+  is \emph{symmetric}\footnote{Recall that a matrix $A$ is \emph{symmetric} if $A^T = A$.} if
+  \[
+    \varphi(x_{\sigma(1)}, x_{\sigma(2)}, \dots, x_{\sigma(n)})
+    = \varphi(x_1, x_2, \dots, x_n)
+  \]
+  for all $x_1, \dots, x_n \in M$ and
+  $\sigma \in S_n$. We say that $\varphi$ is
+  \emph{skew-symmetric}\footnote{Recall that a matrix $A$ is \emph{skew-symmetric} if $A^T = -A$.} if
+  \[
+    \varphi(x_{\sigma(1)}, \dots, x_{\sigma(n)})
+    = \varepsilon(\sigma)\varphi(x_1, \dots, x_n)
+  \]
+  for all $x_1, \dots, x_n \in M$ and $\sigma \in S_n$.
+  We say that $\varphi$ is \emph{alternating} if
+  \[
+    \varphi(x_1, \dots, x_n) = 0
+  \]
+  whenever $x_i = x_j$ for some $i \ne j$.
+\end{definition}
+
+\begin{example}
+  Let $M = \Z^2$, where we write $x_1, x_2 \in M$
+  as
+  \[
+    x_1 = \begin{bmatrix} a_1 \\ b_1 \end{bmatrix}
+    \quad \text{and} \quad
+    x_2 = \begin{bmatrix} a_2 \\ b_2 \end{bmatrix},
+  \]
+  where $a_1, a_2, b_1, b_2 \in \Z$. Consider the map
+  $\varphi : M^2 \to \Z$  defined by
+  \[
+    \varphi(x_1, x_2) =
+    \begin{bmatrix}
+      a_1 & b_1
+    \end{bmatrix}
+    \begin{bmatrix}
+      2 & 1 \\ 1 & 5
+    \end{bmatrix}
+    \begin{bmatrix}
+      a_2 \\ b_2
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      a_1 & b_1
+    \end{bmatrix}
+    \begin{bmatrix}
+      2a_2 + b_2 \\ a_2 + 5b_2
+    \end{bmatrix}
+    = 2a_1a_2 + a_1b_2 + b_1a_2 + 5b_1b_2.
+  \]
+  Now observe that
+  \[
+    \varphi(x_2, x_1) =
+    \begin{bmatrix}
+      a_2 & b_2
+    \end{bmatrix}
+    \begin{bmatrix}
+      2 & 1 \\ 1 & 5
+    \end{bmatrix}
+    \begin{bmatrix}
+      a_1 \\ b_1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      a_2 & b_2
+    \end{bmatrix}
+    \begin{bmatrix}
+      2a_1 + b_1 \\ a_1 + 5b_1
+    \end{bmatrix}
+    = 2a_1a_2 + a_2b_1 + b_2a_1 + 5b_2b_1,
+  \]
+  so $\varphi(x_1, x_2) = \varphi(x_2, x_1)$ and in
+  fact $\varphi$ is symmetric. Notice the the matrix
+  we picked was symmetric.
+\end{example}
+
+\begin{example}
+  Taking the matrix
+  \[
+    A = \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}
+  \]
+  makes $\varphi$ in the above example skew-symmetric
+  (and alternating).
+  Notice that $A$ is skew-symmetric.
+\end{example}
+
+\begin{lemma}
+  The symmetric group $S_n$ acts on the
+  set of $R$-multilinear functions from $M^n \to N$
+  by
+  \[
+    \sigma \varphi(x_1, \dots, x_n)
+    = \varphi(x_{\sigma(1)}, \dots, x_{\sigma(n)}).
+  \]
+  Additionally, the sets of symmetric, skew-symmetric, and alternating
+  multilinear functions are invariant under this action.
+\end{lemma}
+
+\begin{proof}
+  Check as an exercise that $\id$ acts as it's supposed to.
+  To see that $\sigma(\tau \varphi) = (\sigma\tau)\varphi$
+  for all $\sigma, \tau \in S_n$, observe that
+  \[
+    \sigma(\tau \varphi)(x_1, \dots, x_n)
+    = (\tau \varphi)(x_{\sigma(1)}, \dots, x_{\sigma(n)})
+    = (\tau \varphi)(y_1, \dots, y_n)
+  \]
+  if we let $y_i = x_{\sigma(i)}$. Then
+  $y_{\tau(j)} = x_{\sigma(\tau(j))} = x_{(\sigma\tau)(j)}$,
+  and thus
+  \begin{align*}
+    \sigma(\tau \varphi)(x_1, \dots, x_n)
+    &= (\tau \varphi)(y_1, \dots, y_n) \\
+    &= \varphi(y_{\tau(1)}, \dots, y_{\tau(n)})
+    = \varphi(x_{(\sigma\tau)(1)}, \dots, x_{(\sigma\tau)(n)})
+    = (\sigma\tau)\varphi(x_1, \dots, x_n).
+  \end{align*}
+  So we indeed have a group action (technically still
+  need to check that $\sigma \varphi$ is still multilinear).
+  The rest of the proof (if $\varphi$ is symmetric,
+  skew-symmetric, or alternating, then so is $\sigma \varphi$)
+  is left as an exercise.
+\end{proof}
+
+\begin{remark}
+  We see that $\varphi$ is symmetric if and only if
+  $\sigma \varphi = \varphi$ for all $\sigma \in S_n$,
+  and
+  $\varphi$ is skew-symmetric if and only if
+  $\sigma \varphi = \varepsilon(\sigma)\varphi$ for all
+  $\sigma \in S_n$.
+\end{remark}
+
+\begin{lemma}
+  An alternating multilinear function $\varphi : M^n \to N$
+  is skew-symmetric.
+\end{lemma}
+
+\begin{proof}
+  Fix $i < j$ and elements $x_k \in M$ for $k \ne i, j$.
+  Define $\lambda : M^2 \to N$ by
+  \[
+    \lambda(x, y) = \varphi(x_1, \dots, x_{i-1}, x, x_{i+1}, \dots, x_{j-1}, y, x_{j+1}, \dots, x_n).
+  \]
+  Since $\varphi$ is multilinear and alternating,
+  $\lambda$ is bilinear and alternating. Hence,
+  \[
+    0 = \lambda(x + y, x + y)
+    = \lambda(x, x) + \lambda(x, y) + \lambda(y, x) + \lambda(y, y)
+    = \lambda(x, y) + \lambda(y, x)
+  \]
+  since $\lambda$ is alternating (so $\lambda(x, x) = 0$).
+  Thus $\lambda(x, y) = -\lambda(y, x)$, so
+  $\lambda$ is skew-symmetric. Thus
+  \[
+    \varphi(x_{\sigma(1)}, \dots, x_{\sigma(n)})
+    = - \varphi(x_1, \dots, x_n)
+  \]
+  when $\sigma$ is a transposition $(ij)$. Since
+  any $\sigma$ is a product of transpositions
+  $\sigma = \tau_1 \dots \tau_\ell$, we have
+  \[
+    \sigma \varphi = (\tau_1 \dots \tau_\ell) \varphi
+    = (-1)^\ell \varphi = \varepsilon(\sigma) \varphi.
+  \]
+  This gives that $\varphi$ is skew-symmetric.
+\end{proof}
+
+\begin{lemma}
+  Let $\varphi : M^n \to N$ be multilinear. Then
+  \[
+    S(\varphi) = \sum_{\sigma \in S_n} \sigma \varphi
+    \text{ is symmetric} \quad \text{and} \quad
+    A(\varphi) = \sum_{\sigma \in S_n} \varepsilon(\sigma) \sigma \varphi
+    \text{ is alternating and skew-symmetric}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  Next class.
+\end{proof}
