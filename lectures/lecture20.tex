@@ -1,0 +1,399 @@
+\chapter{Apr.~8 --- Determinants}
+
+\section{Symmetric and Alternating Multilinear Maps}
+\begin{lemma}
+  Let $\varphi : M^n \to N$ be multilinear. Then
+  \[
+    S(\varphi) = \sum_{\sigma \in S_n} \sigma \varphi
+    \text{ is symmetric} \quad \text{and} \quad
+    A(\varphi) = \sum_{\sigma \in S_n} \varepsilon(\sigma) \sigma \varphi
+    \text{ is alternating and skew-symmetric}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  For $\tau \in S_n$,
+  \[
+    \tau S(\varphi) = \sum_{\sigma \in S_n} \tau \sigma \varphi
+    = \sum_{\sigma \in S_n} \sigma \varphi
+    = S(\varphi)
+  \]
+  since $\sigma \mapsto \tau \sigma$ is a bijection
+  on $S_n$. Hence $S(\varphi)$ is symmetric. Similarly
+  for $A(\varphi)$,
+  \[
+    \tau A(\varphi) = \sum_{\sigma \in S_n} \varepsilon(\sigma) \tau \sigma \varphi
+    = \sum_{\sigma \in S_n} \varepsilon(\tau) \varepsilon(\tau \sigma) \sigma \varphi
+    = \epsilon(\tau) \sum_{\sigma \in S_n} \varepsilon(\tau \sigma) \tau \sigma \varphi
+    = \epsilon(\tau) \sum_{\sigma \in S_n} \varepsilon(\sigma) \sigma \varphi
+  \]
+  since $\varepsilon : S_n \to \{\pm 1\}$ is a group
+  homomorphism and $(\varepsilon(\tau))^2 = 1$. Hence
+  $A(\varphi)$ is
+  skew-symmetric. To show $A(\varphi)$ is alternating,
+  let $x_1, \dots, x_n \in M$ and suppose
+  $x_i = x_j$ for some $i < j$. Now recall that
+  $S_n$ is the disjoint union of $A_n$ and
+  $(i\ j) A_n$, so
+  \begin{align*}
+    A(\varphi)(x_1, \dots, x_n)
+    &= \sum_{\sigma \in S_n} \varepsilon(\sigma) \sigma \varphi(x_1, \dots, x_n)
+    = \sum_{\sigma \in A_n} (\sigma\varphi(x_1, \dots, x_n) - (i\ j) \sigma \varphi(x_1, \dots, x_n)) \\
+    &= \sum_{\sigma \in S_n} \underbrace{(\varphi(x_{\sigma(1)}, \dots, x_{\sigma(n)}) - \varphi(x_{(i\ j) \sigma(1)}, \dots, x_{(i\ j)\sigma(n)}))}_{(*)}.
+  \end{align*}
+  Now notice that each summand $(*)$ is $0$ since
+  the sequences
+  \[
+    (\sigma(1), \dots, \sigma(n)) \quad \text{and} \quad ((i\ j)\sigma(1), \dots, (i\ j)\sigma(n))
+  \]
+  are identical except that the positions of entries $i$
+  and $j$ are reversed. But since $x_i = x_j$, the
+  sequences are identical, so $(*) = 0$ and
+  $A(\varphi)$ is alternating.
+\end{proof}
+
+\section{Determinants}
+Consider vectors of the form
+\[
+  a_j =
+  \begin{pmatrix}
+    a_{1, j} \\
+    \vdots \\
+    a_{n, j}
+  \end{pmatrix} \in R^n.
+\]
+Then $(a_1, a_2, \dots, a_n)$ can be thought as
+as an $n \times n$ matrix with entries in $R$:
+\[
+  \begin{pmatrix}
+    a_{1, 1} & a_{1, 2} & \cdots & a_{1, n} \\
+    a_{2, 1} & a_{2, 2} & \cdots & a_{2, n}\\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n, 1} & a_{n, 2} & \cdots & a_{n, n}
+  \end{pmatrix}
+  = (a_1, \dots, a_n) \in (R^n)^n.
+\]
+Define $\varphi : (R^n)^n \to R$ by
+\[
+  \varphi(a_1, \dots, a_n) = a_{1, 1} a_{2, 2} \dots a_{n, n}
+\]
+and define
+\[
+  \Lambda = A(\varphi) = \sum_{\sigma \in S_n} \varepsilon(\sigma) \sigma \varphi.
+\]
+Then we have
+\begin{align*}
+  \Lambda(a_1, \dots, a_n)
+  &= \sum_{\sigma \in S_n} \varepsilon(\sigma) \varphi(a_{\sigma(1)}, \dots, a_{\sigma(n)}) \\
+  &= \sum_{\sigma \in S_n} \varepsilon(\sigma) a_{\sigma(1), 1} a_{\sigma(2), 2} \dots a_{\sigma(n), n}
+  = \sum_{\sigma \in S_n} \varepsilon(\sigma) \prod_{i = 1}^n a_{i, \sigma(i)}.
+\end{align*}
+By the previous lemma,
+$\Lambda$ is an alternating multilinear function.
+
+\begin{exercise}
+  Check the following:
+  \begin{enumerate}
+    \item $\Lambda(E_n) = \Lambda(e_1, \dots, e_n) = 1$,
+      where $e_1, \dots, e_n$ are the standard basis
+      vectors.
+    \item $\displaystyle \varepsilon(\sigma) \prod_{i = 1}^n a_{i, \sigma(i)} = \varepsilon(\sigma^{-1}) \prod_{i = 1}^n a_{\sigma^{-1}(i), i}$.
+  \end{enumerate}
+\end{exercise}
+
+So by part (2) of the exercise, we have
+\[
+  \Lambda(a_1, \dots, a_n) = \sum_{\sigma \in S_n} \varepsilon(\sigma^{-1}) \prod_{i = 1}^n a_{\sigma^{-1}(i), i}
+  = \sum_{\sigma \in S_n} \varepsilon(\sigma) \prod_{i = 1}^n a_{\sigma(i), i}.
+\]
+since $\sigma \mapsto \sigma^{-1}$ is a bijection of $S_n$.
+
+Now we ask: \emph{Are there other alternating
+multilinear functions $(R^n)^n \to R$
+satisfying $(e_1, \dots, e_n) \mapsto 1$?}
+
+Suppose $\mu : (R^n)^n \to N$, where $N$ is any
+$R$-module, is alternating and multilinear. Let
+\[
+  a_j =
+  \begin{pmatrix}
+    a_{1, j} \\
+    \vdots \\
+    a_{n, j}
+  \end{pmatrix}
+  = \sum_{i = 1}^n a_{i, j} e_i.
+\]
+Then since $\mu$ is multilinear,
+\[
+  \mu(a_1, \dots, a_n) = \mu\left(\sum_{i = 1}^n a_{i, 1} e_i, \dots, \sum_{i = 1}^n a_{i, n} e_i\right)
+  = \sum_{i_1, i_2, \dots, i_n}^n a_{i_1, 1} \dots a_{i_n, n} \mu(e_{i_1}, \dots, e_{i_n}).
+\]
+Since $\mu$ is alternating, $\mu(e_{i_1}, \dots, e_{i_n}) = 0$
+unless the sequence of indices
+$(i_1, i_2, \dots, i_n)$ is a permutation
+of $(1, 2, \dots, n)$. So we are just summing over
+all permutations, and we have
+\begin{align*}
+  \mu(a_1, \dots, a_n)
+  &= \sum_{\sigma \in S_n} a_{\sigma(1), 1} \dots a_{\sigma(n), n} \mu(e_{\sigma(1)}, \dots, e_{\sigma(n)}) \\
+  &= \sum_{\sigma \in S_n} a_{\sigma(1), 1} \dots a_{\sigma(n), n} \epsilon(\sigma)\mu(e_1, \dots, e_n)
+  = \Lambda(a_1, \dots, a_n) \mu(e_1, \dots, e_n),
+\end{align*}
+where the second equality follows from $\mu$ being
+alternating and thus skew-symmetric. In other words,
+we have proved:
+
+\begin{theorem}
+  There is a unique alternating multilinear function
+  $\Lambda : (R^n)^n \to R$ satisfying
+  \[\Lambda(e_1, \dots, e_n) = 1.\]
+  The function $\Lambda$ satisfies
+  \[
+    \Lambda(a_1, \dots, a_n)
+    = \sum_{\sigma \in S_n} \varepsilon(\sigma) a_{1, \sigma(1)} \dots a_{n, \sigma(n)}
+    = \sum_{\sigma \in S_n} \varepsilon(\sigma) a_{\sigma(1), 1} \dots a_{\sigma(n), n}.
+  \]
+  Moreover, if $\mu : (R^n)^n \to N$ is an
+  alternating multilinear function, then
+  for all $a_1, \dots, a_n \in R^n$,
+  \[
+    \mu(a_1, \dots, a_n) = \Lambda(a_1, \dots, a_n) \mu(e_1, \dots, e_n).
+  \]
+\end{theorem}
+
+\begin{definition}
+  The \emph{determinant} of an $n \times n$ matrix
+  $A$ with entries in $R$ is
+  \[
+    \det A = \Lambda(a_1, \dots, a_n),
+  \]
+  where the $a_i$ are the columns of $A$.
+\end{definition}
+
+\begin{corollary}
+  \label{cor:alternating-is-determinant}
+  We have the following:
+  \begin{enumerate}
+    \item The determinant is characterized by the
+      following properties:
+      \begin{enumerate}[(a)]
+        \item $\det(A)$ is an alternating multilinear
+          function on the columns of $A$,
+        \item and $\det(E_n) = 1$, where $E_n$
+          is the $n \times n$ identity matrix.
+      \end{enumerate}
+    \item If $\mu : \Mat_n(R) \to N$ is any function
+      that is alternating and multilinear on the
+      columns, then
+      \[\mu(A) = \det(A) \mu(E_n)\]
+      for all $A \in \Mat_n(R)$.
+  \end{enumerate}
+\end{corollary}
+
+\begin{exercise}
+  Verify the following properties:
+  \begin{enumerate}
+    \item $\det(A^T) = \det A$.
+    \item $\det A$ is an alternating multilinear
+      function on the rows of $A$.
+    \item If $A$ is upper (or lower) triangular,
+      then $\det A$ is the product of the diagonal
+      entries.
+    \item $\det(AB) = \det(A) \det(B)$.
+    \item If $A$ is invertible
+      in $\Mat_n(R)$, then $\det(A) \in R^*$ (the
+      group of units of $R$) and
+      $\det(A^{-1}) = (\det A) ^{-1}$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{lemma}
+  Let $\varphi : M^r \to N$ be alternating and
+  multilinear. For any $x_1, \dots, x_n \in M$, and
+  any pair of indices $i \ne j$ and any
+  $r \in R$,
+  \[
+    \varphi(x_1, \dots, x_{i - 1}, x_i + rx_j, x_{i + 1}, \dots, x_n) = \varphi(x_1, \dots, x_n).
+  \]
+\end{lemma}
+
+\begin{proof}
+  We can compute that
+  \begin{align*}
+    \varphi(x_1, \dots, x_{i - 1}, x_i + rx_j, x_{i + 1}, \dots, x_n)
+    &= \varphi(x_1, \dots, x_n) + r \varphi(x_1, \dots, x_j, \dots, x_{j}, \dots, x_n) \\
+    &= \varphi(x_1, \dots, x_n)
+  \end{align*}
+  where the first equality follows from $\varphi$
+  multilinear and the second follows
+  from $\varphi$ alternating.
+\end{proof}
+
+\begin{prop}
+  Let $A, B \in \Mat_n(R)$.
+  \begin{enumerate}
+    \item If $B$ is obtained from $A$ by interchanging
+      two rows (or columns), then $\det B = -\det A$.
+    \item If $B$ is obtained from $A$ by multiplying
+      one row (or column) by $r \in R$, then
+      $\det B = r \det A$.
+    \item If $B$ is obtained from $A$ by adding a multiple
+      of one row (respectively column) to another row
+      (respectively column), then $\det B = \det A$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  (1) follows by skew-symmetry,
+  (2) follows by multilinearity, and (3) is
+  the previous lemma.
+\end{proof}
+
+\begin{lemma}
+  If $A \in \Mat_k(R)$ and $E_\ell$ is the
+  $\ell \times \ell$ identity, then
+  \[
+    \det
+    \begin{pmatrix}
+      A & 0 \\
+      0 & E_\ell
+    \end{pmatrix}
+    =
+    \det
+    \begin{pmatrix}
+      E_\ell & 0 \\
+      0 & A
+    \end{pmatrix}
+    = \det A.
+  \]
+\end{lemma}
+
+\begin{proof}
+  Define
+  \[
+    \mu(A) = \det
+    \begin{pmatrix}
+      A & 0 \\
+      0 & E_\ell
+    \end{pmatrix}.
+  \]
+  Then $\mu$ is alternating and multilinear on the
+  columns of $A$. By Corollary \ref{cor:alternating-is-determinant},
+  $\mu(A) = \det(A) \mu(E_k)$. We can compute
+  \[
+    \mu(E_k) = \det
+    \begin{pmatrix}
+      E_k & 0 \\
+      0 & E_\ell
+    \end{pmatrix}
+    = 1,
+  \]
+  which gives $\mu(A) = \det A$ as desired. The
+  same proof works for the other equality.
+\end{proof}
+
+\begin{lemma}
+  If $A, B, C$ are square matrices, then
+  \[
+    \det
+    \begin{pmatrix}
+      A & 0 \\
+      C & B
+    \end{pmatrix}
+    = \det A \det B.
+  \]
+\end{lemma}
+
+\begin{proof}
+  We have
+  \[
+    \begin{pmatrix}
+      A & 0 \\
+      C & B
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      A & 0  \\
+      0 & E
+    \end{pmatrix}
+    \begin{pmatrix}
+      E & 0  \\
+      C & E
+    \end{pmatrix}
+    \begin{pmatrix}
+      E & 0  \\
+      0 & B
+    \end{pmatrix}.
+  \]
+  By the previous lemma, we have
+  \[
+    \det
+    \begin{pmatrix}
+      A & 0 \\
+      0 & E
+    \end{pmatrix} = \det A,
+    \quad
+    \det
+    \begin{pmatrix}
+      E & 0 \\
+      0 & B
+    \end{pmatrix} = \det B,
+    \quad \text{and} \quad
+    \det
+    \begin{pmatrix}
+      E & 0 \\
+      C & E
+    \end{pmatrix} = 1
+  \]
+  since the last matrix is lower triangular. Taking
+  determinants now gives
+  \[
+    \det
+    \begin{pmatrix}
+      A & 0 \\
+      C & B
+    \end{pmatrix}
+    = \det A \det B
+  \]
+  since the determinant is multiplicative, as desired.
+\end{proof}
+
+\begin{remark}
+  Recall the formula
+  \[
+    \det
+    \begin{pmatrix}
+      a & b & c \\
+      d & e & f \\
+      g & h & i
+    \end{pmatrix}
+    = a
+    \begin{vmatrix}
+      e & f \\
+      h & i
+    \end{vmatrix}
+    - b
+    \begin{vmatrix}
+      d & f \\
+      g & i
+    \end{vmatrix}
+    + c
+    \begin{vmatrix}
+      d & e \\
+      g & h
+    \end{vmatrix}.
+  \]
+  For $A \in \Mat_n(R)$, let
+  $A_{i, j} = \text{delete $i$th row and $j$th column of $A$}$.
+\end{remark}
+
+\begin{prop}[Cofactor expansion]
+  Let $A \in \Mat_n(R)$. Then for any $i$,
+  \[
+    \det A = \sum_{j = 1}^n (-1)^{i + j} a_{i, j} \det A_{i, j}
+  \]
+\end{prop}
+
+\begin{proof}
+  Next class.
+\end{proof}
