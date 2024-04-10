@@ -293,7 +293,7 @@ we have proved:
 \end{proof}
 
 \begin{lemma}
-  If $A, B, C$ are square matrices, then
+  If $A$ and $B$ are square matrices, then
   \[
     \det
     \begin{pmatrix}
@@ -395,5 +395,24 @@ we have proved:
 \end{prop}
 
 \begin{proof}
-  Next class.
+  FIx $i$ and $j$. Let $B_j$ be the matrix obtained by
+  replacing all of the entries in the $i$th row
+  by $0$ except $a_{i, j}$. Perform $j - 1$ column
+  operations to move the $J$th column to the first
+  column. Perform $i - 1$ row operations to move
+  $a_{i, j}$ to the top left. Call this new matrix
+  $B_j'$, where we have $a_{i, j}$ in the top corner
+  with all $0$s in the remainder of the first row,
+  and the $A_{i, j}$ minor in the lower right. Then
+  \[
+    \det B_j = (-1)^{i + j - 2} \det B_j'
+    = (-1)^{i + j - 2} a_{i, j} \det A_{i, j}
+  \]
+  since $B_j'$ has two block matrices on the diagonal.
+  Then
+  \[
+    \det A = \sum_{j = 1}^n \det B_j
+    = \sum_{j = 1}^n (-1)^{i + j} a_{i, j} \det A_{i, j},
+  \]
+  which is the desired result.
 \end{proof}
