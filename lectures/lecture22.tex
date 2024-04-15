@@ -1,0 +1,325 @@
+\chapter{Apr.~15 --- The Smith Normal Form}
+
+\section{Elementary Row Operations}
+The following are elementary row operations on a matrix:
+\begin{enumerate}
+  \item Replace $i$th row $a_i$ with $i$th row plus a
+    multiple of $j$th row $a_j$: $a_i \mapsto a_i + \beta a_j$.
+    We can implement this via matrix multiplication on the
+    left by $E_m + \beta E_{i, j}$, where $E_m$ is the
+    $m \times m$ identity matrix and $E_{i, j}$ has
+    $1$ in the $(i, j)$-entry and $0$ elsewhere.
+    For example,
+    \[
+      E_3 + \beta E_{2, 3}
+      = \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & \beta \\
+        0 & 0 & 1
+      \end{pmatrix}.
+    \]
+    The inverse is $E_m - \beta E_{i, j}$.
+  \item Replace $i$th row $a_i$ with
+    $\gamma a_i$ where $\gamma \in R^*$, the group of
+    units of $R$. This is implemented via matrix
+    multiplication by
+    \[
+      D(i, \gamma) = \text{diagonal entries are $1$ except $i$th entry is $\gamma$}.
+    \]
+    For example, for $m = 4$ we have
+    \[
+      D(2, \gamma) =
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & \gamma & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+      \end{pmatrix}.
+    \]
+    The inverse is $D(i, \gamma^{-1})$.
+  \item Interchange $i$th and $j$th. This is implemented
+    via matrix multiplication by the permutation
+    $P(i, j)$, corresponding to the transposition
+    $(i\ j)$. This is the identity matrix with the
+    $i$th and $j$th rows swapped. For example, for
+    $m = 4$ we have
+    \[
+      P(1, 3) =
+      \begin{pmatrix}
+        0 & 0 & 1 & 0 \\
+        0 & 1 & 0 & 0 \\
+        1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1
+      \end{pmatrix}.
+    \]
+    The inverse is $P(i, j)$.
+  \item Replace $i$th row $a_i$ with
+    $\alpha a_i + \beta a_j$ and $j$th row $a_j$ with
+    $\gamma a_i + \delta a_j$, where
+    \[
+      \begin{pmatrix}
+        \alpha & \beta \\
+        \gamma & \delta
+      \end{pmatrix}
+    \]
+    is invertible. This is implemented via matrix
+    multiplication by
+    \[
+      U\left(\begin{bmatrix} \alpha & \beta \\ \gamma & \delta \end{bmatrix}; i, j\right),
+    \]
+    which is the identity matrix except the
+    $2 \times 2$ submatrix in the $i$th and $j$th
+    rows and $i$th and $j$th columns. For example, for
+    $m = 4$ we have
+    \[
+      U\left(\begin{bmatrix} \alpha & \beta \\ \gamma & \delta \end{bmatrix}; 1, 3\right) =
+      \begin{pmatrix}
+        \alpha & 0 & \beta & 0 \\
+        0 & 1 & 0 & 0 \\
+        \gamma & 0 & \delta & 0 \\
+        0 & 0 & 0 & 1
+      \end{pmatrix}.
+    \]
+    The inverse is
+    \[
+      U\left(\begin{bmatrix} \alpha & \beta \\ \gamma & \delta \end{bmatrix}^{-1}; i, j\right).
+    \]
+\end{enumerate}
+Elementary column operations are analogous, implemented
+via right multiplication by invertible $n \times n$
+matrices.
+
+\begin{definition}
+  Two matrices are \emph{row-equivalent} (respectively
+  \emph{column-equivalent}) if one can be transformed into
+  the other by a sequence of elementary row
+  (respectively column) operations. Two matrices are
+  \emph{equivalent} if one can be transformed into the
+  other by a sequence of row and column operations.
+\end{definition}
+
+\section{Smith Normal Form}
+
+\begin{definition}
+  Since $R$ is a PID and hence a UFD, each nonzero
+  element $a \in R$ has a factorization
+  \[
+    a = u p_1 p_2 \dots p_\ell,
+  \]
+  where $u$ is a unit and $p_i$ is irreducible. The
+  number $\ell$ is the \emph{length} of $a$, denoted
+  $|a|$.
+\end{definition}
+
+\begin{remark}
+  We have that $\ell$ is uniquely determined by $a$.
+\end{remark}
+
+\begin{exercise}
+  Check that
+  \begin{enumerate}
+    \item $|ab| \ge \max\{|a|, |b|\}$.
+    \item $|a| = |b|$ if $a$ and $b$ are associates.
+    \item If $a {\nmid} b$, then any $\gcd$ $\delta$ of
+      $a$ and $b$ satisfies $|\delta| < |a|$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{lemma}
+  Let $A = (a_{i, j})$ and suppose that $a_{1, 1} \ne 0$.
+  \begin{enumerate}
+    \item If there is an element in the first row or
+      first column that is not divisible by $a_{1, 1}$,
+      then $A$ is equivalent to a matrix $B = (b_{i, j})$
+      with $|b_{1, 1}| < |a_{1, 1}|$.
+    \item If $a_{1, 1}$ divides all entries in the first
+      row and column, then $A$ is equivalent to a matrix
+      $B = (b_{i, j})$ with $b_{1, 1} = a_{1, 1}$ and
+      all other entries in $1$st row and column are zero.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  $(1)$ Suppose $a_{i, 1}$ is not divisible by
+  $a_{1, 1}$. Then any $\gcd$ $\delta$ of
+  $a_{i, 1}$ and $a_{1, 1}$ satisfies $|\delta| < |a_{1, 1}|$
+  by the exercise. Since $\delta$ is a $\gcd$ of
+  $a_{i, 1}$ and $a_{1, 1}$, there exist $s, t \in R$
+  such that $\delta = s a_{1, 1} + t a_{i, 1}$. Then
+  consider
+  \[
+    \begin{bmatrix}
+      s & t \\
+      -a_{i, 1} / \delta & a_{1, 1} / \delta
+    \end{bmatrix},
+  \]
+  which has determinant $1$ and is thus invertible. Observe
+  that
+  \[
+    \begin{bmatrix}
+      s & t \\
+      -a_{i, 1} / \delta & a_{1, 1} / \delta
+    \end{bmatrix}
+    \begin{bmatrix}
+      a_{1, 1} \\ a_{i, 1}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \delta \\ 0
+    \end{bmatrix}.
+  \]
+  Hence
+  \[
+    B = U\left(\begin{bmatrix} s & t \\ -a_{i, 1} / \delta & a_{1, 1} / \delta \end{bmatrix}; 1, i\right) A
+  \]
+  has $b_{1, 1} = \delta$. The rows are handled
+  analogously.
+
+  $(2)$ If $a_{1, 1}$ divides all entries in the
+  first row and column, we can use Type 1 row and
+  column operations to replace nonzero entries with zeros
+  (subtract the right multiple of $a_{1, 1}$).
+\end{proof}
+
+\begin{prop}
+  Let $A$ be an $m \times n$ matrix. Then there exist
+  invertible matrices $P \in \Mat_m(R)$ and
+  $Q \in \Mat_n(R)$ such that $PAQ = \diag(d_1, d_2, \dots, d_s, 0, \dots, 0)$,
+  where $d_i$ divides $d_j$ if $i \le j$.
+\end{prop}
+
+\begin{proof}
+  If $A$ is the zero matrix, then we are done. So assume
+  $A$ is nonzero. We proceed in three steps.
+
+  First, note that there is a nonzero entry of
+  minimum (number of irreducible factors). Use row and
+  column operations to put this entry in the
+  $(1, 1)$ position. By the previous lemma, if there
+  exists an entry in the $1$st row or column that is not
+  divisible by $a_{1, 1}$, then $A$ is equivalent to a
+  matrix whose $(1, 1)$ entry is strictly smaller length
+  than $a_{1, 1}$. Since the length of the $(1, 1)$ entry
+  is in $\Z_{\ge 0}$, we cannot decrease its length
+  indefinitely. Hence after some number of row and
+  column operations (as above), we obtain a matrix whose
+  $(1, 1)$ entry divides all other entries in the
+  $1$st row and column. Now use the second part of the
+  previous lemma to obtain a block diagonal matrix
+  \[
+    \begin{pmatrix}
+      \varepsilon & 0 & \dots & 0 \\
+      0 &  \\
+      \vdots & & B' \\
+      0 & 
+    \end{pmatrix}. \tag{$*$}
+  \]
+
+  Second, we want a block diagonal matrix as in $(*)$,
+  where the $(1, 1)$ entry divides all other entries.
+  Now:
+  \begin{enumerate}[(a)]
+    \item If $\varepsilon$ no longer has shortest length,
+      apply row and column operations to move an
+      entry of minimum length to the $(1, 1)$ position.
+    \item If $\varepsilon$ is of minimum length but
+      some entry of $B'$ is not divisible by $\varepsilon$,
+      then replace the $1$st row of the larger matrix
+      with the sum of the $1$st row and the row with the
+      ``bad'' entry (this gives an entry in the $1$st
+      row that is not divisible by $a_{1, 1}$).
+  \end{enumerate}
+  In either case (a) or (b), repeating the first step
+  gives a new block diagonal matrix whose $(1, 1)$ entry
+  has strictly shorter length than $\varepsilon$. The
+  length of the $(1, 1)$ cannot be strictly shorter
+  forever, so after a finite number of iterations, we
+  obtain
+  \[
+    \begin{pmatrix}
+      d_1 & 0 & \dots & 0 \\
+      0 &  \\
+      \vdots & & B \\
+      0 &
+    \end{pmatrix},
+  \]
+  where $d_1$ divides all entries in $B$.
+
+  Finally, we now apply the same process to $B$, observing
+  that row and column operations do not change the
+  $1$st row or column of the larger matrix. Moreover,
+  these row and column operations preserve divisibility
+  of all entries $d_1$. Hence iterating this process,
+  we obtain a matrix
+  \[
+    \diag(d_1, d_2, \dots, d_s, 0, \dots, 0),
+  \]
+  where $d_i | d_j$ if $i \le j$.
+\end{proof}
+
+\begin{definition}
+  The matrix $PAQ$ is the \emph{Smith normal form}
+  of $A$.
+\end{definition}
+
+\section{Change of Basis}
+\begin{remark}
+  Recall that any two bases for a finite dimensional
+  vector sapce are related by an invertible matrix. Is
+  the same true for a free module of finite rank?
+  We will see that the answer is yes.
+\end{remark}
+
+\begin{lemma}
+  Let $F$ be a free module with basis
+  $\{v_1, \dots, v_n\}$. Let $w_1, \dots, w_n \in F$ and
+  let $C \in \Mat_n(\R)$ satisfy
+  \[
+    [v_1, \dots, v_n] C = [w_1, \dots, w_n]. \tag{$*$}
+  \]
+  Then $\{w_1, \dots, w_n\}$ is a basis for $F$ if and
+  only if $C$ is invertible.
+\end{lemma}
+
+\begin{proof}
+  $(\Rightarrow)$ Suppose $\{w_1, \dots, w_n\}$ is a
+  basis. Then we can write each $v_j$ as
+  \[
+    v_j = \sum_{i = 1}^n d_{i, j} w_i.
+  \]
+  We can use this to write
+  \[
+    [w_1, \dots, w_n] D = [v_1, \dots, v_n]. \tag{$*$}
+  \]
+  Combining $(*)$ and $(**)$ gives
+  \[
+    [v_1, \dots, v_n] CD = [v_1, \dots, v_n],
+  \]
+  or equivalently $[v_1, \dots, v_n] (CD - E) = 0$.
+  Since $v_1, \dots, v_n$ are linearly independent,
+  we can conclude that
+  $CD - E = 0$, or $CD = E$. Hence $C$ is invertible.
+
+  $(\Leftarrow)$ Suppose $C$ is invertible with
+  inverse $C^{-1}$. Then we have
+  \[
+    [v_1, \dots, v_n] = [w_1, \dots, w_n] C^{-1}.
+  \]
+  So $\{v_1, \dots, v_n\}$ is in the span of
+  $\{w_1, \dots, w_n\}$, hence $\{w_1, \dots, w_n\}$
+  span $F$. Now suppose
+  \[
+    \sum_{j = 1}^n a w_j = 0
+  \]
+  for some $a_1, \dots, a_n \in R$. Then
+  \[
+    0 = [w_1, \dots, w_n] \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}
+    = [v_1, \dots, v_n] C \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}.
+  \]
+  The linear independence of the $v_i$'s gives that
+  \[
+    C \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} = 0 \implies 0 = C^{-1} C \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix} = \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}
+  \]
+  since $C$ is invertible. Hence $\{w_1, \dots, w_n\}$
+  are linearly independent and thus a basis.
+\end{proof}
