@@ -1,0 +1,290 @@
+\chapter{Apr.~17 --- The Structure Theorem}
+
+\section{Structure Theorem for Finitely Generated Modules}
+\begin{theorem}
+  Let $F$ be a free $R$-module ($R$ is a PID) of rank
+  $n$ and
+  $N$ a submodule. Then there exists a basis
+  $\{v_1, \dots, v_n\}$ of $F$ and $s \le n$ and
+  $d_1, \dots, d_s \in R$ such that $d_i | d_j$ if
+  $i \le j$ and $\{d_1 v_1, \dots, d_s v_s\}$ is a
+  basis for $N$, i.e. $N$ is free.
+\end{theorem}
+
+\begin{proof}
+  Let $\{f_1, \dots, f_n\}$ be a basis for $F$. By
+  an earlier lemma, $N$ has a generating set with
+  $\le n$ elements. Let $\{e_1, \dots, e_s\}$ be a
+  generating set for $N$ with minimum cardinality.
+  Now each $e_j$ can be expressed as a linear combination
+  of the $f_i$'s:
+  \[
+    e_j = \sum_{i = 1}^n a_{i, j} f_i,
+  \]
+  i.e. $[e_1, \dots, e_s] = [f_1, \dots, f_n] A$ $(*)$
+  where
+  $A = (a_{i, j})$ is an $n \times s$ matrix.
+  Put $A$ in Smith normal form:
+  \[
+    A' = PAQ = \diag(d_1, \dots, d_s)
+  \]
+  where $P, Q$ are invertible and $d_i \le d_j$ if
+  $i \le j$. Then $(*)$ becomes
+  \[
+    [e_1, \dots, e_s]Q = [f_1, \dots, f_n] P^{-1} A'.
+  \]
+  Define $v_1, \dots, v_n$ by $[v_1, \dots, v_n] = [f_1, \dots, f_n] P^{-1}$.
+  This is a basis by the previous lemma since
+  $P^{-1}$ is invertible. Also define
+  $w_1, \dots, w_s$ by $[w_1, \dots, w_s] = [e_1, \dots, e_s]Q$,
+  which is also a generating set for $N$ since $Q$ is
+  invertible. By the minimality of $s$, no proper
+  subset of $\{w_1, \dots, w_n\}$ generates $N$, so
+  $w_j$ is nonzero for each $1 \le j \le s$. Then note
+  that
+  \[
+    [w_1, \dots, w_s] = [v_1, \dots, v_n] A'
+    = [d_1 v_1, \dots, d_s v_s].
+  \]
+  Since $w_j \ne 0$ for each $j$, we have $d_j \ne 0$
+  for each $j$. The linear independence of
+  $\{v_1, \dots, v_n\}$ implies that $\{d_1 v_1, \dots, d_s v_s\}$
+  is linearly independent. Hence $\{w_1, \dots, w_s\}$
+  is a basis for $N$. In particular, $N$ is free of
+  rank $s$.
+\end{proof}
+
+\begin{exercise}
+  Let $\{e_1, \dots, e_s\}$ be a generating set
+  for $N$ and $Q$ an invertible matrix. Show that
+  $\{e_1, \dots, e_s\}Q$ is also a generating set
+  for $N$.
+\end{exercise}
+
+\begin{definition}
+  An element $x \in M$ is a \emph{torsion element} if
+  there is a nonzero $r \in R$ such that $rx = 0$.
+\end{definition}
+
+\begin{exercise}
+  Show that the set of all torsion elements of $M$ is a
+  submodule. This is the \emph{torsion submodule} of $M$,
+  denoted $M_{\mathrm{tor}}$.
+\end{exercise}
+
+\begin{definition}
+  We say that $M$ is a \emph{torsion module} if
+  $M = M_{\mathrm{tor}}$, and $M$ is \emph{torsion-free}
+  if $M_{\mathrm{tor}} = 0$.
+\end{definition}
+
+\begin{exercise}
+  Show that $M / M_{\mathrm{tor}}$ is torsion-free.
+\end{exercise}
+
+\begin{example}
+  Let $M = R \oplus R / (a) \oplus R / (b)$. Then
+  $M_{\mathrm{tor}} = \{0\} \oplus R / (a) \oplus R / (b)$.
+\end{example}
+
+\begin{remark}
+  Recall for a subset $S \subseteq M$, the \emph{annihilator}
+  of $S$ is
+  \[
+    \ann(S) = \{r \in R \mid rx = 0 \text{ for all } x \in S\}.
+  \]
+\end{remark}
+
+\begin{exercise}
+  If $A$ is the torsion submodule of a finitely generated
+  module, then show that $\ann(A)$ is a nonzero ideal of $R$. The generator of $\ann(A)$ is called a \emph{period}
+  of $A$. Show that the period is unique up to
+  associates.
+\end{exercise}
+
+\begin{example}
+  For $a \in R$, we have $\ann(R / (a)) = (a)$. So the
+  period is $a$.
+\end{example}
+
+\begin{example}
+  Let $M = R / (a_1) \oplus \dots \oplus R / (a_n)$
+  where $a_i | a_j$ if $i \le j$. Then
+  $\ann(M) = (a_n)$ and the period of $M$ is $a_n$.
+\end{example}
+
+\begin{theorem}[Structure theorem for finitely
+  generated modules over a PID, invariant factor form]
+  Let $R$ be a PID and $M$ a finitely generated
+  module over $R$. Then
+  \begin{enumerate}
+    \item $M \cong R / (a_1) \oplus \dots \oplus R / (a_s) \oplus R^k$
+      where $a_i$ are nonzero, non-unit elements of
+      $R$ and $a_i | a_j$ if $i \le j$,
+    \item and the decomposition is unique, i.e.
+      if $M \cong R / (b_1) \oplus \dots \oplus R / (b_t) \oplus R^\ell$
+      where $b_i | b_j$ if $i \le j$, then $s = t$,
+      $k = \ell$, and $(a_i) = (b_i)$ for all $i$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (1) Let $\{x_1, \dots, x_n\}$ be a generating set for
+  $M$ of minimum cardinality. Let $F$ be a free module of
+  rank $n$ with basis $\{f_1, \dots, f_n\}$ and
+  define the $R$-module homomorphism $\varphi : F \to M$
+  given by
+  \[
+    \sum_{i = 1}^n r_i f_i \mapsto \sum_{i = 1}^n r_i x_i,
+  \]
+  which is surjective since the $x_i$'s are a generating
+  set for $M$. Let $N = \ker \varphi$. By the previous
+  theorem, there exists a basis $\{v_1, \dots, v_n\}$
+  for $F$ and nonzero $d_1, \dots, d_s \in R$ such that
+  $\{d_1 v_1, \dots, d_s v_s\}$ is a basis for $N$ and
+  $d_i | d_j$ if $i \le j$. Then we have
+  \[
+    M \cong F / N \cong (Rv_1 \oplus \dots \oplus Rv_n) / (Rd_1 v_1 \oplus \dots \oplus Rd_s v_s)
+    \cong R / (d_1) \oplus \dots \oplus R / (d_s) \oplus R^{n - s}
+  \]
+  by Exercise \ref{ex:quotient-submodule-iso}.
+  This is precisely what we wanted to show.
+
+  (2) Let $M$ be a finitely generated module over a PID.
+  Then by the existence part,
+  \[
+    M \cong R / (a_1) \oplus \dots \oplus R / (a_s) \oplus R^k
+  \]
+  and so $M_{\mathrm{tor}} = R / (a_1) \oplus \dots \oplus R / (a_s)$.
+  Hence $M / M_{\mathrm{tor}} = R^k$, which is free. So
+  if also
+  \[
+    M \cong R / (b_1) \oplus \dots \oplus R / (b_k) \oplus R^\ell,
+  \]
+  then $M / M_{\mathrm{tor}} \cong R^\ell$. Since the
+  rank of a free is well-defined, we must have $k = \ell$.
+  To prove the rest of uniqueness, we may assume
+  $M = M_{\mathrm{tor}}$. Now if
+  \[
+    M \cong R / (a_1) \oplus \dots \oplus R / (a_s)
+    \cong R / (b_1) \oplus \dots \oplus R / (b_t), \tag{*}
+  \]
+  where $a_i | a_j$ and $b_i | b_j$ if $i \le j$. Then
+  $a_s$ and $b_t$ (up to associates) are both the period of $M$, so
+  let $m = a_s = b_t$ since the period is unique up
+  to associates.
+
+  Now we induct on the length of
+  $m$. If $|m| = 1$, then $m$ is irreducible and all of
+  the $a_i$'s and $b_i$'s are associates of $m$. Then
+  $mM = \{0\}$, so $M$ is a $R / (m)$-vector space by
+  Exercise $\ref{ex:irreducible-vec}$. Then the first part
+  of $(*)$ yields $M \cong (R / (m))^s$ and the second
+  part yields $M \cong (R / (m))^t$. Since the dimension
+  of a vector space is well-defined, we must have
+  $s = t$.
+
+  For the inductive step, assume $|m| > 1$ and that
+  the assertion holds for all finitely generated
+  torsion modules of period of shorter length.
+  Set $A_i = R / (a_i)$ and $B_i = R / (b_i)$, and
+  let $p \in R$ be irreducible.
+  Then by Exercise $\ref{ex:quotient-irreducible}$ on
+  the first part of $(*)$, we have
+  \[
+    M / pM \cong A_1 / pA_1 \oplus \dots \oplus A_s / pA_s
+    \cong (R / p)^k,
+  \]
+  where $k$ is the number of $a_i$'s such that $p | a_i$.
+  Similar on the second part of $(*)$, we get
+  $k$ as the number of $b_i$'s such that $p | b_i$.
+  Let $p$ be an irreducible dividing $a_1$. Then $p$
+  divides all $s$ of the $a_i$'s and $p$ divides exactly
+  $s$ of the $b_i$'s. So $s \le t$. Applying the
+  argument in reverse gives $t \le s$, so in fact
+  $s = t$.
+
+  Now fix an irreducible $p$ dividing $a_1$. Then
+  $p | a_i$ and $p | b_i$ for all $i$. Let $k'$ be
+  the last index such that $a_{k'} / p$ is a unit.
+  Then $pA_j$ is is cyclic of period $a_j / p$ if
+  $j > k'$ and $pA_j = \{0\}$ for $j \le k'$. So
+  \[
+    pM = pA_{k' + 1} \oplus \dots \oplus pA_s.
+  \]
+  Let $k''$ be the last index such that
+  $b_{k''} / p$ is a unit. By the same argument,
+  \[
+  pM = pB_{k'' + 1} \oplus \dots \oplus pB_s
+  .\]
+  Note that $pM$ has period $m / p$, and
+  $|m / p| < |m|$. So applying the inductive hypothesis
+  to $pM$ gives $k' = k''$ and $(a_i / p) = (b_i / p)$
+  if $i > k$. Hence $(a_i) = (b_i)$ if $i > k'$.
+  But for $i \le k'$, we have $(a_i) = (b_i) = p$.
+  This is precisely what we needed to show, so this
+  completes the proof.
+\end{proof}
+
+\begin{exercise}
+  \label{ex:quotient-submodule-iso}
+  Let $A_1, \dots, A_n$ be $R$-modules and
+  $B_i \subseteq A_i$ be submodules. Then show that
+  \[
+    (A_1 \oplus \dots \oplus A_n)
+    / (B_1 \oplus \dots \oplus B_n)
+    \cong A_1 / B_1 \oplus \dots \oplus A_n / B_n.
+  \]
+\end{exercise}
+
+\begin{exercise}
+  \label{ex:irreducible-vec}
+  If $m$ is irreducible and $mM = \{0\}$, then show that
+  $M$ is a $R / (m)$-vector space.\footnote{Recall that if $R$ is a PID, then $m$ irreducible implies $R / (m)$ is a field.}
+\end{exercise}
+
+\begin{exercise}
+  \label{ex:quotient-irreducible}
+  Let $A = R / (a)$ and $p \in R$ be irreducible. Show that
+  \begin{enumerate}
+    \item if $p | a$, then $A / pA \cong R / (p)$.
+    \item if $p {\nmid} a$, then $A / pA = \{0\}$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{remark}
+  Just like the structure theorem for finitely
+  generated abelian groups, there is another version
+  involving primes/irreducibles. But we will not prove
+  this version here.
+\end{remark}
+
+\begin{theorem}[Structure theorem for finitely generated modules over a PID, primary factor/elementary divisor form]
+  Let $R$ be a PID and $M$ a nonzero finitely
+  generated torsion module over $R$. Then
+  \[
+    M \cong \bigoplus_j \bigoplus_i R / (p_j^{n_{i, j}}),
+  \]
+  i.e. $M$ is isomorphic to a direct sum of submodules,
+  each having period a power of an irreducible. This
+  decomposition is unique up to reordering.
+\end{theorem}
+
+\begin{example}
+  Let $R = \Q[X]$ and set $f = (X - 2)^4(X - 1)$,
+  $g = (X - 2)^2 (X - 1)^2 (X^2 + 1)^3$. Let
+  \[
+    M = \Q[X] / (f) \oplus \Q[X] / (g).
+  \]
+  Here we have
+  \[
+    M \cong \Q[X] / (X - 2)^4 \oplus \Q[X] / (X - 1)
+    \oplus \Q[X] (X - 2)^2 \oplus \Q[X] / (X - 1)^2
+    \oplus \Q[X] / (X^2 + 1)^3.
+  \]
+  This is the decomposition into elementary divisors.
+  We can also write the invariant factor decomposition:
+  \[
+  M \cong \Q[X] / ((X - 1)(X - 2)^2) \oplus \Q[X] / ((X - 1)^2(X - 2)^4 (X^2 + 1)^3).
+  \]
+\end{example}
